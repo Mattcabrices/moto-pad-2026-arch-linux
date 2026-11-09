@@ -1,0 +1,1 @@
+60 MOZ_ENABLE_WAYLAND=1 timeout 55 gdb -q -batch -ex 'set pagination off' -ex run -ex bt -ex 'info threads' --args /usr/lib/firefox/firefox --new-instance --profile /tmp/ff-gpu about:blank 2>&1 | grep -v -E '^\[(New|Thread|Detaching)|linker configuration|^warning:' | grep -B2 -A14 "^Thread .* received signal|^Program received|^#0 " | head -40

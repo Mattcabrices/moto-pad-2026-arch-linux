@@ -1,0 +1,1 @@
+14 mpv --no-config --vo=gpu --gpu-api=opengl --gpu-context=wayland -v --length=10 av://lavfi:testsrc2=s=1280x720:r=60 2>&1 | grep -E "EGL_|GL_VERSION|GL_RENDERER|Could not|Failed|rror|Dropped|VO:" | head -20

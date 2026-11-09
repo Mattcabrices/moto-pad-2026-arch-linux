@@ -1,0 +1,5 @@
+26 glmark2-es2-wayland -b build:duration=4 -b texture:duration=4 -b shading:duration=4 -b refract:duration=4 -s 1280x720
+10 gtk4-demo --run=gears
+12 mpv --no-config --vo=gpu --gpu-api=opengl --gpu-context=wayland --msg-level=vo=v --length=9 'av://lavfi:testsrc2=s=1280x720:r=60'
+3 mkdir -p /tmp/ff-gpu && printf 'user_pref("gfx.webrender.all", true);\nuser_pref("gfx.webrender.software", false);\nuser_pref("layers.acceleration.force-enabled", true);\nuser_pref("browser.shell.checkDefaultBrowser", false);\n' > /tmp/ff-gpu/user.js && echo prefs-written
+40 MOZ_ENABLE_WAYLAND=1 firefox --new-instance --profile /tmp/ff-gpu about:support

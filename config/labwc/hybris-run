@@ -1,12 +1,17 @@
 #!/bin/bash
 # Moto Pad (archpad): run a Wayland app with GPU rendering (Mali via libhybris) inside the GPU desktop.
-# Usage: hybris-run <command> [args...]   e.g. hybris-run es2gears_wayland
-# Apps that use EGL/GLES on Wayland render on the GPU; apps that only use wl_shm are unaffected.
-# Needs the Android services (pad-android.target) and the labwc session (WAYLAND_DISPLAY set).
+# Usage: hybris-run <command> [args...]   e.g. hybris-run mpv video.mkv
+# Works for apps that use EGL/GLES on Wayland: es2gears/glmark2, GTK4, mpv (--vo=gpu). Apps that only draw with
+# the CPU are unaffected. Known not to work: Firefox (its executable's TLS overlaps Android's TLS slots) and
+# Chromium (ANGLE needs EGL platforms libhybris lacks); run those normally.
+# Outside the GPU desktop (Xorg session, or Android services not running) the app just runs normally.
 [ $# -gt 0 ] || { echo "usage: hybris-run <command> [args...]" >&2; exit 2; }
+if [ -z "$WAYLAND_DISPLAY" ] || ! pgrep -f 'graphics.allocator@4.0-service' >/dev/null; then
+  exec "$@"
+fi
 export LD_LIBRARY_PATH=/usr/local/hybris/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
 # Android code writes bionic TLS slots that overlap glibc TLS; this pads them (tools/src/bionic-tls-pad.c).
-export LD_PRELOAD=/usr/local/hybris/lib/bionic-tls-pad.so${LD_PRELOAD:+:$LD_PRELOAD}
+case ":$LD_PRELOAD:" in *bionic-tls-pad*) ;; *) export LD_PRELOAD=/usr/local/hybris/lib/bionic-tls-pad.so${LD_PRELOAD:+:$LD_PRELOAD} ;; esac
 export HYBRIS_LD_LIBRARY_PATH=/vendor/lib64:/system/lib64:/odm/lib64:/usr/local/hybris/compat
 export EGL_PLATFORM=wayland
 exec "$@"

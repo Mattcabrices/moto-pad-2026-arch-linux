@@ -31,6 +31,12 @@ grep -c "/\* archpad \*/" "$H"
 W="$R/root/hb/libhybris/hybris/platforms/common/server_wlegl_buffer.cpp"
 grep -q archpad "$W" || perl -0pi -e 's/(server_wlegl_buffer_from\(struct wl_resource \*buffer\)\n\{\n\tif \(!buffer\)\n\t\treturn NULL;\n)/$1\t\/* archpad: only libhybris wl_buffers *\/\n\tif (!wl_resource_instance_of(buffer, &wl_buffer_interface, &server_wlegl_buffer_impl))\n\t\treturn NULL;\n/' "$W"
 grep -c archpad "$W"
+# libhybris implements eglGetPlatformDisplayEXT/eglCreatePlatformWindowSurfaceEXT but does not list
+# EGL_EXT_platform_base among the client extensions; mpv (and other EGL 1.4 clients) refuse to start without it.
+E="$R/root/hb/libhybris/hybris/egl/egl.c"
+grep -q '"EGL_EXT_client_extensions EGL_EXT_platform_base ' "$E" || \
+  sed -i 's/"EGL_EXT_client_extensions EGL_EXT_platform_wayland EGL_KHR_platform_wayland"/"EGL_EXT_client_extensions EGL_EXT_platform_base EGL_EXT_platform_wayland EGL_KHR_platform_wayland"/' "$E"
+grep -c "EGL_EXT_platform_base EGL_EXT_platform_wayland" "$E"
 # Android 16 has no gralloc 0/1 module and no Halium libui_compat_layer.so: add an AHardwareBuffer backend.
 perl /mnt/c/mpad26/MotoPadArch/scripts/libhybris-archpad-gralloc.pl "$R/root/hb/libhybris/hybris"
 arch-chroot "$R" pacman -S --noconfirm --needed base-devel autoconf automake libtool pkgconf \

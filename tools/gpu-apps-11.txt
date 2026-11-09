@@ -1,0 +1,2 @@
+8 es2gears_wayland > /tmp/es2.log 2>&1; echo "es2gears rc=$?"
+12 glmark2-es2-wayland -b build:duration=5 -s 800x600 2>&1 | grep -E 'GL_RENDERER|FPS|Score'

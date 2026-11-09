@@ -16,7 +16,7 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
 | Boot | Rebuilt Android GKI kernel `5.15.185-archpad` in `boot_a`, Arch on `userdata` (ext4), boot-loop breaker with a telnet rescue console |
 | Display and touch | 1600x2560 @ 90 Hz panel, used in landscape; Himax touchscreen |
 | Desktop | XFCE. Default: **GPU-composited Wayland session** (labwc on the Mali GPU through libhybris). Fallback: Xorg |
-| GPU | Compositing on the GPU with zero-copy scanout. Apps can render on the GPU too: `hybris-run <app>` (EGL/GLES Wayland apps; es2gears ~87 fps at the 90 Hz panel limit) |
+| GPU | Compositing on the GPU with zero-copy scanout. Apps render on the Mali-G57 (GLES 3.2) via `hybris-run <app>`: glmark2, GTK4 apps, mpv (also from its menu entry). Firefox and Chromium still render in software |
 | Wi-Fi, Bluetooth | Working, through MediaTek's Android helpers run in a small chroot with a property shim |
 | Audio | Speakers and the main microphone. Headphone jack not done yet |
 | USB | Network gadget (SSH over USB) |

@@ -1,0 +1,1 @@
+12 mpv --no-config --vo=gpu --gpu-api=opengl --gpu-context=wayland --length=60 'av://lavfi:testsrc2=s=1280x720:r=60' >/dev/null 2>&1

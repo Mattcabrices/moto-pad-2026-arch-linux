@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-09 14:05 (GPU apps: es2gears and GTK4 work via hybris-run; Chromium stays software; see "14:05").
+Last updated: 2026-11-09 14:30 (GPU apps: glmark2, GTK4, mpv work; Firefox/Chromium stay software; see "14:30").
 
 ## Goal
 
@@ -260,7 +260,24 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
-- **14:05 (11-09) REAL APPS ON THE GPU (RESUME HERE).** `tools/tab-gpu-apps.sh` runs each line of the newest
+- **14:30 (11-09) MORE GPU APPS; MATT AT WORK, FULL APPROVAL ON THE TABLET (RESUME HERE).**
+  - `pacman -Syu` done (only desktop-file-utils + libstemmer were behind; labwc/wlroots0.20 still 0.20.2, held with
+    --ignore anyway). Installed mpv 0.41, glmark2, gtk4-demos, firefox 159, ltrace.
+  - Works on the GPU via hybris-run: glmark2-es2-wayland (Mali-G57 MC2, GLES 3.2 r38p1; score 353 at 1280x720,
+    616 fps "build" at 800x600), gtk4-demo gears (90 fps = panel), mpv (`--vo=gpu` and default `gpu-next`, both after
+    Vulkan fails; 720p60 test pattern, ~10 % dropped, decoder 0; `shots/gpu-mpv.png`).
+  - mpv fix: libhybris did not list EGL_EXT_platform_base in client extensions; mpv silently gives up without it
+    (egl_helpers.c mpegl_get_display). scripts/62 now adds it. Probe: `tools/src/egl-wl-probe.c`
+    (`scripts/69-build-egl-wl-probe.sh`) repeats mpv's EGL start-up step by step.
+  - Firefox: crashes on the GPU (rc 139, "Renderer" thread). Cause: /usr/lib/firefox/firefox has its own 56-byte TLS
+    (tp+16..72), exactly where Android code writes bionic TLS slots; the preload pad cannot move an executable's TLS.
+    Needs a glibc with reserved bionic slots. Firefox runs fine in software (`shots/firefox-sw.png`); do NOT use
+    hybris-run for it. Check any app with `tools/tab-tls-check.sh` (readelf PT_TLS of the executable: none = OK).
+  - Chromium: ANGLE cannot get a system EGL display (see 14:05); stays software.
+  - Installed for daily use (`tools/tab-gpu-apps-install.sh`): hybris-run now falls back to a plain exec outside the
+    GPU desktop; `/usr/local/share/applications/mpv.desktop` runs mpv through hybris-run; pad-wayland-session starts
+    labwc with LD_PRELOAD=bionic-tls-pad.so (inherited by apps, harmless). Session restarted and verified.
+- **14:05 (11-09) REAL APPS ON THE GPU.** `tools/tab-gpu-apps.sh` runs each line of the newest
   `/tmp/gpu-apps-*.txt` ("<secs> <command>") through hybris-run in matt's session and screenshots it (example list
   `tools/gpu-apps-1.txt`; push it with pad-scp first). Results:
   - GTK4 (zenity 4.2): GPU. Vulkan instance fails (no Vulkan), GTK falls back to GskGLRenderer on Mali; renders fine

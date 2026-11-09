@@ -1,0 +1,2 @@
+10 mpv --no-config --vo=gpu --gpu-api=opengl --gpu-context=wayland -v --length=5 'av://lavfi:testsrc2=s=1280x720:r=60' 2>&1 | grep -i -E 'egl|opengl|gl_|context|error|fail' | head -40
+30 MOZ_ENABLE_WAYLAND=1 MOZ_LOG=WidgetWayland:3 firefox --new-instance --profile /tmp/ff-gpu about:support 2>&1 | tail -40; echo "firefox rc=${PIPESTATUS[0]}"
