@@ -20,6 +20,7 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
 | Wi-Fi, Bluetooth | Working, through MediaTek's Android helpers run in a small chroot with a property shim |
 | Audio | Speakers and the main microphone. Headphone jack not done yet |
 | USB | Network gadget (SSH over USB) |
+| Extras | On-screen keyboard (squeekboard) in the GPU desktop, Xwayland for X11 apps, Claude Code |
 | Not working | Camera, modem, headphone jack |
 
 ## How it works (short version)

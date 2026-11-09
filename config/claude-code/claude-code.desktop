@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Claude Code
+Comment=Claude Code in a terminal (first run: sign in through the browser)
+Exec=xfce4-terminal --title="Claude Code" --working-directory=/home/matt -x /home/matt/.local/bin/claude
+Icon=utilities-terminal
+Terminal=false
+Categories=Development;Utility;

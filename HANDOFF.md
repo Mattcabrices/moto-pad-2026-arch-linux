@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-09 16:45 (compositor scan-out buffers locked = no tearing; WebGL 1 findings; see "16:45").
+Last updated: 2026-11-09 16:50 (Claude Code installed on the tablet with a menu entry; see "16:50").
 
 ## Goal
 
@@ -260,7 +260,18 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
-- **16:45 (11-09) DOUBLE-BUFFERED SCAN-OUT; WEBGL 1 NOTES (RESUME HERE).**
+- **16:50 (11-09) CLAUDE CODE ON THE TABLET (RESUME HERE).** Matt's wish from earlier.
+  - `tools/tab-claude-code-install.sh`: nodejs + npm + git + ripgrep from pacman; `npm install -g
+    @anthropic-ai/claude-code` as matt with prefix ~/.local (PATH added to ~/.bashrc). The npm postinstall that fetches
+    the native linux-arm64 binary did not run the first time; `node install.cjs` in the package dir fixed it.
+    `claude --version` = 2.1.321. NOT signed in: Matt runs it once and logs in through the browser.
+  - Menu entry Applications > Development > Claude Code (`config/claude-code/claude-code.desktop` ->
+    ~/.local/share/applications): xfce4-terminal running claude. squeekboard switches to its terminal layout
+    (Esc/Tab/Ctrl/Alt/arrows) in the terminal. Screenshot `shots/claude-code-tablet.png`.
+  - Installed noto-fonts (wider symbol coverage). Note: the test harness (`tools/tab-gpu-apps.sh`) now exports
+    LANG=en_US.UTF-8; without it xfce4-terminal ran in "C" and UTF-8 symbols looked broken (harness-only problem;
+    the desktop session has LANG=en_US.UTF-8).
+- **16:45 (11-09) DOUBLE-BUFFERED SCAN-OUT; WEBGL 1 NOTES.**
   - Tearing fix in `wlroots-pad/backend/pad/pad.c`: the backend now locks the buffer handed to drmModePageFlip
     (`queued`) and the one on screen (`current`), releasing the old one on the flip event. Before, wlroots could render
     the next frame into the buffer being scanned out. labwc now holds 4 scan-out dma-bufs; glmark2 build 637 fps (was

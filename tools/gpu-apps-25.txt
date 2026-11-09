@@ -1,0 +1,2 @@
+3 pkill -u matt -x xfce4-terminal; true
+14 gtk-launch claude-code; sleep 12; pkill -u matt -f '/home/matt/.local/bin/claude' ; true

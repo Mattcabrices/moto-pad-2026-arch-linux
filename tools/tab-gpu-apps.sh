@@ -5,7 +5,7 @@ L=$(ls -t /tmp/gpu-apps-*.txt 2>/dev/null | head -1); [ -n "$L" ] || { echo "no 
 rm -rf /tmp/gpu-apps-out; mkdir -p /tmp/gpu-apps-out; chmod 777 /tmp/gpu-apps-out
 cat > /tmp/gpu-apps-run <<'EOR'
 #!/bin/bash
-export XDG_RUNTIME_DIR=/run/user/1000 WAYLAND_DISPLAY=wayland-0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+export XDG_RUNTIME_DIR=/run/user/1000 WAYLAND_DISPLAY=wayland-0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus LANG=en_US.UTF-8
 n=0
 while read -r secs cmd; do
   [ -n "$secs" ] || continue
