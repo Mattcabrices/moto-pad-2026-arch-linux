@@ -31,7 +31,7 @@ A working, lightweight XFCE Arch Linux system on the Moto Pad 2026 (XT2575-4,
 | Wi-Fi | **Working and connected 2026-11-08 14:00:** home network (saved in NetworkManager, auto-connects), DHCP, internet over wlan0 verified (0% loss, ~23 ms). Earlier: `wlan0` up, NetworkManager scans 2.4 and 5 GHz. Boot service `pad-wifi.service` runs `/usr/local/sbin/pad-wifi-start` (source `tools/pad-wifi-start`). **Boot test passed 13:46** (Wi-Fi, BT, XFCE all start on their own). Fix needed on the way: run `wmt_loader` *without* the prop shim (the shim's `driver.ready=yes` makes it skip setup), wait for `/dev/stpwmt`, then start `wmt_launcher` *with* the shim |
 | Bluetooth | **Working 2026-11-08 13:45:** BlueZ sees hci0 (`00:00:46:67:61:01`, looks factory-unset; Android sets the real one from NVRAM). `hci_vhci.ko` built from our kernel source (`scripts/27-build-hci-vhci.sh`, CRCs verified) + `tools/pad-bt-bridge.py` copying H4 packets between `/dev/stpbt` and `/dev/vhci`. The bridge answers HCI 0x0c77 (Read Sync Train Params) itself, because the controller rejects it and that aborted Linux setup. `pad-bt.service` (after pad-wifi). Blueman applet in the panel |
 | Display orientation | Landscape at X server start: `/etc/X11/xorg.conf.d/20-pad-landscape.conf` (`Monitor` `Rotate "right"` bound via `Monitor-DSI-1`, plus touch `TransformationMatrix "0 1 0 -1 0 1 0 0 1"`). The login-time xrandr script was dropped: rotating after XFCE started left the desktop sized wrong. Right way up per Matt. Screenshots (`xwd`) show only about 1920 px with the right side black, but Matt confirmed the real screen is full width: a screenshot artifact only |
-| Audio | **Speakers working 2026-11-08 14:20** (Matt heard the test tone). Card `mt6835-mt6377`. `MTK_SPK_TYPE_GET=NOT_SMARTPA`: four analog Awinic aw87xxx amps fed by codec line-out. Route (from stock `audio_device.xml` speaker_output + ext_speaker_output): `ADDA_DL_CH1/2 DL1_CH1/2` on, `DAC In Mux=Normal Path`, `LOL Mux=Playback`, `Ext_Speaker_Amp Switch=on`, `aw87xxx_profile_switch_0..3=Music` (`/usr/local/sbin/pad-audio-speaker`, `pad-audio.service`). PipeWire + WirePlumber sink "Built-in Audio Stereo" on hw:0; XFCE pulseaudio volume plugin. **Mic working 14:30:** stock `builtin_Mic_DualMic` + `ADDA_TO_CAPTURE1` route (`/usr/local/sbin/pad-audio-mic`, also run by pad-audio.service) to PCM device 10 `Capture_1`; PipeWire source "Built-in Microphone" from `/etc/pipewire/pipewire.conf.d/90-pad-mic.conf`. Left channel (AIN0) records speech (peak 7227); right (AIN2) is silent, so the second mic is elsewhere or absent. `PGA1/PGA2 Volume` 70%, set by pad-audio-mic. Headphone jack not done |
+| Audio | **Speakers working 2026-11-08 14:20** (Matt heard the test tone). Card `mt6835-mt6377`. `MTK_SPK_TYPE_GET=NOT_SMARTPA`: four analog Awinic aw87xxx amps fed by codec line-out. Route (from stock `audio_device.xml` speaker_output + ext_speaker_output): `ADDA_DL_CH1/2 DL1_CH1/2` on, `DAC In Mux=Normal Path`, `LOL Mux=Playback`, `Ext_Speaker_Amp Switch=on`, `aw87xxx_profile_switch_0..3=Music` (`/usr/local/sbin/pad-audio-speaker`, `pad-audio.service`). PipeWire + WirePlumber sink "Built-in Audio Stereo" on hw:0; XFCE pulseaudio volume plugin. **Mic working 14:30:** stock `builtin_Mic_DualMic` + `ADDA_TO_CAPTURE1` route (`/usr/local/sbin/pad-audio-mic`, also run by pad-audio.service) to PCM device 10 `Capture_1`; PipeWire source "Built-in Microphone" from `/etc/pipewire/pipewire.conf.d/90-pad-mic.conf`. Left channel (AIN0) records speech (peak 7227); right (AIN2) is silent, so the second mic is elsewhere or absent. `PGA1/PGA2 Volume` 70%, set by pad-audio-mic. Headphone jack switching 11-09 18:10: `pad-jack.service` (see log entry); not yet tested by ear |
 | Not yet | GPU acceleration (libhybris on the back burner), camera, modem, on-screen keyboard is only tolerable (see Keyboard) |
 
 **Keyboard (verified 14:05, auto-show seen in a screenshot when xfce4-terminal took focus):** Onboard tuned to be Gboard-like (Phone layout, Droid theme, auto-show on text focus via AT-SPI after a
@@ -260,7 +260,19 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
-- **16:50 (11-09) CLAUDE CODE ON THE TABLET (RESUME HERE).** Matt's wish from earlier.
+- **18:10 (11-09) HEADPHONE JACK (RESUME HERE).** Matt picked it; he has not plugged anything in yet (needs his ears).
+  - Jack: input device "mt6835-mt6377 Headset Jack" (event4, MT6377 ACCDET) reports SW_HEADPHONE_INSERT /
+    SW_MICROPHONE_INSERT / SW_LINEOUT_INSERT. `tools/pad-jackd` (python, /usr/local/sbin, `pad-jack.service`) reads the
+    state with EVIOCGSW at start, then follows events. Install: `tools/tab-jack-install.sh` (push pad-jackd first).
+  - Headphones in (stock audio_device.xml `headphone_output`): `DAC In Mux=Normal Path`, `HPL/HPR Mux=Audio Playback`,
+    `Headphone Plugged In=On`, `Headset Volume=12,12` (index: 0=+8dB, 8=0dB, 18=-10dB, 31=-40dB, from
+    Volume_AudioParam.xml; override with PAD_HP_GAIN), speakers off (`Ext_Speaker_Amp Switch=off`, aw87xxx profiles
+    Off, `LOL Mux=Open`). Out: HP muxes Open, then pad-audio-speaker.
+  - Headset mic (stock `headset_mic_input`): `PGA_L_Mux=AIN1` instead of the built-in AIN0, so the existing
+    "Built-in Microphone" PipeWire source carries it. Self-test `tools/tab-jack-selftest.sh` applies both routes and
+    reads every control back: all correct. NOT verified by ear: plug in headphones, play something, check level.
+  - Boot logo: a subagent is preparing a clean Arch logo.bin + `tools/make-logo.py` (no flashing).
+- **16:50 (11-09) CLAUDE CODE ON THE TABLET.** Matt's wish from earlier.
   - `tools/tab-claude-code-install.sh`: nodejs + npm + git + ripgrep from pacman; `npm install -g
     @anthropic-ai/claude-code` as matt with prefix ~/.local (PATH added to ~/.bashrc). The npm postinstall that fetches
     the native linux-arm64 binary did not run the first time; `node install.cjs` in the package dir fixed it.
@@ -436,7 +448,7 @@ xorg.conf also ignores `DP-1` (USB-C output reports connected with nothing attac
 1. Finish Wi-Fi (see "Wi-Fi status" above). Then rotate XFCE to landscape (xrandr with ShadowFB rotation + libinput touch matrix), if Matt wants it.
 2. Wi-Fi: the driver needs Android helpers (`wmt_loader`, `wmt_launcher`, `conninfra_loader`,
    `wlan_assistant`), which are bionic binaries. Not solved.
-3. Audio: MTK routing normally comes from an Android HAL. Not attempted.
+3. Audio: speakers, mic and headphone jack switching done (jack not yet tested by ear).
 4. Fun boot logo in the `logo` partition (read it via BROM first and keep a backup).
 5. Back burner (Matt, 2026-11-08): GPU acceleration via libhybris (Android Mali blob). Panfrost was the other option.
 6. Optional: change the USB gadget VID/PID (Windows binds `18d1:4e23` to its ADB driver),

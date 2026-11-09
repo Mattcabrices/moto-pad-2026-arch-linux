@@ -1,0 +1,94 @@
+#!/usr/bin/env python3
+# Moto Pad (archpad): headphone jack switching. Watches the codec's "Headset Jack" input device (MT6377 ACCDET)
+# and moves the analog routes:
+#   headphones in  -> codec HP out (stock audio_device.xml "headphone_output"), speaker amps off
+#   headphones out -> speakers (pad-audio-speaker)
+#   headset mic in -> left capture channel takes AIN1 (stock "headset_mic_input") instead of the built-in AIN0
+# PipeWire keeps the same sink/source; only the hardware path behind them changes.
+import fcntl, os, struct, subprocess, sys, time
+
+EV_SYN, EV_SW = 0, 5
+SW_HEADPHONE_INSERT, SW_MICROPHONE_INSERT, SW_LINEOUT_INSERT = 2, 4, 6
+HP_GAIN = os.environ.get("PAD_HP_GAIN", "12")  # Headset Volume index: 0=+8dB, 8=0dB, 18=-10dB (Volume_AudioParam.xml)
+EVENT = struct.Struct("qqHHi")  # aarch64 struct input_event
+
+
+def log(msg):
+    print("pad-jackd: " + msg, flush=True)
+
+
+def cset(name, value):
+    r = subprocess.run(["amixer", "-q", "-c", "0", "cset", "name=" + name, value], capture_output=True)
+    if r.returncode:
+        log("could not set '%s' = %s" % (name, value))
+
+
+def find_device():
+    name = None
+    for line in open("/proc/bus/input/devices"):
+        if line.startswith("N: Name="):
+            name = line
+        elif line.startswith("H: Handlers=") and name and "Headset Jack" in name:
+            for h in line.split("=", 1)[1].split():
+                if h.startswith("event"):
+                    return "/dev/input/" + h
+    return None
+
+
+def switches(fd):
+    buf = bytearray(8)
+    fcntl.ioctl(fd, (2 << 30) | (len(buf) << 16) | (ord("E") << 8) | 0x1B, buf)  # EVIOCGSW
+    bits = int.from_bytes(buf, "little")
+    return {c: bool(bits >> c & 1) for c in (SW_HEADPHONE_INSERT, SW_MICROPHONE_INSERT, SW_LINEOUT_INSERT)}
+
+
+def apply(sw, last):
+    hp = sw[SW_HEADPHONE_INSERT] or sw[SW_LINEOUT_INSERT]
+    mic = sw[SW_MICROPHONE_INSERT]
+    if (hp, mic) == last:
+        return last
+    if hp:
+        cset("Ext_Speaker_Amp Switch", "off")
+        for i in range(4):
+            cset("aw87xxx_profile_switch_%d" % i, "Off")
+        cset("LOL Mux", "Open")
+        cset("Headphone Plugged In", "On")
+        cset("DAC In Mux", "Normal Path")
+        cset("Headset Volume", "%s,%s" % (HP_GAIN, HP_GAIN))
+        cset("HPL Mux", "Audio Playback")
+        cset("HPR Mux", "Audio Playback")
+    else:
+        cset("HPL Mux", "Open")
+        cset("HPR Mux", "Open")
+        cset("Headphone Plugged In", "Off")
+        subprocess.run(["/usr/local/sbin/pad-audio-speaker"], capture_output=True)
+    cset("PGA_L_Mux", "AIN1" if mic else "AIN0")
+    log("%s, %s" % ("headphones" if hp else "speakers", "headset mic" if mic else "built-in mic"))
+    return (hp, mic)
+
+
+def main():
+    for _ in range(60):
+        dev = find_device()
+        if dev:
+            break
+        time.sleep(1)
+    else:
+        log("no Headset Jack input device")
+        sys.exit(1)
+    fd = os.open(dev, os.O_RDONLY)
+    log("watching " + dev)
+    sw = switches(fd)
+    last = apply(sw, None)
+    while True:
+        data = os.read(fd, EVENT.size * 16)
+        for off in range(0, len(data) - EVENT.size + 1, EVENT.size):
+            _, _, typ, code, val = EVENT.unpack_from(data, off)
+            if typ == EV_SW and code in sw:
+                sw[code] = bool(val)
+            elif typ == EV_SYN:
+                last = apply(sw, last)
+
+
+if __name__ == "__main__":
+    main()
