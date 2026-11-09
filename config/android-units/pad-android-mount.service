@@ -1,0 +1,8 @@
+[Unit]
+Description=Moto Pad: mount the read-only Android userspace at /opt/android-full (GPU / libhybris)
+After=local-fs.target
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/bash /usr/local/sbin/pad-android-mount
+TimeoutStartSec=300

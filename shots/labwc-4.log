@@ -1,0 +1,1381 @@
+gdb: warning: Couldn't determine a path for the index cache directory.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/usr/lib/libthread_db.so.1".
+[New Thread 0x7ff2e4eb60 (LWP 31159) (id 2)]
+[Thread 0x7ff2e4eb60 (LWP 31159) (id 2) exited]
+00:00:00.051 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x140 with 0x110
+00:00:00.051 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x14b with 0x111
+00:00:00.051 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x14c with 0x112
+00:00:00.051 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x110 with 0x110
+00:00:00.051 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x111 with 0x111
+00:00:00.051 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x112 with 0x112
+00:00:00.051 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x113 with 0x113
+00:00:00.051 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x114 with 0x114
+00:00:00.051 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x115 with 0x115
+00:00:00.051 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x116 with 0x116
+00:00:00.051 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x117 with 0x117
+00:00:00.051 [INFO] [../labwc/src/config/rcxml.c:1781] load default key bindings
+00:00:00.052 [INFO] [../labwc/src/config/rcxml.c:1786] load default mouse bindings
+00:00:00.052 [DEBUG] [../labwc/src/config/rcxml.c:1677] Loaded 32 merged mousebinds
+00:00:00.052 [INFO] [../labwc/src/config/rcxml.c:1903] load default window switcher fields
+00:00:00.052 [DEBUG] [../labwc/src/main.c:257] LABWC_PID=31157
+00:00:00.052 [DEBUG] [../labwc/src/main.c:264] LABWC_VER=0.20.2
+00:00:00.053 [INFO] [backend/backend.c:345] Loading user-specified backends due to WLR_BACKENDS: pad,libinput
+00:00:00.053 [INFO] [backend/pad/pad.c:383] pad: backend created
+00:00:00.054 [INFO] [libseat] [libseat/libseat.c:62] Seat opened with backend 'seatd'
+00:00:00.054 [INFO] [libseat] [libseat/backend/seatd.c:218] Enabling seat
+00:00:00.054 [INFO] [backend/session/session.c:117] Successfully loaded libseat session
+00:00:00.054 [DEBUG] [../labwc/src/server.c:535] manually creating headless backend
+00:00:00.054 [INFO] [backend/headless/backend.c:60] Creating headless backend
+00:00:00.054 [INFO] [util/env.c:9] Loading WLR_NO_HARDWARE_CURSORS option: 1
+00:00:00.054 [DEBUG] [types/output/output.c:378] WLR_NO_HARDWARE_CURSORS set, forcing software cursors
+00:00:00.055 [INFO] [util/env.c:25] Loading WLR_RENDERER option: hybris
+library "libui_compat_layer.so" not found
+library "libpq_cust.so" not found
+[New Thread 0x7ff2e4eb60 (LWP 31163) (id 3)]
+[New Thread 0x7fe971cb60 (LWP 31164) (id 4)]
+[New Thread 0x7fe8f0cb60 (LWP 31165) (id 5)]
+[New Thread 0x7fe86fcb60 (LWP 31166) (id 6)]
+[New Thread 0x7fe7eecb60 (LWP 31167) (id 7)]
+[New Thread 0x7fe76dcb60 (LWP 31168) (id 8)]
+[New Thread 0x7fe6eccb60 (LWP 31169) (id 9)]
+[New Thread 0x7fe66bcb60 (LWP 31170) (id 10)]
+[New Thread 0x7fe5eacb60 (LWP 31171) (id 11)]
+[New Thread 0x7fe569cb60 (LWP 31172) (id 12)]
+[New Thread 0x7fe4e8cb60 (LWP 31173) (id 13)]
+00:00:00.305 [INFO] [render/egl.c:207] Supported EGL client extensions: EGL_EXT_platform_base
+00:00:00.306 [INFO] [render/egl.c:371] Using EGL 1.4
+00:00:00.306 [INFO] [render/egl.c:372] Supported EGL display extensions: EGL_ANDROID_front_buffer_auto_refresh EGL_ANDROID_get_native_client_buffer EGL_ANDROID_presentation_time EGL_EXT_surface_CTA861_3_metadata EGL_EXT_surface_SMPTE2086_metadata EGL_KHR_get_all_proc_addresses EGL_KHR_swap_buffers_with_damage EGL_ANDROID_get_frame_timestamps EGL_ANDROID_image_native_buffer EGL_ANDROID_native_fence_sync EGL_ANDROID_recordable EGL_EXT_create_context_robustness EGL_EXT_image_gl_colorspace EGL_EXT_pixel_format_float EGL_EXT_yuv_surface EGL_IMG_context_priority EGL_KHR_config_attribs EGL_KHR_create_context EGL_KHR_fence_sync EGL_KHR_gl_colorspace EGL_KHR_gl_renderbuffer_image EGL_KHR_gl_texture_2D_image EGL_KHR_gl_texture_cubemap_image EGL_KHR_image EGL_KHR_image_base EGL_KHR_mutable_render_buffer EGL_KHR_no_config_context EGL_KHR_partial_update EGL_KHR_surfaceless_context EGL_KHR_wait_sync EGL_NV_context_priority_realtime  EGL_HYBRIS_native_buffer2 EGL_HYBRIS_WL_acquire_native_buffer EGL_WL_bind_wayland_display
+00:00:00.306 [DEBUG] [render/egl.c:121] Supported DMA-BUF formats:
+00:00:00.306 [DEBUG] [render/egl.c:170]   AR24 (0x34325241)
+00:00:00.306 [DEBUG] [render/egl.c:104]     INVALID (0x00FFFFFFFFFFFFFF): ✓ texture  ✓ render
+00:00:00.306 [DEBUG] [render/egl.c:104]     LINEAR (0x0000000000000000): ✓ texture  ✓ render
+00:00:00.306 [DEBUG] [render/egl.c:170]   XR24 (0x34325258)
+00:00:00.306 [DEBUG] [render/egl.c:104]     INVALID (0x00FFFFFFFFFFFFFF): ✓ texture  ✓ render
+00:00:00.306 [DEBUG] [render/egl.c:104]     LINEAR (0x0000000000000000): ✓ texture  ✓ render
+00:00:00.306 [DEBUG] [render/egl.c:170]   AB24 (0x34324241)
+00:00:00.306 [DEBUG] [render/egl.c:104]     INVALID (0x00FFFFFFFFFFFFFF): ✓ texture  ✓ render
+00:00:00.306 [DEBUG] [render/egl.c:104]     LINEAR (0x0000000000000000): ✓ texture  ✓ render
+00:00:00.306 [DEBUG] [render/egl.c:170]   XB24 (0x34324258)
+00:00:00.306 [DEBUG] [render/egl.c:104]     INVALID (0x00FFFFFFFFFFFFFF): ✓ texture  ✓ render
+00:00:00.306 [DEBUG] [render/egl.c:104]     LINEAR (0x0000000000000000): ✓ texture  ✓ render
+00:00:00.306 [DEBUG] [render/egl.c:190] EGL DMA-BUF format modifiers unsupported
+00:00:00.307 [INFO] [render/gles2/renderer.c:538] Creating GLES2 renderer
+00:00:00.307 [INFO] [render/gles2/renderer.c:539] Using OpenGL ES 3.2 v1.r38p1
+00:00:00.307 [INFO] [render/gles2/renderer.c:540] GL vendor: ARM
+00:00:00.307 [INFO] [render/gles2/renderer.c:541] GL renderer: Mali-G57 MC2
+00:00:00.307 [INFO] [render/gles2/renderer.c:542] Supported GLES2 extensions: GL_EXT_debug_marker GL_ARM_rgba8 GL_ARM_mali_shader_binary GL_OES_depth24 GL_OES_depth_texture GL_OES_depth_texture_cube_map GL_OES_packed_depth_stencil GL_OES_rgb8_rgba8 GL_EXT_read_format_bgra GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_standard_derivatives GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_EGL_image_external_essl3 GL_OES_EGL_sync GL_OES_texture_npot GL_OES_vertex_half_float GL_OES_required_internalformat GL_OES_vertex_array_object GL_OES_mapbuffer GL_EXT_texture_format_BGRA8888 GL_EXT_texture_rg GL_EXT_texture_type_2_10_10_10_REV GL_OES_fbo_render_mipmap GL_OES_element_index_uint GL_EXT_shadow_samplers GL_OES_texture_compression_astc GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_sliced_3d GL_EXT_texture_compression_astc_decode_mode GL_EXT_texture_compression_astc_decode_mode_rgb9e5 GL_KHR_debug GL_EXT_occlusion_query_boolean GL_EXT_disjoint_timer_query GL_EXT_blend_minmax GL_EXT_discard_framebuffer GL_OES_get_program_binary GL_OES_texture_3D GL_EXT_texture_storage GL_EXT_multisampled_render_to_texture GL_EXT_multisampled_render_to_texture2 GL_OES_surfaceless_context GL_OES_texture_stencil8 GL_EXT_shader_pixel_local_storage GL_ARM_shader_framebuffer_fetch GL_ARM_shader_framebuffer_fetch_depth_stencil GL_ARM_mali_program_binary GL_EXT_sRGB GL_EXT_sRGB_write_control GL_EXT_texture_sRGB_decode GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_OES_texture_storage_multisample_2d_array GL_OES_shader_image_atomic GL_EXT_robustness GL_EXT_draw_buffers_indexed GL_OES_draw_buffers_indexed GL_EXT_texture_border_clamp GL_OES_texture_border_clamp GL_EXT_texture_cube_map_array GL_OES_texture_cube_map_array GL_OES_sample_variables GL_OES_sample_shading GL_OES_shader_multisample_interpolation GL_EXT_shader_io_blocks GL_OES_shader_io_blocks GL_EXT_tessellation_shader GL_OES_tessellation_shader GL_EXT_primitive_bounding_box GL_OES_primitive_bounding_box GL_EXT_geometry_shader GL_OES_geometry_shader GL_ANDROID_extension_pack_es31a GL_EXT_gpu_shader5 GL_OES_gpu_shader5 GL_EXT_texture_buffer GL_OES_texture_buffer GL_EXT_copy_image GL_OES_copy_image GL_EXT_shader_non_constant_global_initializers GL_EXT_color_buffer_half_float GL_EXT_unpack_subimage GL_EXT_color_buffer_float GL_EXT_float_blend GL_EXT_YUV_target GL_OVR_multiview GL_OVR_multiview2 GL_OVR_multiview_multisampled_render_to_texture GL_KHR_robustness GL_KHR_robust_buffer_access_behavior GL_EXT_draw_elements_base_vertex GL_OES_draw_elements_base_vertex GL_EXT_protected_textures GL_EXT_buffer_storage GL_EXT_external_buffer GL_EXT_EGL_image_array GL_EXT_texture_filter_anisotropic GL_OES_texture_float_linear GL_ARM_texture_unnormalized_coordinates GL_EXT_shader_framebuffer_fetch GL_EXT_clip_control 
+00:00:00.307 [DEBUG] [render/gles2/renderer.c:602] GPU reset notifications are disabled
+[New Thread 0x7fe457eb60 (LWP 31174) (id 14)]
+[New Thread 0x7fe3d6eb60 (LWP 31175) (id 15)]
+00:00:00.352 [INFO] [render/hybris.c:243] hybris: GLES2 renderer on libhybris EGL
+00:00:00.352 [ERROR] [types/wlr_linux_dmabuf_v1.c:1094] Failed to get renderer DRM FD
+00:00:00.352 [INFO] [render/hybris.c:215] hybris: using the AHardwareBuffer allocator
+00:00:00.358 [DEBUG] [xcursor/wlr_xcursor.c:233] Loaded cursor theme 'default' at size 24 (63 available cursors)
+00:00:00.362 [DEBUG] [../labwc/src/config/keybind.c:136] Found layout English (US)
+00:00:00.362 [DEBUG] [types/wlr_drm_lease_v1.c:679] No DRM backend supplied, failed to create wlr_drm_lease_v1_manager
+00:00:00.362 [DEBUG] [../labwc/src/server.c:811] Failed to create wlr_drm_lease_device_v1
+00:00:00.362 [INFO] [../labwc/src/server.c:812] VR will not be available
+00:00:00.383 [DEBUG] [../labwc/src/xwayland.c:1111] xwayland is running on display :0
+00:00:00.384 [INFO] [util/env.c:9] Loading WLR_NO_HARDWARE_CURSORS option: 1
+00:00:00.384 [DEBUG] [types/output/output.c:378] WLR_NO_HARDWARE_CURSORS set, forcing software cursors
+00:00:00.384 [INFO] [backend/pad/pad.c:317] pad: DSI-1 connector 32 crtc 60 1600x2560@90
+00:00:00.384 [DEBUG] [../labwc/src/output.c:528] enable output DSI-1
+00:00:00.384 [DEBUG] [../labwc/src/output.c:443] testing modes for DSI-1
+00:00:00.384 [DEBUG] [../labwc/src/output.c:488] testing preferred mode 1600x2560@90000
+00:00:00.384 [DEBUG] [types/output/render.c:123] Attaching empty buffer to output for modeset
+00:00:00.384 [DEBUG] [types/output/swapchain.c:27] Choosing primary buffer format XR24 (0x34325258) for output 'DSI-1'
+00:00:00.384 [DEBUG] [types/output/swapchain.c:96] Testing swapchain for output 'DSI-1'
+00:00:00.384 [DEBUG] [render/swapchain.c:103] Allocating new swapchain buffer
+00:00:00.390 [DEBUG] [render/hybris.c:193] hybris: allocated 1600x2560 fmt 0x34325258 stride 1600
+00:00:00.393 [DEBUG] [render/gles2/renderer.c:157] Created GL FBO for buffer 1600x2560
+00:00:00.393 [DEBUG] [types/output/render.c:123] Attaching empty buffer to output for modeset
+00:00:00.393 [DEBUG] [types/output/cursor.c:428] Falling back to software cursor on output 'DSI-1'
+00:00:00.394 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 0 flip_pending 0
+00:00:00.394 [DEBUG] [backend/pad/pad.c:115] pad: new framebuffer 34
+00:00:00.394 [DEBUG] [backend/pad/pad.c:176] pad: modeset done, fb 34
+00:00:00.395 [DEBUG] [types/output/cursor.c:428] Falling back to software cursor on output 'DSI-1'
+00:00:00.395 [DEBUG] [types/output/cursor.c:428] Falling back to software cursor on output 'DSI-1'
+00:00:00.395 [DEBUG] [backend/libinput/backend.c:88] Starting libinput backend
+libinput error: event3  - lenovo-stylus: libinput bug: missing tablet capabilities: resolution. Ignoring this device.
+00:00:00.447 [DEBUG] [backend/libinput/events.c:69] Adding mtk-kpd [0:0]
+00:00:00.447 [INFO] [../labwc/src/seat.c:162] configuring input device mtk-kpd (event1)
+00:00:00.447 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.447 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.447 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.447 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.447 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.447 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.447 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.447 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.447 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.447 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.447 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.447 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.447 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.447 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.447 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.447 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.449 [DEBUG] [backend/libinput/events.c:69] Adding mtk-pmic-keys [1:1]
+00:00:00.449 [INFO] [../labwc/src/seat.c:162] configuring input device mtk-pmic-keys (event0)
+00:00:00.449 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.449 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.449 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.449 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.449 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.449 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.449 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.449 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.449 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.449 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.449 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.449 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.449 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.449 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.449 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.449 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.450 [DEBUG] [backend/libinput/events.c:69] Adding mt6835-mt6377 Headset Jack [0:0]
+00:00:00.450 [INFO] [../labwc/src/seat.c:162] configuring input device mt6835-mt6377 Headset Jack (event4)
+00:00:00.450 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.450 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.450 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.450 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.450 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.450 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.450 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.450 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.450 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.450 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.450 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.450 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.450 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.450 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.450 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.450 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.452 [DEBUG] [backend/libinput/events.c:69] Adding himax-touchscreen [0:0]
+00:00:00.452 [INFO] [../labwc/src/seat.c:162] configuring input device himax-touchscreen (event2)
+00:00:00.452 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.452 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.452 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.452 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.452 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.452 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.452 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.452 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.452 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.452 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.452 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.452 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.452 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.452 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.452 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.452 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.453 [INFO] [../labwc/src/seat.c:162] configuring input device himax-touchscreen (event2)
+00:00:00.453 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.453 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.453 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.453 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.453 [INFO] [../labwc/src/seat.c:399] map pointer to output (null)
+00:00:00.453 [INFO] [../labwc/src/seat.c:162] configuring input device himax-touchscreen (event2)
+00:00:00.453 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.453 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.453 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.453 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.453 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.453 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.453 [INFO] [../labwc/src/seat.c:474] map touch to output unknown
+00:00:00.453 [DEBUG] [backend/libinput/backend.c:125] libinput successfully initialized
+00:00:00.453 [INFO] [backend/headless/backend.c:17] Starting headless backend
+00:00:00.453 [DEBUG] [../labwc/src/server.c:872] WAYLAND_DISPLAY=wayland-0
+[New Thread 0x7fe3383b60 (LWP 31176) (id 16)]
+[Detaching after fork from child process 31177]
+00:00:00.480 [DEBUG] [backend/pad/pad.c:205] pad: flip done #1
+00:00:00.481 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:00.484 [DEBUG] [backend/pad/pad.c:205] pad: flip done #2
+00:00:00.525 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x5555fb8cc0 (res 0x555619ba50)
+00:00:00.525 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x5555f4a7d0 (res 0x555619bd20)
+00:00:00.525 [DEBUG] [types/xdg_shell/wlr_xdg_surface.c:441] new xdg_surface 0x5555f66670 (res 0x555619c0e0)
+00:00:00.525 [DEBUG] [types/wlr_xdg_decoration_v1.c:220] new xdg_toplevel_decoration 0x55561fff10 (res 0x55561ffe80)
+00:00:00.525 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x55561dab20 (res 0x55561daef0)
+00:00:00.537 [DEBUG] [../labwc/src/view-impl-common.c:40] [map] identifier=foot, title=foot
+00:00:00.537 [DEBUG] [../labwc/src/desktop-entry.c:325] matched 'foot.desktop' via exact match
+00:00:00.537 [DEBUG] [../labwc/src/desktop-entry.c:382] loading icon file /usr/share/icons/hicolor/scalable/apps/foot.svg
+00:00:00.538 [DEBUG] [../labwc/src/scaled-buffer/scaled-icon-buffer.c:88] loaded icon by app_id
+00:00:00.542 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:00.551 [DEBUG] [backend/pad/pad.c:205] pad: flip done #3
+00:00:00.551 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:00.562 [DEBUG] [backend/pad/pad.c:205] pad: flip done #4
+00:00:00.562 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:00.573 [DEBUG] [backend/pad/pad.c:205] pad: flip done #5
+00:00:00.699 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.699 [DEBUG] [types/output/cursor.c:428] Falling back to software cursor on output 'DSI-1'
+00:00:00.699 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:00.701 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:00.708 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:00.955 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:00.955 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:00.955 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.955 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:00.957 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:00.963 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:00.977 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.033 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:01.033 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:01.034 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.041 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.054 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.055 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:01.056 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.063 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.065 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.122 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:01.122 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:01.123 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.130 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.132 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.133 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:01.142 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.266 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.410 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:01.410 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:01.411 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.419 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.432 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.433 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:01.434 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.441 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.644 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.644 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.655 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.733 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:01.733 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:01.734 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.741 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.755 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.755 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:01.756 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.763 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.766 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.811 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:01.811 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:01.812 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.819 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.821 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.822 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:01.830 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:01.843 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.077 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.077 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.078 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.085 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.099 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.099 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.100 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.108 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.111 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.133 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.133 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.134 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.141 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.155 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.155 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.156 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.163 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.166 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.500 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.500 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.501 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.508 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.521 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.522 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.523 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.530 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.533 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.577 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.577 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.578 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.585 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.600 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.600 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.600 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.602 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.608 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.611 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.611 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.619 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.633 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.633 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.635 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.641 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.699 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.722 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.722 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.723 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.730 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.744 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.744 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.744 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.746 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.752 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.799 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.800 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.801 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.808 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.821 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.822 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.823 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.830 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.844 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.877 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.877 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.878 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.885 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.900 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.900 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.901 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.908 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:02.933 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.943 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.411 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:03.411 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:03.412 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.419 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.433 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.433 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:03.434 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.441 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.511 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.511 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.522 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:03.522 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:03.523 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.530 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.544 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.544 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:03.546 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.552 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.566 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.733 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:03.733 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:03.734 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.741 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.755 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.755 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:03.756 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.764 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.789 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.789 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.855 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:03.855 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:03.856 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.863 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.866 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.866 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:03.875 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:03.988 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.011 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.289 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:04.289 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:04.290 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:04.297 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:04.310 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.310 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:04.312 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+[Thread 0x7fe457eb60 (LWP 31174) (id 14) exited]
+00:00:04.319 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:04.522 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.555 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.677 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:04.677 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:04.678 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:04.685 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:04.699 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.699 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:04.701 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:04.708 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:04.744 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.944 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:04.944 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:04.945 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:04.952 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:04.966 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.966 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:04.967 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.968 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:04.974 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.033 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:05.033 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:05.034 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.041 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.055 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.055 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:05.055 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.055 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.056 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.063 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.066 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:05.066 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:05.075 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.089 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.089 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:05.089 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.091 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.097 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.200 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:05.200 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:05.201 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.208 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.221 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.222 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:05.223 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.230 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.422 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.444 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.522 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:05.522 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:05.523 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.530 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.544 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.544 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:05.546 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.552 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.566 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.733 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:05.733 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:05.734 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.741 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.755 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.755 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:05.755 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.756 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.763 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:05.765 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.166 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.166 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.167 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.174 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.188 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.189 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.190 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.197 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.199 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.233 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.233 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.234 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.242 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.266 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.266 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.266 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.268 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.275 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.277 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.377 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.377 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.378 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.385 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.400 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.400 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.401 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.408 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.410 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.533 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.533 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.534 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.541 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.555 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.555 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.555 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.557 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.563 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.666 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.666 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.667 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.674 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.688 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.688 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.689 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.697 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.744 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.766 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.766 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.767 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.774 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.788 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.788 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.789 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.797 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.843 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.877 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.877 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.879 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.885 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.899 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.899 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.901 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:06.908 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.043 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.055 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:07.055 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:07.056 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.063 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.077 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.077 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:07.078 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.086 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.288 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.288 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.344 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:07.344 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:07.345 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.352 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.366 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.366 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:07.367 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.374 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.767 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:07.767 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:07.768 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.775 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.777 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.777 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:07.787 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.788 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.788 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.788 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.799 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.933 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:07.933 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:07.934 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.941 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.955 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.955 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:07.955 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.957 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:07.964 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.089 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:08.089 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:08.090 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.097 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.099 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.099 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:08.108 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.466 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:08.466 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:08.467 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.474 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.488 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.488 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:08.489 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.497 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.622 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.622 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:08.622 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:08.623 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.630 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.644 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.644 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:08.645 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.652 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.699 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.699 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.755 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:08.755 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:08.756 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.763 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.777 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.777 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:08.778 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.786 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.788 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.955 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:08.955 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:08.956 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.963 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.977 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.977 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:08.979 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:08.986 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.021 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.022 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.277 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:09.277 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:09.278 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.285 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.299 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.299 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:09.299 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.301 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.308 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.322 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:09.322 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:09.323 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.330 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.343 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.344 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:09.345 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.352 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.455 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.455 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.465 [DEBUG] [types/output/render.c:142] Disabling direct scan-out on output 'DSI-1' (locks: 1)
+00:00:09.466 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.533 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:09.533 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:09.534 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.541 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.554 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.555 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:09.555 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.563 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.644 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.711 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:09.711 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:09.712 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.719 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.732 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.733 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:09.734 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.741 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:09.913 [DEBUG] [types/output/render.c:142] Enabling direct scan-out on output 'DSI-1' (locks: 0)
+00:00:09.944 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.044 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:10.044 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:10.046 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.052 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.066 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.066 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:10.067 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.068 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.075 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.077 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:10.077 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:10.085 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.099 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.099 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:10.099 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.101 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.108 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.110 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.110 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.121 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.233 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:10.233 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:10.234 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.241 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.255 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.255 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:10.257 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.264 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.333 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.444 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:10.444 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:10.445 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.452 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.454 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.455 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:10.464 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.633 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.645 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.711 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:10.711 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:10.712 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.719 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.732 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.732 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:10.734 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.741 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.744 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.900 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:10.900 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:10.901 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.908 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.921 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.921 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:10.923 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.931 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:10.944 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.966 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.133 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:11.133 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:11.134 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.141 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.144 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.144 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:11.153 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.199 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.210 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.244 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:11.244 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:11.245 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.252 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.266 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.266 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:11.268 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.275 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.488 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.500 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.544 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:11.544 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:11.545 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.552 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.566 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.566 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:11.567 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.568 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.575 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.577 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:11.577 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:11.586 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.599 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.599 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:11.601 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.608 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.655 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.677 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:11.677 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:11.679 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.686 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.710 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.711 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:11.711 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.712 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:11.719 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.155 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:12.155 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:12.157 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.163 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.199 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.200 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:12.201 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.207 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.221 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.233 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.233 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:12.233 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:12.234 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.241 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.255 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.255 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:12.256 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.263 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.288 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.288 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.478 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:12.478 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:12.479 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.485 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.500 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.500 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:12.501 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.508 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.555 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.666 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:12.666 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:12.667 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.674 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.688 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.688 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:12.689 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:12.697 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.022 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:13.022 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:13.023 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.030 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.044 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.044 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:13.044 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.046 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.052 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.167 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:13.167 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:13.168 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.175 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.189 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.189 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:13.189 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.190 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.197 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.210 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:13.211 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:13.211 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.219 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.233 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.233 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:13.233 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.234 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.242 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.299 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.366 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:13.366 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:13.367 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.375 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.388 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.388 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:13.389 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.397 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.477 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.477 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.700 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:13.700 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:13.701 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.708 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.722 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.722 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:13.723 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.730 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.844 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.855 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:13.855 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:13.856 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.863 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.877 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.877 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:13.877 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.879 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.885 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.977 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:13.977 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:13.978 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:13.986 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.010 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.010 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:14.012 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.019 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.100 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.122 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:14.122 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:14.124 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.130 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.143 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.144 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:14.145 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.152 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.155 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.155 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.177 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.200 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:14.200 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:14.201 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.208 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.222 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.222 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:14.222 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.223 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.230 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.322 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:14.322 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:14.323 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.330 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.332 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.333 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:14.342 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.445 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.455 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:14.455 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:14.456 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.467 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.477 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.477 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:14.479 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.486 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.499 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.499 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.544 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:14.544 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:14.545 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.552 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.555 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.555 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:14.564 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.732 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.732 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.744 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.889 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:14.889 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:14.890 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.897 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.911 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.911 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:14.913 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.919 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.922 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.933 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:14.934 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:14.935 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.941 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.955 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.955 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:14.956 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.963 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:14.966 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.056 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:15.056 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:15.057 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.064 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.077 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.077 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:15.079 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.086 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.356 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:15.356 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:15.357 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.363 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.377 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.377 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:15.377 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.379 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.385 [DEBUG] [backend/pad/pad.c:205] pad: flip done #300
+00:00:15.386 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.399 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:15.399 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:15.400 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.408 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.421 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.421 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:15.422 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.423 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.431 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.544 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:15.544 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:15.545 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.553 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.555 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.555 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:15.564 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.721 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.744 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.955 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:15.955 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:15.957 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.964 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:15.966 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.966 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:15.975 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.022 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.022 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.055 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.055 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.056 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.063 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.077 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.077 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.079 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.086 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.088 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.088 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.088 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.097 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.111 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.111 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.111 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.113 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.119 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.177 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.177 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.178 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.186 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.188 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.188 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.197 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.322 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.333 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.333 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.335 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.341 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.354 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.355 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.356 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.363 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.411 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.433 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.433 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.434 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.441 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.443 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.444 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.453 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.455 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.566 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.566 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.567 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.574 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.611 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.611 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.612 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.619 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.688 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.878 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.878 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.879 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.886 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.900 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.900 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.900 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.901 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.908 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.911 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.911 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.919 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.932 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.932 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.933 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.934 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.942 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.977 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.977 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.979 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.986 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:16.999 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.999 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.999 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.001 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.008 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.044 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:17.044 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:17.045 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.052 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.055 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.055 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:17.064 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.244 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.244 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.278 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:17.278 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:17.280 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.286 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.300 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.300 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:17.301 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.308 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.311 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.355 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:17.355 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:17.356 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.364 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.366 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.366 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:17.375 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.388 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.410 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:17.411 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:17.411 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.419 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.432 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.433 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:17.433 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.434 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.441 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.555 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:17.556 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:17.557 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.564 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.566 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.566 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:17.575 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.655 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.677 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:17.677 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:17.678 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.686 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.699 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.699 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:17.701 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.708 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.811 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.811 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.822 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.833 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:17.833 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:17.834 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.841 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.855 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.855 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:17.857 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:17.863 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.055 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.122 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:18.122 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:18.123 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.130 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.144 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.144 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:18.144 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.145 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.153 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.155 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.155 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.211 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:18.211 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:18.212 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.219 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.233 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.233 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:18.233 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.234 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.241 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.299 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:18.299 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:18.300 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.308 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.321 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.321 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:18.322 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.330 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.477 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.744 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:18.744 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:18.745 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.753 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.766 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.766 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:18.768 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.775 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.810 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.822 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.855 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:18.855 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:18.856 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.864 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.877 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.877 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:18.879 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.886 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:18.888 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.044 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:19.044 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:19.045 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.052 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.065 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.066 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:19.066 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.067 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.075 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.077 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.111 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:19.111 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:19.112 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.119 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.133 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.133 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:19.134 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.142 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.144 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.144 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.289 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:19.290 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:19.291 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.297 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.310 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.311 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:19.313 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.319 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.510 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.633 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:19.633 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:19.634 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.642 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.655 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.655 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:19.655 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.657 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.664 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.666 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:19.666 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:19.675 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.689 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.689 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:19.690 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.697 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.800 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.800 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.900 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:19.900 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:19.901 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.908 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.910 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.910 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:19.920 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:19.944 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.977 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.000 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:20.000 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:20.001 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.008 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.022 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.022 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:20.022 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.024 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.030 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.189 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:20.189 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:20.190 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.197 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.210 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.211 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:20.211 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.212 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.219 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.277 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:20.278 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:20.279 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.286 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.299 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.299 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:20.300 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.308 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.310 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.322 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:20.322 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:20.322 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.330 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.344 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.344 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:20.345 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.352 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.733 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:20.734 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:20.735 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.742 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.755 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.755 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:20.755 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.755 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.757 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.763 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.778 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.778 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.788 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:20.788 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:20.789 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.797 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:20.799 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.799 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:20.809 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:21.000 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.233 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.300 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:21.300 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:21.301 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:21.308 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:21.310 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.310 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:21.320 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.145 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.145 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.147 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.152 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.166 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.166 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.168 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.175 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.178 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.233 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.233 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.234 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.241 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.244 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.244 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.253 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.311 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.321 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.344 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.366 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.366 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.367 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.374 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.388 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.388 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.390 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.397 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.444 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.444 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.477 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.477 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.479 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.486 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.499 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.499 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.501 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.508 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.510 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.532 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.533 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.533 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.541 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.555 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.555 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.555 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.557 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.564 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.611 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.612 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.613 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.619 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.632 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.633 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.634 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.641 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.644 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.667 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.667 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.668 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.674 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.689 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.689 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.691 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.697 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.710 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.721 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.766 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.766 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.768 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.775 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.788 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.788 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.788 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.790 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.797 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.822 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.822 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.823 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.830 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.844 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.844 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.845 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.852 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.855 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.922 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.922 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.923 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.931 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+00:00:22.944 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.944 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.944 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.945 [DEBUG] [backend/pad/pad.c:152] pad: commit 0x3 buffer 0x5556107f70 crtc_set 1 flip_pending 0
+ err: wayland.c:1769: failed to read events from the Wayland socket: Broken pipe
+ err: wayland.c:2477: failed to roundtrip Wayland display: Broken pipe
+ err: wayland.c:2477: failed to roundtrip Wayland display: Broken pipe
+ err: wayland.c:2477: failed to roundtrip Wayland display: Broken pipe
+ err: wayland.c:2442: failed to flush wayland socket: Broken pipe

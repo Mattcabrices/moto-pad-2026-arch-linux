@@ -1,0 +1,7 @@
+[Unit]
+Description=Moto Pad: stand-in for Android logd (/dev/socket/logdw -> /var/log/android-helpers.log)
+[Service]
+ExecStart=/usr/bin/python3 /usr/local/bin/fake-logd.py
+StandardOutput=append:/var/log/android-helpers.log
+StandardError=append:/var/log/android-helpers.log
+Restart=on-failure

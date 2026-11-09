@@ -1,0 +1,893 @@
+00:00:00.034 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x140 with 0x110
+00:00:00.034 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x14b with 0x111
+00:00:00.034 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x14c with 0x112
+00:00:00.034 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x110 with 0x110
+00:00:00.034 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x111 with 0x111
+00:00:00.034 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x112 with 0x112
+00:00:00.034 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x113 with 0x113
+00:00:00.034 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x114 with 0x114
+00:00:00.034 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x115 with 0x115
+00:00:00.034 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x116 with 0x116
+00:00:00.034 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x117 with 0x117
+00:00:00.034 [INFO] [../labwc/src/config/rcxml.c:2045] read config file /etc/xdg/labwc/rc.xml
+00:00:00.034 [DEBUG] [../labwc/src/config/rcxml.c:1677] Loaded 32 merged mousebinds
+00:00:00.034 [INFO] [../labwc/src/config/rcxml.c:623] create mousebind for Root
+00:00:00.034 [INFO] [../labwc/src/config/rcxml.c:623] create mousebind for Root
+00:00:00.034 [INFO] [../labwc/src/config/rcxml.c:623] create mousebind for Root
+00:00:00.034 [INFO] [../labwc/src/config/rcxml.c:1781] load default key bindings
+00:00:00.034 [DEBUG] [../labwc/src/config/rcxml.c:1708] Replaced 3 mousebinds
+00:00:00.034 [DEBUG] [../labwc/src/config/rcxml.c:1711] Cleared 3 mousebinds
+00:00:00.034 [INFO] [../labwc/src/config/rcxml.c:1903] load default window switcher fields
+00:00:00.034 [DEBUG] [../labwc/src/main.c:257] LABWC_PID=42664
+00:00:00.034 [DEBUG] [../labwc/src/main.c:264] LABWC_VER=0.20.2
+00:00:00.034 [INFO] [backend/backend.c:345] Loading user-specified backends due to WLR_BACKENDS: pad,libinput
+00:00:00.034 [INFO] [backend/pad/pad.c:420] pad: backend created
+00:00:00.034 [INFO] [libseat] [libseat/libseat.c:62] Seat opened with backend 'seatd'
+00:00:00.035 [INFO] [libseat] [libseat/backend/seatd.c:218] Enabling seat
+00:00:00.035 [INFO] [backend/session/session.c:117] Successfully loaded libseat session
+00:00:00.035 [DEBUG] [../labwc/src/server.c:535] manually creating headless backend
+00:00:00.035 [INFO] [backend/headless/backend.c:60] Creating headless backend
+00:00:00.035 [INFO] [util/env.c:9] Loading WLR_NO_HARDWARE_CURSORS option: 1
+00:00:00.035 [DEBUG] [types/output/output.c:378] WLR_NO_HARDWARE_CURSORS set, forcing software cursors
+00:00:00.035 [INFO] [util/env.c:25] Loading WLR_RENDERER option: hybris
+library "libui_compat_layer.so" not found
+library "libpq_cust.so" not found
+00:00:00.169 [INFO] [render/egl.c:207] Supported EGL client extensions: EGL_EXT_platform_base
+00:00:00.169 [INFO] [render/egl.c:371] Using EGL 1.4
+00:00:00.169 [INFO] [render/egl.c:372] Supported EGL display extensions: EGL_ANDROID_front_buffer_auto_refresh EGL_ANDROID_get_native_client_buffer EGL_ANDROID_presentation_time EGL_EXT_surface_CTA861_3_metadata EGL_EXT_surface_SMPTE2086_metadata EGL_KHR_get_all_proc_addresses EGL_KHR_swap_buffers_with_damage EGL_ANDROID_get_frame_timestamps EGL_ANDROID_image_native_buffer EGL_ANDROID_native_fence_sync EGL_ANDROID_recordable EGL_EXT_create_context_robustness EGL_EXT_image_gl_colorspace EGL_EXT_pixel_format_float EGL_EXT_yuv_surface EGL_IMG_context_priority EGL_KHR_config_attribs EGL_KHR_create_context EGL_KHR_fence_sync EGL_KHR_gl_colorspace EGL_KHR_gl_renderbuffer_image EGL_KHR_gl_texture_2D_image EGL_KHR_gl_texture_cubemap_image EGL_KHR_image EGL_KHR_image_base EGL_KHR_mutable_render_buffer EGL_KHR_no_config_context EGL_KHR_partial_update EGL_KHR_surfaceless_context EGL_KHR_wait_sync EGL_NV_context_priority_realtime  EGL_HYBRIS_native_buffer2 EGL_HYBRIS_WL_acquire_native_buffer EGL_WL_bind_wayland_display
+00:00:00.169 [DEBUG] [render/egl.c:121] Supported DMA-BUF formats:
+00:00:00.169 [DEBUG] [render/egl.c:170]   AR24 (0x34325241)
+00:00:00.169 [DEBUG] [render/egl.c:104]     INVALID (0x00FFFFFFFFFFFFFF): ✓ texture  ✓ render
+00:00:00.169 [DEBUG] [render/egl.c:104]     LINEAR (0x0000000000000000): ✓ texture  ✓ render
+00:00:00.169 [DEBUG] [render/egl.c:170]   XR24 (0x34325258)
+00:00:00.169 [DEBUG] [render/egl.c:104]     INVALID (0x00FFFFFFFFFFFFFF): ✓ texture  ✓ render
+00:00:00.169 [DEBUG] [render/egl.c:104]     LINEAR (0x0000000000000000): ✓ texture  ✓ render
+00:00:00.169 [DEBUG] [render/egl.c:170]   AB24 (0x34324241)
+00:00:00.169 [DEBUG] [render/egl.c:104]     INVALID (0x00FFFFFFFFFFFFFF): ✓ texture  ✓ render
+00:00:00.169 [DEBUG] [render/egl.c:104]     LINEAR (0x0000000000000000): ✓ texture  ✓ render
+00:00:00.169 [DEBUG] [render/egl.c:170]   XB24 (0x34324258)
+00:00:00.169 [DEBUG] [render/egl.c:104]     INVALID (0x00FFFFFFFFFFFFFF): ✓ texture  ✓ render
+00:00:00.169 [DEBUG] [render/egl.c:104]     LINEAR (0x0000000000000000): ✓ texture  ✓ render
+00:00:00.169 [DEBUG] [render/egl.c:190] EGL DMA-BUF format modifiers unsupported
+00:00:00.171 [INFO] [render/gles2/renderer.c:538] Creating GLES2 renderer
+00:00:00.171 [INFO] [render/gles2/renderer.c:539] Using OpenGL ES 3.2 v1.r38p1
+00:00:00.171 [INFO] [render/gles2/renderer.c:540] GL vendor: ARM
+00:00:00.171 [INFO] [render/gles2/renderer.c:541] GL renderer: Mali-G57 MC2
+00:00:00.171 [INFO] [render/gles2/renderer.c:542] Supported GLES2 extensions: GL_EXT_debug_marker GL_ARM_rgba8 GL_ARM_mali_shader_binary GL_OES_depth24 GL_OES_depth_texture GL_OES_depth_texture_cube_map GL_OES_packed_depth_stencil GL_OES_rgb8_rgba8 GL_EXT_read_format_bgra GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_standard_derivatives GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_EGL_image_external_essl3 GL_OES_EGL_sync GL_OES_texture_npot GL_OES_vertex_half_float GL_OES_required_internalformat GL_OES_vertex_array_object GL_OES_mapbuffer GL_EXT_texture_format_BGRA8888 GL_EXT_texture_rg GL_EXT_texture_type_2_10_10_10_REV GL_OES_fbo_render_mipmap GL_OES_element_index_uint GL_EXT_shadow_samplers GL_OES_texture_compression_astc GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_sliced_3d GL_EXT_texture_compression_astc_decode_mode GL_EXT_texture_compression_astc_decode_mode_rgb9e5 GL_KHR_debug GL_EXT_occlusion_query_boolean GL_EXT_disjoint_timer_query GL_EXT_blend_minmax GL_EXT_discard_framebuffer GL_OES_get_program_binary GL_OES_texture_3D GL_EXT_texture_storage GL_EXT_multisampled_render_to_texture GL_EXT_multisampled_render_to_texture2 GL_OES_surfaceless_context GL_OES_texture_stencil8 GL_EXT_shader_pixel_local_storage GL_ARM_shader_framebuffer_fetch GL_ARM_shader_framebuffer_fetch_depth_stencil GL_ARM_mali_program_binary GL_EXT_sRGB GL_EXT_sRGB_write_control GL_EXT_texture_sRGB_decode GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_OES_texture_storage_multisample_2d_array GL_OES_shader_image_atomic GL_EXT_robustness GL_EXT_draw_buffers_indexed GL_OES_draw_buffers_indexed GL_EXT_texture_border_clamp GL_OES_texture_border_clamp GL_EXT_texture_cube_map_array GL_OES_texture_cube_map_array GL_OES_sample_variables GL_OES_sample_shading GL_OES_shader_multisample_interpolation GL_EXT_shader_io_blocks GL_OES_shader_io_blocks GL_EXT_tessellation_shader GL_OES_tessellation_shader GL_EXT_primitive_bounding_box GL_OES_primitive_bounding_box GL_EXT_geometry_shader GL_OES_geometry_shader GL_ANDROID_extension_pack_es31a GL_EXT_gpu_shader5 GL_OES_gpu_shader5 GL_EXT_texture_buffer GL_OES_texture_buffer GL_EXT_copy_image GL_OES_copy_image GL_EXT_shader_non_constant_global_initializers GL_EXT_color_buffer_half_float GL_EXT_unpack_subimage GL_EXT_color_buffer_float GL_EXT_float_blend GL_EXT_YUV_target GL_OVR_multiview GL_OVR_multiview2 GL_OVR_multiview_multisampled_render_to_texture GL_KHR_robustness GL_KHR_robust_buffer_access_behavior GL_EXT_draw_elements_base_vertex GL_OES_draw_elements_base_vertex GL_EXT_protected_textures GL_EXT_buffer_storage GL_EXT_external_buffer GL_EXT_EGL_image_array GL_EXT_texture_filter_anisotropic GL_OES_texture_float_linear GL_ARM_texture_unnormalized_coordinates GL_EXT_shader_framebuffer_fetch GL_EXT_clip_control 
+00:00:00.171 [DEBUG] [render/gles2/renderer.c:602] GPU reset notifications are disabled
+00:00:00.208 [INFO] [render/hybris.c:244] hybris: GLES2 renderer on libhybris EGL
+00:00:00.208 [ERROR] [types/wlr_linux_dmabuf_v1.c:1094] Failed to get renderer DRM FD
+00:00:00.208 [INFO] [render/hybris.c:208] hybris: using the AHardwareBuffer allocator
+00:00:00.215 [DEBUG] [xcursor/wlr_xcursor.c:233] Loaded cursor theme 'default' at size 24 (63 available cursors)
+00:00:00.219 [DEBUG] [../labwc/src/config/keybind.c:136] Found layout English (US)
+00:00:00.219 [DEBUG] [types/wlr_drm_lease_v1.c:679] No DRM backend supplied, failed to create wlr_drm_lease_v1_manager
+00:00:00.219 [DEBUG] [../labwc/src/server.c:811] Failed to create wlr_drm_lease_device_v1
+00:00:00.219 [INFO] [../labwc/src/server.c:812] VR will not be available
+00:00:00.241 [DEBUG] [../labwc/src/xwayland.c:1111] xwayland is running on display :0
+00:00:00.241 [INFO] [util/env.c:9] Loading WLR_NO_HARDWARE_CURSORS option: 1
+00:00:00.241 [DEBUG] [types/output/output.c:378] WLR_NO_HARDWARE_CURSORS set, forcing software cursors
+00:00:00.241 [INFO] [backend/pad/pad.c:354] pad: DSI-1 connector 32 crtc 60 1600x2560@90
+00:00:00.241 [DEBUG] [../labwc/src/output.c:528] enable output DSI-1
+00:00:00.241 [DEBUG] [../labwc/src/output.c:443] testing modes for DSI-1
+00:00:00.241 [DEBUG] [../labwc/src/output.c:488] testing preferred mode 1600x2560@90000
+00:00:00.241 [DEBUG] [types/output/render.c:123] Attaching empty buffer to output for modeset
+00:00:00.241 [DEBUG] [types/output/swapchain.c:27] Choosing primary buffer format XR24 (0x34325258) for output 'DSI-1'
+00:00:00.241 [DEBUG] [types/output/swapchain.c:96] Testing swapchain for output 'DSI-1'
+00:00:00.241 [DEBUG] [render/swapchain.c:103] Allocating new swapchain buffer
+00:00:00.242 [DEBUG] [render/hybris.c:186] hybris: allocated 1600x2560 fmt 0x34325258 stride 1600
+00:00:00.244 [DEBUG] [render/gles2/renderer.c:157] Created GL FBO for buffer 1600x2560
+00:00:00.245 [DEBUG] [types/output/render.c:123] Attaching empty buffer to output for modeset
+00:00:00.245 [DEBUG] [types/output/cursor.c:428] Falling back to software cursor on output 'DSI-1'
+00:00:00.246 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 0 flip_pending 0
+00:00:00.246 [DEBUG] [backend/pad/pad.c:118] pad: new framebuffer 34
+00:00:00.246 [DEBUG] [backend/pad/pad.c:179] pad: modeset done, fb 34
+00:00:00.246 [DEBUG] [types/output/cursor.c:428] Falling back to software cursor on output 'DSI-1'
+00:00:00.246 [DEBUG] [types/output/cursor.c:428] Falling back to software cursor on output 'DSI-1'
+00:00:00.246 [DEBUG] [backend/libinput/backend.c:88] Starting libinput backend
+libinput error: event3  - lenovo-stylus: libinput bug: missing tablet capabilities: resolution. Ignoring this device.
+00:00:00.297 [DEBUG] [backend/libinput/events.c:69] Adding mtk-kpd [0:0]
+00:00:00.297 [INFO] [../labwc/src/seat.c:162] configuring input device mtk-kpd (event1)
+00:00:00.297 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.297 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.297 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.297 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.297 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.297 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.297 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.297 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.297 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.297 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.297 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.297 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.297 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.297 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.297 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.297 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.298 [DEBUG] [backend/libinput/events.c:69] Adding mtk-pmic-keys [1:1]
+00:00:00.298 [INFO] [../labwc/src/seat.c:162] configuring input device mtk-pmic-keys (event0)
+00:00:00.298 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.298 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.298 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.298 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.298 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.298 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.298 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.298 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.298 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.298 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.298 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.298 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.298 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.298 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.298 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.298 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.300 [DEBUG] [backend/libinput/events.c:69] Adding mt6835-mt6377 Headset Jack [0:0]
+00:00:00.300 [INFO] [../labwc/src/seat.c:162] configuring input device mt6835-mt6377 Headset Jack (event4)
+00:00:00.300 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.300 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.300 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.300 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.300 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.300 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.300 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.300 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.300 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.300 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.300 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.300 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.300 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.300 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.300 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.300 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.301 [DEBUG] [backend/libinput/events.c:69] Adding himax-touchscreen [0:0]
+00:00:00.301 [INFO] [../labwc/src/seat.c:162] configuring input device himax-touchscreen (event2)
+00:00:00.301 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.301 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.301 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.302 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.302 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.302 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.302 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.302 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.302 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.302 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.302 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.302 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.302 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.302 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.302 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.302 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.303 [INFO] [../labwc/src/seat.c:162] configuring input device himax-touchscreen (event2)
+00:00:00.303 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.303 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.303 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.303 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.303 [INFO] [../labwc/src/seat.c:399] map pointer to output (null)
+00:00:00.303 [INFO] [../labwc/src/seat.c:162] configuring input device himax-touchscreen (event2)
+00:00:00.303 [INFO] [../labwc/src/seat.c:166] matched category: touch
+00:00:00.303 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.303 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.303 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:362] calibration matrix configured
+00:00:00.303 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.303 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.303 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:00.303 [INFO] [../labwc/src/seat.c:474] map touch to output DSI-1
+00:00:00.303 [DEBUG] [backend/libinput/backend.c:125] libinput successfully initialized
+00:00:00.303 [INFO] [backend/headless/backend.c:17] Starting headless backend
+00:00:00.303 [DEBUG] [../labwc/src/server.c:872] WAYLAND_DISPLAY=wayland-0
+00:00:00.330 [DEBUG] [backend/pad/pad.c:242] pad: flip done #1
+00:00:00.331 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:00.336 [DEBUG] [backend/pad/pad.c:242] pad: flip done #2
+00:00:00.428 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x557419a730 (res 0x55744af940)
+00:00:00.428 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x557412c600 (res 0x55744afb90)
+dbus-daemon[42685]: [session uid=0 pid=42685 pidfd=5] Activating service name='org.a11y.Bus' requested by ':1.1' (uid=0 pid=42687 comm="xfce4-panel" label="kernel")
+00:00:00.440 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.440 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:00.440 [DEBUG] [types/output/cursor.c:428] Falling back to software cursor on output 'DSI-1'
+00:00:00.441 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:00.447 [DEBUG] [backend/pad/pad.c:242] pad: flip done #3
+00:00:00.452 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x55744b8f10 (res 0x55744b92e0)
+00:00:00.452 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x55743c7250 (res 0x55743c7620)
+dbus-daemon[42685]: [session uid=0 pid=42685 pidfd=5] Successfully activated service 'org.a11y.Bus'
+dbus-daemon[42685]: [session uid=0 pid=42685 pidfd=5] Activating service name='org.xfce.Xfconf' requested by ':1.0' (uid=0 pid=42687 comm="xfce4-panel" label="kernel")
+dbus-daemon[42685]: [session uid=0 pid=42685 pidfd=5] Successfully activated service 'org.xfce.Xfconf'
+dbus-daemon[42709]: Activating service name='org.a11y.atspi.Registry' requested by ':1.1' (uid=0 pid=42687 comm="xfce4-panel" label="kernel")
+libxfce4windowing-Message: 00:51:35.307: Window<->Workspace association is not available on your compositor
+dbus-daemon[42709]: Successfully activated service 'org.a11y.atspi.Registry'
+SpiRegistry daemon is running with well-known name - org.a11y.atspi.Registry
+00:00:00.563 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.563 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:00.563 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.563 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+WARNING: Glycin running without sandbox. Bubblewrap (bwrap) doesn't work in the environment.
+WARNING: Glycin running without sandbox. Bubblewrap (bwrap) doesn't work in the environment.
+00:00:00.728 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x5574460d50 (res 0x5574461120)
+00:00:00.728 [DEBUG] [types/xdg_shell/wlr_xdg_surface.c:441] new xdg_surface 0x5574122b30 (res 0x5574461f40)
+00:00:00.728 [DEBUG] [types/wlr_server_decoration.c:108] new server_decoration 0x55744b8590 (res 0x557437f480)
+00:00:00.745 [DEBUG] [../labwc/src/view-impl-common.c:40] [map] identifier=xfce4-terminal, title=Terminal
+00:00:00.745 [DEBUG] [../labwc/src/desktop-entry.c:325] matched 'xfce4-terminal.desktop' via exact match
+00:00:00.745 [DEBUG] [../labwc/src/desktop-entry.c:382] loading icon file /usr/share/icons/hicolor/24x24/apps/org.xfce.terminal.png
+00:00:00.746 [DEBUG] [../labwc/src/scaled-buffer/scaled-icon-buffer.c:88] loaded icon by app_id
+00:00:00.756 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:00.759 [DEBUG] [backend/pad/pad.c:242] pad: flip done #4
+00:00:00.767 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:00.770 [DEBUG] [backend/pad/pad.c:242] pad: flip done #5
+00:00:00.831 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x55743ae310 (res 0x55743c9f10)
+00:00:00.831 [DEBUG] [types/wlr_layer_shell_v1.c:502] new layer_surface 0x55743a1420 (res 0x55744bebf0)
+00:00:00.895 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.895 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:00.907 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.907 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:00.910 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x55743ae8c0 (res 0x55743ae800)
+00:00:00.910 [DEBUG] [types/wlr_layer_shell_v1.c:502] new layer_surface 0x55744d5ce0 (res 0x55743aec90)
+00:00:00.933 [DEBUG] [../labwc/src/layers.c:229] interactive-on-demand '0x55743a1420'
+00:00:00.934 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:00.937 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:00.949 [DEBUG] [../labwc/src/layers.c:229] interactive-on-demand '0x55744d5ce0'
+00:00:00.950 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:00.960 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:01.018 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.018 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:01.196 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.196 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:01.207 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.207 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:01.454 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:01.473 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.473 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:01.473 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.473 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:01.492 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:01.504 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:01.516 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:01.584 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.584 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:01.584 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.584 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:01.684 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.684 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:01.707 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.707 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:01.707 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.707 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:01.974 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.974 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.096 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.097 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.152 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.152 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.163 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.163 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.218 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.218 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.296 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.297 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.297 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.297 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.340 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.341 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.341 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.341 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.385 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.385 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.440 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.440 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.441 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.441 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.562 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.562 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.574 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.574 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.607 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.607 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.618 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.618 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.818 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.818 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.940 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.941 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.941 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.941 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:02.951 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.951 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:03.318 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.318 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:03.318 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.318 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+sh: line 1: mousepad: command not found
+
+(xfce4-panel:42687): xfce4-panel-CRITICAL **: 00:51:38.141: Name org.xfce.Panel lost on the message dbus, exiting.
+
+(xfconfd:42711): xfconfd-WARNING **: 00:51:38.143: Name org.xfce.Xfconf lost on the message dbus, exiting.
+00:00:03.389 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:03.394 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:03.396 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:03.429 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.429 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:03.440 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.440 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:03.562 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.562 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:03.862 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.862 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:03.862 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.862 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:03.874 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.874 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:03.951 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.951 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:03.951 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.951 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:04.018 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.018 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:04.018 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.019 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:04.184 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.185 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:04.596 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.596 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:04.740 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.740 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:04.896 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.896 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:04.896 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.896 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.196 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.196 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.196 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.196 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.263 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.263 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.329 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.329 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.330 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.330 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.330 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.330 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.397 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.397 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.663 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.663 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.685 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.685 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.763 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.763 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.797 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.797 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.797 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.797 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:05.941 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.941 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:06.029 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.029 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:06.040 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.040 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:06.662 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.662 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:06.830 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.830 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.097 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.097 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.097 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.097 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.241 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.241 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.241 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.241 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.241 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.241 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.296 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.296 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.385 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.385 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.430 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.430 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.430 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.430 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.473 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.473 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.473 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.474 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.552 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.552 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.552 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.553 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.585 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.585 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.596 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.596 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.618 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.618 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.618 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.618 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.629 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.630 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.718 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.718 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.763 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.763 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.896 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.896 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.907 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.908 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.974 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.974 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:07.974 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.974 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.007 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.007 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.018 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.018 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.051 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.051 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.051 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.051 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.062 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.063 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.085 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.085 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.085 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.085 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.184 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.184 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.185 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.185 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.196 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.196 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.451 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.452 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.462 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.463 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.574 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.574 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.629 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.629 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.629 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.629 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:08.640 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.640 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:09.051 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.051 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:09.118 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.118 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:09.129 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.129 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:09.129 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.129 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:09.196 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.196 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:09.262 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.263 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:09.263 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.263 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:09.362 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.363 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:09.430 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.430 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:09.430 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.430 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:09.840 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.840 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:09.992 [DEBUG] [types/output/render.c:142] Disabling direct scan-out on output 'DSI-1' (locks: 1)
+00:00:09.993 [DEBUG] [backend/pad/pad.c:155] pad: commit 0x3 buffer 0x55742c3370 crtc_set 1 flip_pending 0
+00:00:10.098 [INFO] [backend/pad/pad.c:231] pad: dumped scanout 1600x2560 fmt 0x34325258 to /tmp/pad-scanout.ppm
+00:00:10.240 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.240 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.285 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.285 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.296 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.296 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.329 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.329 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.444 [DEBUG] [types/output/render.c:142] Enabling direct scan-out on output 'DSI-1' (locks: 0)
+00:00:10.464 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.464 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.464 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.464 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.496 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.497 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.497 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.497 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.562 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.563 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.574 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.574 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.574 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.574 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.574 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.574 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.874 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.874 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.874 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.874 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.929 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.929 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:10.940 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.940 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.007 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.007 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.018 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.018 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.063 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.063 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.063 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.063 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.196 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.196 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.196 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.196 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.362 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.362 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.384 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.385 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.496 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.496 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.630 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.630 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.630 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.630 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.674 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.674 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.851 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.851 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.851 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.851 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.862 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.863 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:11.863 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.863 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:12.063 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.063 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:12.096 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.096 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:12.108 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.108 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:12.218 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.218 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:12.240 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.240 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:12.563 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.563 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:12.762 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.762 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:12.763 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.763 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:12.795 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.795 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:12.807 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.807 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:13.207 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.207 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:13.218 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.218 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:13.285 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.285 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:13.285 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.285 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:13.285 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.285 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:13.296 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.296 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:13.729 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.730 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:13.773 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.774 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:13.818 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.818 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:14.174 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.174 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:14.597 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.597 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:14.640 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.641 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:14.751 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.751 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:14.886 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.886 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:14.930 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.930 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:14.974 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.974 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:14.974 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.974 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.185 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.185 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.329 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.330 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.385 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.385 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.430 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.430 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.430 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.430 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.496 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.496 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.630 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.630 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.807 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.808 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.830 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.830 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.830 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.830 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.896 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.896 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.896 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.896 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.907 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.907 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:15.985 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.986 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.029 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.029 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.130 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.130 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.130 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.131 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.174 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.174 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.185 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.186 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.186 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.186 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.229 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.230 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.362 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.363 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.463 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.463 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.463 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.463 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.507 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.507 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.507 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.507 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.563 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.563 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.563 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.563 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.629 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.629 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.630 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.630 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.696 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.696 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.719 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.719 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.719 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.719 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.763 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.763 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.930 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.930 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.963 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.963 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.974 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.974 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:16.996 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.996 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:17.007 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.007 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:17.007 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.007 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:17.018 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.018 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:17.129 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.129 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:17.352 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.352 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:17.352 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.352 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:17.807 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.807 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:17.896 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.896 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:17.897 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.897 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:17.940 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.941 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.030 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.030 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.041 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.041 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.041 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.041 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.074 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.074 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.074 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.074 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.130 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.130 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.130 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.130 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.207 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.207 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.252 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.252 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.252 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.252 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.540 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.540 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.551 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.551 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.551 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.551 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.652 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.652 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.663 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.663 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.707 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.707 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.719 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.719 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.774 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.774 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:18.951 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.952 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:19.085 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.085 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:19.085 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.085 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:19.329 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.330 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:19.330 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.330 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:19.374 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.374 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:20.118 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.118 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:20.118 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.118 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:20.397 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.397 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:20.685 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.685 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:20.708 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.708 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:20.952 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.952 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:21.052 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.052 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:21.053 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.053 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:21.140 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.140 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:21.140 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.140 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:21.151 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.151 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:21.796 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.797 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:21.918 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.918 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.018 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.018 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.018 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.018 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.174 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.174 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.273 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.274 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.285 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.285 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.352 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.352 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.352 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.352 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.540 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.541 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.596 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.596 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.596 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.596 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.663 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.663 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.663 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.663 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.696 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.697 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.697 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.697 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.796 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.796 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.807 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.807 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.840 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.841 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:22.841 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.841 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:23.041 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.041 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:23.041 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.041 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:23.140 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.140 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:23.574 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.574 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:23.818 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.818 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:23.830 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.830 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:23.874 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.874 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:23.874 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.874 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:23.918 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.918 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:23.929 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.929 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:24.130 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:24.130 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:24.130 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:24.130 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:24.141 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:24.141 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:24.374 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:24.374 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:24.562 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:24.562 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:25.074 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:25.074 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:25.453 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:25.453 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:25.541 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:25.541 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:26.085 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:26.085 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:26.085 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:26.085 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:26.307 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:26.307 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:26.307 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:26.307 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:26.407 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:26.407 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:26.407 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:26.407 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:26.474 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:26.474 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:26.907 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:26.907 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:26.907 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:26.907 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:26.918 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:26.918 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:26.918 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:26.918 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:27.663 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:27.663 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:27.674 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:27.674 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:27.785 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:27.785 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:27.786 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:27.786 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:27.863 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:27.863 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:27.863 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:27.863 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen
+00:00:28.118 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:28.118 [INFO] [../labwc/src/config/touch.c:28] found touch configuration for himax-touchscreen

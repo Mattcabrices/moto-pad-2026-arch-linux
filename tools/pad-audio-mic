@@ -1,0 +1,17 @@
+#!/bin/sh
+# Routes the Moto Pad's two built-in mics to Capture_1 (stereo: left = AIN0, right = AIN2).
+# From the stock vendor audio_device.xml "builtin_Mic_DualMic" + "ADDA_TO_CAPTURE1" paths.
+c() { amixer -q -c 0 cset name="$1" "$2" 2>/dev/null || echo "pad-audio-mic: could not set '$1'"; }
+c "MISO0_MUX" "UL1_CH1"
+c "MISO1_MUX" "UL1_CH2"
+c "ADC_L_Mux" "Left Preamplifier"
+c "PGA_L_Mux" "AIN0"
+c "ADC_R_Mux" "Right Preamplifier"
+c "PGA_R_Mux" "AIN2"
+c "DMIC0_MUX" "DMIC_DATA0"
+c "DMIC1_MUX" "DMIC_DATA1_L"
+c "UL1_CH1 ADDA_UL_CH1" on
+c "UL1_CH2 ADDA_UL_CH2" on
+amixer -q -c 0 cset name="PGA1 Volume" 70% 2>/dev/null
+amixer -q -c 0 cset name="PGA2 Volume" 70% 2>/dev/null
+echo "pad-audio-mic: built-in mics routed to Capture_1"

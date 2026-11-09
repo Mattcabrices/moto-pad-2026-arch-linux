@@ -1,0 +1,8 @@
+#!/bin/sh
+# Landscape for the Moto Pad (the panel is natively 1600x2560 portrait) and touch to match.
+# Run at XFCE login from /etc/xdg/autostart/pad-rotate.desktop. Override with PAD_ROTATE=normal|left|inverted.
+ROT=${PAD_ROTATE:-right}
+xrandr --output DSI-1 --rotate "$ROT"
+sleep 1
+id=$(xinput list | grep -i 'himax-touchscreen' | grep -iv keyboard | grep -oE 'id=[0-9]+' | head -1 | cut -d= -f2)
+[ -n "$id" ] && xinput --map-to-output "$id" DSI-1

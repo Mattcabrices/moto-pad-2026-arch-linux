@@ -1,0 +1,12 @@
+#!/bin/sh
+# Routes playback (PCM device 0, Playback_1 / DL1) to the Moto Pad's speakers.
+# From the stock vendor audio_device.xml "speaker_output" and "ext_speaker_output" paths:
+# DL1 -> codec DAC -> line out (LOL) -> four analog Awinic aw87xxx amps (MTK_SPK_NOT_SMARTPA).
+c() { amixer -q -c 0 cset name="$1" "$2" 2>/dev/null || echo "pad-audio: could not set '$1'"; }
+c "ADDA_DL_CH1 DL1_CH1" on
+c "ADDA_DL_CH2 DL1_CH2" on
+c "DAC In Mux" "Normal Path"
+c "LOL Mux" "Playback"
+c "Ext_Speaker_Amp Switch" on
+for i in 0 1 2 3; do c "aw87xxx_profile_switch_$i" "Music"; done
+echo "pad-audio: speaker path on"

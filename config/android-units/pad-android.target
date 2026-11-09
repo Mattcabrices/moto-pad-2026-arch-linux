@@ -1,0 +1,6 @@
+[Unit]
+Description=Moto Pad: Android services for the GPU (mount, service managers, allocator)
+Wants=pad-android-mount.service pad-android-logd.service pad-servicemanager.service pad-hwservicemanager.service pad-vndservicemanager.service pad-gralloc.service
+After=pad-gralloc.service
+[Install]
+WantedBy=multi-user.target

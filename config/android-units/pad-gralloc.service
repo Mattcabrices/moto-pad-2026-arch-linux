@@ -1,0 +1,12 @@
+[Unit]
+Description=Moto Pad: Android gralloc allocator HAL (MediaTek)
+Requires=pad-android-mount.service pad-hwservicemanager.service
+After=pad-android-mount.service pad-android-logd.service pad-servicemanager.service pad-hwservicemanager.service pad-vndservicemanager.service
+PartOf=pad-android.target
+[Service]
+ExecStart=/usr/bin/chroot /opt/android-full /system/bin/env LD_PRELOAD=/data/local/libpropshim.so /vendor/bin/hw/android.hardware.graphics.allocator@4.0-service-mediatek.mt6835
+Restart=on-failure
+RestartSec=2
+# Started = registered with hwservicemanager (so the GPU desktop never races it). Up to 30 s.
+ExecStartPost=/usr/local/sbin/pad-gralloc-wait
+TimeoutStartSec=45

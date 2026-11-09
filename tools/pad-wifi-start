@@ -1,0 +1,27 @@
+#!/bin/sh
+# Brings up MediaTek Wi-Fi on the Moto Pad, following the stock vendor init order.
+# The bionic helpers run in /opt/android with libpropshim.so standing in for Android's property
+# service, and fake-logd.py standing in for logd (their log: /var/log/android-helpers.log).
+A=/opt/android
+P="env LD_PRELOAD=/system/lib64/libpropshim.so chroot $A"
+eval "$(sed -n '/^d=/,/^}$/p' /usr/local/sbin/pad-load-modules)"
+wait_for() { n=0; while [ ! -e "$1" ] && [ $n -lt "$2" ]; do sleep 1; n=$((n + 1)); done; [ -e "$1" ]; }
+for mnt in dev proc sys; do mountpoint -q $A/$mnt || mount --bind /$mnt $A/$mnt; done
+pgrep -f fake-logd.py >/dev/null || (python3 /usr/local/bin/fake-logd.py >> /var/log/android-helpers.log 2>&1 &)
+sleep 1
+load connfem.ko; load wmt_drv.ko
+# wmt_loader creates /dev/stpwmt; wmt_launcher gives up if that node is not there yet.
+# Run the loader WITHOUT the property shim: the shim reports vendor.connsys.driver.ready=yes,
+# which makes the loader skip chip setup. (Its own setprop then fails harmlessly.)
+timeout 30 chroot $A /vendor/bin/wmt_loader >/dev/null 2>&1
+wait_for /dev/stpwmt 20 || { echo "pad-wifi: /dev/stpwmt never appeared"; exit 1; }
+pgrep -f wmt_launcher >/dev/null || ($P /vendor/bin/wmt_launcher -p /vendor/firmware/ -o 1 >/dev/null 2>&1 &)
+sleep 5
+# wlan_drv needs ccci_md_all and mddp (modem modules); load() pulls them in from modules.dep.
+load wmt_chrdev_wifi.ko; load wlan_drv_gen4m_6835.ko
+wait_for /dev/wmtWifi 20 || { echo "pad-wifi: /dev/wmtWifi never appeared"; exit 1; }
+for try in 1 2 3 4 5; do
+  if echo 1 > /dev/wmtWifi 2>/dev/null; then echo "pad-wifi: radio on (try $try)"; break; fi
+  sleep 4
+done
+wait_for /sys/class/net/wlan0 30 && echo "pad-wifi: wlan0 ready" || { echo "pad-wifi: no wlan0"; exit 1; }

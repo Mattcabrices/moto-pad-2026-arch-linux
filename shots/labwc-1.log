@@ -1,0 +1,952 @@
+00:00:00.042 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x140 with 0x110
+00:00:00.042 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x14b with 0x111
+00:00:00.042 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x14c with 0x112
+00:00:00.042 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x110 with 0x110
+00:00:00.042 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x111 with 0x111
+00:00:00.042 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x112 with 0x112
+00:00:00.042 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x113 with 0x113
+00:00:00.042 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x114 with 0x114
+00:00:00.042 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x115 with 0x115
+00:00:00.042 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x116 with 0x116
+00:00:00.042 [INFO] [../labwc/src/config/tablet.c:111] Adding button map for 0x117 with 0x117
+00:00:00.042 [INFO] [../labwc/src/config/rcxml.c:1781] load default key bindings
+00:00:00.043 [INFO] [../labwc/src/config/rcxml.c:1786] load default mouse bindings
+00:00:00.043 [DEBUG] [../labwc/src/config/rcxml.c:1677] Loaded 32 merged mousebinds
+00:00:00.044 [INFO] [../labwc/src/config/rcxml.c:1903] load default window switcher fields
+00:00:00.044 [DEBUG] [../labwc/src/main.c:257] LABWC_PID=29469
+00:00:00.044 [DEBUG] [../labwc/src/main.c:264] LABWC_VER=0.20.2
+00:00:00.044 [INFO] [backend/backend.c:345] Loading user-specified backends due to WLR_BACKENDS: pad,libinput
+00:00:00.044 [INFO] [backend/pad/pad.c:370] pad: backend created
+00:00:00.044 [INFO] [libseat] [libseat/libseat.c:62] Seat opened with backend 'seatd'
+00:00:00.044 [INFO] [libseat] [libseat/backend/seatd.c:218] Enabling seat
+00:00:00.044 [INFO] [backend/session/session.c:117] Successfully loaded libseat session
+00:00:00.044 [DEBUG] [../labwc/src/server.c:535] manually creating headless backend
+00:00:00.044 [INFO] [backend/headless/backend.c:60] Creating headless backend
+00:00:00.044 [INFO] [util/env.c:9] Loading WLR_NO_HARDWARE_CURSORS option: 1
+00:00:00.044 [DEBUG] [types/output/output.c:378] WLR_NO_HARDWARE_CURSORS set, forcing software cursors
+00:00:00.044 [INFO] [util/env.c:25] Loading WLR_RENDERER option: hybris
+library "libui_compat_layer.so" not found
+library "libpq_cust.so" not found
+00:00:00.242 [INFO] [render/egl.c:207] Supported EGL client extensions: EGL_EXT_platform_base
+00:00:00.242 [INFO] [render/egl.c:371] Using EGL 1.4
+00:00:00.242 [INFO] [render/egl.c:372] Supported EGL display extensions: EGL_ANDROID_front_buffer_auto_refresh EGL_ANDROID_get_native_client_buffer EGL_ANDROID_presentation_time EGL_EXT_surface_CTA861_3_metadata EGL_EXT_surface_SMPTE2086_metadata EGL_KHR_get_all_proc_addresses EGL_KHR_swap_buffers_with_damage EGL_ANDROID_get_frame_timestamps EGL_ANDROID_image_native_buffer EGL_ANDROID_native_fence_sync EGL_ANDROID_recordable EGL_EXT_create_context_robustness EGL_EXT_image_gl_colorspace EGL_EXT_pixel_format_float EGL_EXT_yuv_surface EGL_IMG_context_priority EGL_KHR_config_attribs EGL_KHR_create_context EGL_KHR_fence_sync EGL_KHR_gl_colorspace EGL_KHR_gl_renderbuffer_image EGL_KHR_gl_texture_2D_image EGL_KHR_gl_texture_cubemap_image EGL_KHR_image EGL_KHR_image_base EGL_KHR_mutable_render_buffer EGL_KHR_no_config_context EGL_KHR_partial_update EGL_KHR_surfaceless_context EGL_KHR_wait_sync EGL_NV_context_priority_realtime  EGL_HYBRIS_native_buffer2 EGL_HYBRIS_WL_acquire_native_buffer EGL_WL_bind_wayland_display
+00:00:00.242 [DEBUG] [render/egl.c:121] Supported DMA-BUF formats:
+00:00:00.242 [DEBUG] [render/egl.c:170]   AR24 (0x34325241)
+00:00:00.242 [DEBUG] [render/egl.c:104]     INVALID (0x00FFFFFFFFFFFFFF): ✓ texture  ✓ render
+00:00:00.242 [DEBUG] [render/egl.c:104]     LINEAR (0x0000000000000000): ✓ texture  ✓ render
+00:00:00.242 [DEBUG] [render/egl.c:170]   XR24 (0x34325258)
+00:00:00.242 [DEBUG] [render/egl.c:104]     INVALID (0x00FFFFFFFFFFFFFF): ✓ texture  ✓ render
+00:00:00.242 [DEBUG] [render/egl.c:104]     LINEAR (0x0000000000000000): ✓ texture  ✓ render
+00:00:00.242 [DEBUG] [render/egl.c:170]   AB24 (0x34324241)
+00:00:00.242 [DEBUG] [render/egl.c:104]     INVALID (0x00FFFFFFFFFFFFFF): ✓ texture  ✓ render
+00:00:00.242 [DEBUG] [render/egl.c:104]     LINEAR (0x0000000000000000): ✓ texture  ✓ render
+00:00:00.242 [DEBUG] [render/egl.c:170]   XB24 (0x34324258)
+00:00:00.242 [DEBUG] [render/egl.c:104]     INVALID (0x00FFFFFFFFFFFFFF): ✓ texture  ✓ render
+00:00:00.242 [DEBUG] [render/egl.c:104]     LINEAR (0x0000000000000000): ✓ texture  ✓ render
+00:00:00.242 [DEBUG] [render/egl.c:190] EGL DMA-BUF format modifiers unsupported
+00:00:00.243 [INFO] [render/gles2/renderer.c:538] Creating GLES2 renderer
+00:00:00.243 [INFO] [render/gles2/renderer.c:539] Using OpenGL ES 3.2 v1.r38p1
+00:00:00.243 [INFO] [render/gles2/renderer.c:540] GL vendor: ARM
+00:00:00.243 [INFO] [render/gles2/renderer.c:541] GL renderer: Mali-G57 MC2
+00:00:00.243 [INFO] [render/gles2/renderer.c:542] Supported GLES2 extensions: GL_EXT_debug_marker GL_ARM_rgba8 GL_ARM_mali_shader_binary GL_OES_depth24 GL_OES_depth_texture GL_OES_depth_texture_cube_map GL_OES_packed_depth_stencil GL_OES_rgb8_rgba8 GL_EXT_read_format_bgra GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_standard_derivatives GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_EGL_image_external_essl3 GL_OES_EGL_sync GL_OES_texture_npot GL_OES_vertex_half_float GL_OES_required_internalformat GL_OES_vertex_array_object GL_OES_mapbuffer GL_EXT_texture_format_BGRA8888 GL_EXT_texture_rg GL_EXT_texture_type_2_10_10_10_REV GL_OES_fbo_render_mipmap GL_OES_element_index_uint GL_EXT_shadow_samplers GL_OES_texture_compression_astc GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_sliced_3d GL_EXT_texture_compression_astc_decode_mode GL_EXT_texture_compression_astc_decode_mode_rgb9e5 GL_KHR_debug GL_EXT_occlusion_query_boolean GL_EXT_disjoint_timer_query GL_EXT_blend_minmax GL_EXT_discard_framebuffer GL_OES_get_program_binary GL_OES_texture_3D GL_EXT_texture_storage GL_EXT_multisampled_render_to_texture GL_EXT_multisampled_render_to_texture2 GL_OES_surfaceless_context GL_OES_texture_stencil8 GL_EXT_shader_pixel_local_storage GL_ARM_shader_framebuffer_fetch GL_ARM_shader_framebuffer_fetch_depth_stencil GL_ARM_mali_program_binary GL_EXT_sRGB GL_EXT_sRGB_write_control GL_EXT_texture_sRGB_decode GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_OES_texture_storage_multisample_2d_array GL_OES_shader_image_atomic GL_EXT_robustness GL_EXT_draw_buffers_indexed GL_OES_draw_buffers_indexed GL_EXT_texture_border_clamp GL_OES_texture_border_clamp GL_EXT_texture_cube_map_array GL_OES_texture_cube_map_array GL_OES_sample_variables GL_OES_sample_shading GL_OES_shader_multisample_interpolation GL_EXT_shader_io_blocks GL_OES_shader_io_blocks GL_EXT_tessellation_shader GL_OES_tessellation_shader GL_EXT_primitive_bounding_box GL_OES_primitive_bounding_box GL_EXT_geometry_shader GL_OES_geometry_shader GL_ANDROID_extension_pack_es31a GL_EXT_gpu_shader5 GL_OES_gpu_shader5 GL_EXT_texture_buffer GL_OES_texture_buffer GL_EXT_copy_image GL_OES_copy_image GL_EXT_shader_non_constant_global_initializers GL_EXT_color_buffer_half_float GL_EXT_unpack_subimage GL_EXT_color_buffer_float GL_EXT_float_blend GL_EXT_YUV_target GL_OVR_multiview GL_OVR_multiview2 GL_OVR_multiview_multisampled_render_to_texture GL_KHR_robustness GL_KHR_robust_buffer_access_behavior GL_EXT_draw_elements_base_vertex GL_OES_draw_elements_base_vertex GL_EXT_protected_textures GL_EXT_buffer_storage GL_EXT_external_buffer GL_EXT_EGL_image_array GL_EXT_texture_filter_anisotropic GL_OES_texture_float_linear GL_ARM_texture_unnormalized_coordinates GL_EXT_shader_framebuffer_fetch GL_EXT_clip_control 
+00:00:00.244 [DEBUG] [render/gles2/renderer.c:602] GPU reset notifications are disabled
+00:00:00.285 [INFO] [render/hybris.c:243] hybris: GLES2 renderer on libhybris EGL
+00:00:00.285 [ERROR] [types/wlr_linux_dmabuf_v1.c:1094] Failed to get renderer DRM FD
+00:00:00.285 [INFO] [render/hybris.c:215] hybris: using the AHardwareBuffer allocator
+00:00:00.321 [DEBUG] [xcursor/wlr_xcursor.c:233] Loaded cursor theme 'default' at size 24 (63 available cursors)
+00:00:00.328 [DEBUG] [../labwc/src/config/keybind.c:136] Found layout English (US)
+00:00:00.328 [DEBUG] [types/wlr_drm_lease_v1.c:679] No DRM backend supplied, failed to create wlr_drm_lease_v1_manager
+00:00:00.328 [DEBUG] [../labwc/src/server.c:811] Failed to create wlr_drm_lease_device_v1
+00:00:00.328 [INFO] [../labwc/src/server.c:812] VR will not be available
+00:00:00.355 [DEBUG] [../labwc/src/xwayland.c:1111] xwayland is running on display :0
+00:00:00.355 [INFO] [util/env.c:9] Loading WLR_NO_HARDWARE_CURSORS option: 1
+00:00:00.355 [DEBUG] [types/output/output.c:378] WLR_NO_HARDWARE_CURSORS set, forcing software cursors
+00:00:00.355 [INFO] [backend/pad/pad.c:304] pad: DSI-1 connector 32 crtc 60 1600x2560@90
+00:00:00.355 [DEBUG] [../labwc/src/output.c:528] enable output DSI-1
+00:00:00.355 [DEBUG] [../labwc/src/output.c:443] testing modes for DSI-1
+00:00:00.355 [DEBUG] [../labwc/src/output.c:488] testing preferred mode 1600x2560@90000
+00:00:00.355 [DEBUG] [types/output/render.c:123] Attaching empty buffer to output for modeset
+00:00:00.355 [DEBUG] [types/output/swapchain.c:27] Choosing primary buffer format XR24 (0x34325258) for output 'DSI-1'
+00:00:00.355 [DEBUG] [types/output/swapchain.c:96] Testing swapchain for output 'DSI-1'
+00:00:00.355 [DEBUG] [render/swapchain.c:103] Allocating new swapchain buffer
+00:00:00.364 [DEBUG] [render/hybris.c:193] hybris: allocated 1600x2560 fmt 0x34325258 stride 1600
+00:00:00.366 [DEBUG] [render/gles2/renderer.c:157] Created GL FBO for buffer 1600x2560
+00:00:00.366 [DEBUG] [types/output/render.c:123] Attaching empty buffer to output for modeset
+00:00:00.366 [DEBUG] [types/output/cursor.c:428] Falling back to software cursor on output 'DSI-1'
+00:00:00.367 [DEBUG] [backend/pad/pad.c:115] pad: new framebuffer 34
+00:00:00.367 [DEBUG] [types/output/cursor.c:428] Falling back to software cursor on output 'DSI-1'
+00:00:00.367 [DEBUG] [types/output/cursor.c:428] Falling back to software cursor on output 'DSI-1'
+00:00:00.368 [DEBUG] [backend/libinput/backend.c:88] Starting libinput backend
+libinput error: event3  - lenovo-stylus: libinput bug: missing tablet capabilities: resolution. Ignoring this device.
+00:00:00.418 [DEBUG] [backend/libinput/events.c:69] Adding mtk-kpd [0:0]
+00:00:00.418 [INFO] [../labwc/src/seat.c:162] configuring input device mtk-kpd (event1)
+00:00:00.418 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.418 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.418 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.418 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.418 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.418 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.418 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.418 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.418 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.418 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.418 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.418 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.418 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.418 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.418 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.418 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.420 [DEBUG] [backend/libinput/events.c:69] Adding mtk-pmic-keys [1:1]
+00:00:00.420 [INFO] [../labwc/src/seat.c:162] configuring input device mtk-pmic-keys (event0)
+00:00:00.420 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.420 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.420 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.420 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.420 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.420 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.420 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.420 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.420 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.420 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.420 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.420 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.420 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.420 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.420 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.420 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.422 [DEBUG] [backend/libinput/events.c:69] Adding mt6835-mt6377 Headset Jack [0:0]
+00:00:00.422 [INFO] [../labwc/src/seat.c:162] configuring input device mt6835-mt6377 Headset Jack (event4)
+00:00:00.422 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.422 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.422 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.422 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.422 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.422 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.422 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.422 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.422 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.422 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.422 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.422 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.422 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.422 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.422 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.422 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.423 [DEBUG] [backend/libinput/events.c:69] Adding himax-touchscreen [0:0]
+00:00:00.423 [INFO] [../labwc/src/seat.c:162] configuring input device himax-touchscreen (event2)
+00:00:00.423 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.423 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.423 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.423 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.423 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.423 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.423 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.423 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.423 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.423 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.423 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.423 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.423 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.423 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.423 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.423 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.425 [INFO] [../labwc/src/seat.c:162] configuring input device himax-touchscreen (event2)
+00:00:00.425 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.425 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.425 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.425 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.425 [INFO] [../labwc/src/seat.c:399] map pointer to output (null)
+00:00:00.425 [INFO] [../labwc/src/seat.c:162] configuring input device himax-touchscreen (event2)
+00:00:00.425 [INFO] [../labwc/src/seat.c:166] matched category: default
+00:00:00.425 [INFO] [../labwc/src/seat.c:174] tap unavailable
+00:00:00.425 [INFO] [../labwc/src/seat.c:187] tap-and-drag not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:199] drag lock not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:211] three-finger drag not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:224] natural scroll not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:236] left-handed mode not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:249] pointer acceleration unavailable
+00:00:00.425 [INFO] [../labwc/src/seat.c:276] middle emulation not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:288] dwt not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:300] click method not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:320] scroll method not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:334] scroll button not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:347] send events mode not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:360] calibration matrix not configured
+00:00:00.425 [INFO] [../labwc/src/seat.c:366] scroll factor configured (1)
+00:00:00.425 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.425 [INFO] [../labwc/src/seat.c:474] map touch to output unknown
+00:00:00.425 [DEBUG] [backend/libinput/backend.c:125] libinput successfully initialized
+00:00:00.425 [INFO] [backend/headless/backend.c:17] Starting headless backend
+00:00:00.425 [DEBUG] [../labwc/src/server.c:872] WAYLAND_DISPLAY=wayland-0
+00:00:00.457 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.457 [DEBUG] [types/output/cursor.c:428] Falling back to software cursor on output 'DSI-1'
+00:00:00.457 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:00.458 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:00.458 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.468 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.510 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x55a582a5a0 (res 0x55a5a4df50)
+00:00:00.510 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x55a57bbfe0 (res 0x55a5a4e220)
+00:00:00.510 [DEBUG] [types/xdg_shell/wlr_xdg_surface.c:441] new xdg_surface 0x55a58dffc0 (res 0x55a5a4e5e0)
+00:00:00.510 [DEBUG] [types/wlr_xdg_decoration_v1.c:220] new xdg_toplevel_decoration 0x55a5a83120 (res 0x55a5a83090)
+00:00:00.510 [DEBUG] [types/wlr_compositor.c:785] New wlr_surface 0x55a5a2d1f0 (res 0x55a5a2d5c0)
+00:00:00.522 [DEBUG] [../labwc/src/view-impl-common.c:40] [map] identifier=foot, title=foot
+00:00:00.522 [DEBUG] [../labwc/src/desktop-entry.c:325] matched 'foot.desktop' via exact match
+00:00:00.522 [DEBUG] [../labwc/src/desktop-entry.c:382] loading icon file /usr/share/icons/hicolor/scalable/apps/foot.svg
+00:00:00.524 [DEBUG] [../labwc/src/scaled-buffer/scaled-icon-buffer.c:88] loaded icon by app_id
+00:00:00.534 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:00.535 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:00.545 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.545 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:00.546 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:00.557 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.602 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:00.602 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:00.623 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.623 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:00.624 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:00.624 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.724 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:00.724 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:00.746 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.746 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:00.746 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:00.757 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.780 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:00.780 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:00.802 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.802 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:00.802 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:00.802 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:00.802 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.002 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:01.002 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:01.023 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.023 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:01.024 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:01.112 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.124 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.124 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.202 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:01.202 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:01.545 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.546 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:01.546 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:01.546 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.568 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:01.568 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:01.579 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.579 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:01.579 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:01.591 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.591 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.646 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:01.646 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:01.657 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.657 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:01.657 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:01.701 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.902 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:01.902 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:01.924 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:01.924 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:01.924 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:02.068 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.079 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.080 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.102 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.102 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.123 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.124 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.124 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:02.157 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.157 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.168 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.168 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.190 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.190 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.190 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:02.191 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.324 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.324 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.346 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.346 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.347 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:02.446 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.457 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.468 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.535 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.536 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.557 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.558 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.558 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:02.601 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.668 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.669 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.690 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.690 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.690 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:02.701 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.791 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.791 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.812 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.813 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.813 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:02.813 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.924 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:02.924 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:02.946 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:02.946 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:02.946 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:02.946 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.013 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:03.013 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:03.035 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.035 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:03.035 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:03.112 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.346 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:03.346 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:03.357 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.357 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:03.357 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:03.435 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.491 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:03.491 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:03.512 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.512 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:03.513 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:03.513 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.524 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.557 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:03.557 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:03.568 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.568 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:03.568 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:03.602 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.624 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.624 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.924 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:03.924 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:03.946 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:03.947 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:03.947 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:04.012 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.291 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:04.291 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:04.301 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.301 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:04.302 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:04.624 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:04.624 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:04.646 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:04.646 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:04.646 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:04.935 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:04.935 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:05.002 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.002 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:05.002 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:05.202 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.291 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:05.291 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:05.312 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.312 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:05.313 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:05.356 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.390 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:05.390 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:05.412 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.413 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:05.413 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:05.557 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.591 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:05.591 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:05.612 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.613 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:05.613 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:05.613 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.613 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.613 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.702 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:05.702 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:05.712 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.713 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:05.713 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:05.857 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:05.991 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:05.991 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.013 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.013 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.013 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:06.069 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.069 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.124 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.124 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.146 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.146 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.146 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:06.190 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.213 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.247 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.247 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.269 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.269 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.269 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:06.302 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.346 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.346 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.368 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.368 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.369 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:06.479 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.480 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.480 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.501 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.501 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.502 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:06.579 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.713 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.713 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.735 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.736 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.736 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:06.736 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.757 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.757 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.779 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.779 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.779 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:06.780 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.913 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:06.913 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:06.934 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:06.935 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:06.935 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:06.979 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.046 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:07.047 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:07.068 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.068 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:07.068 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:07.090 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.124 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.246 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:07.246 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:07.257 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.257 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:07.258 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:07.369 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.391 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.391 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.446 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:07.446 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:07.457 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.457 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:07.457 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:07.468 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.479 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.479 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:07.479 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:07.501 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.502 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:07.502 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:07.590 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.612 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:07.613 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:07.623 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.624 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:07.624 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:07.635 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.657 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.702 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:07.702 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:07.723 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.724 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:07.724 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:07.879 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.935 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.947 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:07.947 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:07.968 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.969 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:07.969 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:07.979 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.980 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:07.980 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.180 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:08.180 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:08.190 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.191 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:08.191 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:08.291 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.313 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:08.313 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:08.324 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.325 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:08.325 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:08.335 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.357 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:08.358 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:08.379 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.380 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:08.380 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:08.491 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.492 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.557 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:08.558 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:08.579 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.580 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:08.580 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:08.669 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.679 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.680 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:08.680 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:08.701 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:08.702 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:08.702 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:09.035 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:09.035 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:09.057 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.058 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:09.058 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:09.180 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.180 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.291 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:09.291 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:09.357 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.357 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:09.358 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:09.512 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.635 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:09.635 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:09.657 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.657 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:09.657 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:09.657 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.724 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.769 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:09.769 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:09.801 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.802 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:09.802 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:09.802 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.813 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:09.813 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:09.824 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.824 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:09.825 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:09.924 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.935 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.957 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:09.989 [DEBUG] [types/output/render.c:142] Disabling direct scan-out on output 'DSI-1' (locks: 1)
+00:00:10.090 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:10.090 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:10.101 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.101 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:10.101 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:10.113 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.113 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.146 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:10.146 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:10.157 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.157 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:10.157 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:10.168 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.168 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.324 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:10.324 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:10.334 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.335 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:10.335 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:10.423 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:10.433 [DEBUG] [types/output/render.c:142] Enabling direct scan-out on output 'DSI-1' (locks: 0)
+00:00:11.035 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:11.035 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:11.057 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.057 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:11.057 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:11.079 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.102 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:11.102 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:11.123 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.124 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:11.124 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:11.124 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.146 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.190 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:11.190 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:11.224 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.224 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:11.224 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:11.224 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.268 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:11.269 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:11.290 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.291 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:11.291 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:11.324 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.391 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:11.391 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:11.413 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.413 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:11.413 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:11.435 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.636 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:11.636 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:11.657 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.658 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:11.658 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:11.701 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:11.702 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.235 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:12.235 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:12.246 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.246 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:12.246 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:12.313 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.369 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:12.369 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:12.390 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.391 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:12.391 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:12.457 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.458 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.480 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.635 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:12.635 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:12.657 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.657 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:12.657 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:12.657 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.668 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.813 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:12.813 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:12.835 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.836 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:12.836 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:12.913 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.913 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.924 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:12.924 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:12.946 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.946 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:12.946 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:12.946 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.947 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.957 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:12.957 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:12.968 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:12.968 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:12.968 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:13.002 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.325 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:13.325 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:13.345 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.345 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:13.345 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:13.345 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.345 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.357 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.380 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:13.380 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:13.401 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.401 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:13.402 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:13.412 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.413 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.502 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:13.502 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:13.546 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.546 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:13.546 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:13.590 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.612 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.680 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:13.680 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:13.701 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.702 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:13.702 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:13.702 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:13.824 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:13.824 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:14.046 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.047 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:14.047 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:14.457 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:14.457 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:14.479 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.479 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:14.479 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:14.501 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.612 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:14.612 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:14.634 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.635 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:14.635 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:14.635 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.668 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.724 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:14.724 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:14.791 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:14.791 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:14.792 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:14.946 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.013 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:15.013 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:15.279 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.279 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:15.280 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:15.401 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.601 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:15.602 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:15.623 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:15.623 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:15.624 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:15.756 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.368 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.368 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.390 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.390 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.391 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:16.391 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.457 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.457 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.479 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.479 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.480 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:16.791 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.791 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.812 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.812 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.813 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:16.813 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.824 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:16.824 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:16.846 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:16.846 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:16.846 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:17.112 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:17.113 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:17.134 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.134 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:17.135 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:17.424 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:17.424 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:17.446 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.446 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:17.447 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:17.447 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.457 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:17.457 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:17.457 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.457 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:17.458 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:17.479 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.790 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:17.791 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:17.813 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:17.813 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:17.813 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:18.124 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:18.124 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:18.146 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.146 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:18.146 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:18.201 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.580 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:18.580 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:18.601 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.602 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:18.602 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:18.724 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.857 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:18.858 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:18.879 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:18.879 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:18.879 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:18.879 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.003 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:19.003 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:19.024 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.025 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:19.025 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:19.157 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.224 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:19.224 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:19.246 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.246 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:19.246 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:19.257 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.280 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.335 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:19.335 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:19.346 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.346 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:19.346 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:19.557 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.568 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:19.569 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:19.590 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.590 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:19.591 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:19.591 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.612 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.612 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.657 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:19.658 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:19.679 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:19.679 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:19.680 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:19.979 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:19.979 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:20.024 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.024 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:20.024 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:20.057 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.113 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:20.113 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:20.135 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.135 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:20.135 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:20.179 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.535 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:20.536 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:20.557 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.558 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:20.558 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:20.613 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.657 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.813 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:20.813 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:20.835 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.835 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:20.835 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:20.835 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.868 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:20.868 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:20.879 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.879 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:20.879 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:20.890 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:20.890 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.080 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:21.080 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:21.102 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.102 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:21.102 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:21.102 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.124 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:21.124 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:21.146 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.146 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:21.146 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:21.146 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.168 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:21.168 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:21.168 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.168 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:21.169 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:21.212 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.224 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.324 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:21.324 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:21.347 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.347 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:21.347 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:21.347 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.369 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:21.369 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:21.391 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.391 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:21.391 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:21.391 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.524 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:21.524 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:21.535 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.535 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:21.535 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:21.702 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.713 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.724 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:21.724 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:21.746 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.746 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:21.746 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:21.746 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:21.980 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:21.980 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.001 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.001 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.002 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:22.012 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.012 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.468 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.468 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.512 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.513 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.513 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:22.524 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.524 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.535 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.535 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.579 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.579 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.580 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:22.590 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.735 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.736 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.768 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.768 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.769 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:22.769 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.769 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.847 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.847 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:22.868 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.868 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:22.869 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:22.879 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.879 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:22.957 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:22.957 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:23.024 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.024 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:23.024 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:23.257 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.257 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.268 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.268 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.368 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:23.368 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:23.391 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.391 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:23.391 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:23.391 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.402 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:23.402 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:23.424 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.424 [DEBUG] [../labwc/src/action.c:1644] Handling action 17: ShowMenu
+00:00:23.425 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+00:00:23.425 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.425 [INFO] [../labwc/src/config/touch.c:24] find touch configuration for himax-touchscreen
+00:00:23.458 [DEBUG] [../labwc/src/menu/menu.c:1199] number of menus before close=4
+00:00:23.458 [DEBUG] [../labwc/src/menu/menu.c:1216] number of menus after  close=4
+00:00:23.470 [INFO] [../labwc/src/input/ime.c:614] The surface is already focused
+ err: wayland.c:1769: failed to read events from the Wayland socket: Broken pipe
+ err: wayland.c:2477: failed to roundtrip Wayland display: Broken pipe
+ err: wayland.c:2477: failed to roundtrip Wayland display: Broken pipe
+ err: wayland.c:2477: failed to roundtrip Wayland display: Broken pipe
+warn: terminal.c:2034: slave exited with signal 1 (Hangup)
+ err: wayland.c:2442: failed to flush wayland socket: Broken pipe

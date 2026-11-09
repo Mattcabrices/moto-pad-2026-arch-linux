@@ -1,0 +1,2 @@
+sync
+systemctl reboot

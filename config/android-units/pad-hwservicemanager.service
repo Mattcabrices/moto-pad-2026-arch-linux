@@ -1,0 +1,9 @@
+[Unit]
+Description=Moto Pad: Android hwservicemanager
+Requires=pad-android-mount.service
+After=pad-android-mount.service pad-android-logd.service 
+PartOf=pad-android.target
+[Service]
+ExecStart=/usr/bin/chroot /opt/android-full /system/bin/env LD_PRELOAD=/data/local/libpropshim.so /system/bin/hwservicemanager
+Restart=on-failure
+RestartSec=2

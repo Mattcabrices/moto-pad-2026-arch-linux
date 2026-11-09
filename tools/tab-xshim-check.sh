@@ -1,0 +1,1 @@
+echo "uptime $(cut -d. -f1 /proc/uptime)s"; ls -la /tmp/xshim.* 2>&1; grep -E "\(EE\)|modeset\(0\): (Output|Using|Virtual)|FatalError" /tmp/xshim.log 2>/dev/null | head; journalctl -b -1 -k --no-pager 2>/dev/null | grep -E "Unable to handle|Internal error" | tail -2

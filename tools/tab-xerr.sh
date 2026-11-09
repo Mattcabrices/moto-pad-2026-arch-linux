@@ -1,0 +1,1 @@
+grep -E "\(EE\)|logind|failed|Permission|no screens|drm" /home/matt/.local/share/xorg/Xorg.0.log | head -20; ls -la /dev/dri/; loginctl list-sessions --no-legend; loginctl show-session $(loginctl list-sessions --no-legend | awk "/tty1/{print \$1}") -p Seat -p VTNr -p Type -p Active 2>&1

@@ -1,0 +1,114 @@
+#!/archbin/busybox sh
+# Early userspace for Arch on the Moto Pad. Built into the kernel and started with
+# rdinit=/archinit. Stock kernel modules come from the untouched vendor ramdisk.
+#
+# Safety: userdata is only ever mounted as ext4 and only when it carries the Arch
+# marker file. If Android's f2fs is still there, the mount fails and this script
+# holds at a USB debug shell, so a test boot cannot alter Android data.
+export PATH=/archbin
+/archbin/busybox --install -s /archbin
+
+mkdir -p /proc /sys /dev /newroot /tmp /config
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+mount -t tmpfs tmpfs /tmp
+mkdir -p /dev/pts
+mount -t devpts devpts /dev/pts
+log() { echo "archinit: $*" > /dev/kmsg; echo "archinit: $*" >> /tmp/archinit.log; }
+log "start $(uname -r)"
+
+# Load first-stage modules like Android does: dependencies and pre-softdeps first.
+# modules.load is not in dependency order (170 modules precede a dependency).
+MD=/lib/modules
+SEEN=" "
+modname() { n=${1##*/}; n=${n%.ko}; echo "$n" | tr - _; }
+load() {
+  local m=$1 d p
+  case "$SEEN" in *" $m "*) return 0 ;; esac
+  SEEN="$SEEN$m "
+  grep -q "^$(modname "$m") " /proc/modules && return 0
+  for p in $(grep "^softdep $(modname "$m") pre:" $MD/modules.softdep 2>/dev/null | sed 's/.*pre://'); do load "${p%.ko}.ko"; done
+  for d in $(grep -m1 "/$m:" $MD/modules.dep | cut -d: -f2); do load "${d##*/}"; done
+  [ -f "$MD/$m" ] || { echo "MISSING $m" >> /tmp/insmod.log; return 1; }
+  insmod "$MD/$m" 2>>/tmp/insmod.log || { echo "FAILED $m" >> /tmp/insmod.log; return 1; }
+}
+while read -r m; do [ -n "$m" ] && load "${m##*/}"; done < $MD/modules.load
+ok=$(grep -c '' /proc/modules); fail=$(grep -c '^FAILED' /tmp/insmod.log 2>/dev/null)
+log "first-stage: $ok modules loaded, $fail failed"
+
+usb_debug() {
+  mountpoint -q /config || mount -t configfs none /config || return 1
+  g=/config/usb_gadget/g1
+  mkdir -p "$g" "$g/strings/0x409" "$g/configs/c.1" "$g/functions/ncm.usb0" || return 1
+  echo 0x18d1 > "$g/idVendor"; echo 0x4e23 > "$g/idProduct"
+  echo archpad > "$g/strings/0x409/serialnumber"
+  echo "Arch Moto Pad" > "$g/strings/0x409/product"
+  ln -sf "$g/functions/ncm.usb0" "$g/configs/c.1/" 2>/dev/null
+  n=0
+  while [ -z "$(ls /sys/class/udc 2>/dev/null)" ] && [ $n -lt 20 ]; do sleep 1; n=$((n + 1)); done
+  ls /sys/class/udc > "$g/UDC" || return 1
+  ip link set usb0 up && ip addr add 10.55.0.1/24 dev usb0
+  # Hand the PC an address so no manual network setup is needed on Windows.
+  printf 'start 10.55.0.10\nend 10.55.0.14\ninterface usb0\nlease_file /tmp/udhcpd.leases\nopt subnet 255.255.255.0\n' > /tmp/udhcpd.conf
+  : > /tmp/udhcpd.leases
+  udhcpd /tmp/udhcpd.conf
+  log "usb debug network up at 10.55.0.1"
+}
+
+hold() {
+  log "holding: $1"
+  # Without the USB console there is no way to see anything, so go to fastboot instead.
+  usb_debug || { log "usb debug failed, rebooting to bootloader"; sync; /archbin/reboot-bootloader; }
+  telnetd -l /archbin/sh -p 23 -b 10.55.0.1
+  while :; do sleep 3600; done
+}
+
+grep -q 'archpad.hold' /proc/cmdline && hold "requested on cmdline"
+
+# Find the userdata partition without relying on Android's by-name links.
+dev=""; n=0
+while [ -z "$dev" ] && [ $n -lt 30 ]; do
+  for u in /sys/class/block/*/uevent; do
+    if grep -q '^PARTNAME=userdata$' "$u" 2>/dev/null; then
+      dev="/dev/$(grep '^DEVNAME=' "$u" | cut -d= -f2)"
+    fi
+  done
+  [ -n "$dev" ] || { sleep 1; n=$((n + 1)); }
+done
+[ -n "$dev" ] || hold "userdata partition not found"
+log "userdata is $dev"
+
+mount -t ext4 -o noatime "$dev" /newroot || hold "userdata is not ext4 (Android data left untouched)"
+[ -f /newroot/etc/archpad-release ] || { umount /newroot; hold "no Arch marker on userdata"; }
+
+# Keep any kernel crash log from the previous boot (pstore/ramoops) on the root filesystem.
+mkdir -p /newroot/var/log/pstore /sys/fs/pstore
+mount -t pstore pstore /sys/fs/pstore 2>/dev/null
+if [ -n "$(ls /sys/fs/pstore 2>/dev/null)" ]; then
+  d=/newroot/var/log/pstore/$(date +%s); mkdir -p "$d"; cp /sys/fs/pstore/* "$d/" 2>/dev/null
+  log "saved pstore to ${d#/newroot}"
+fi
+
+# Boot-loop breaker: the marker is removed by pad-boot-ok.service once Arch has run for a
+# while. If it is still here, the previous boot crashed, so stay at the USB console.
+# Creating /archpad-hold on the root filesystem also forces a hold.
+mkdir -p /newroot/var/lib/archpad
+if [ -e /newroot/var/lib/archpad/boot-pending ] || [ -e /newroot/archpad-hold ]; then
+  rm -f /newroot/var/lib/archpad/boot-pending; sync
+  log "previous boot did not finish; root filesystem left mounted at /newroot"
+  hold "previous boot did not finish (or /archpad-hold exists)"
+fi
+date > /newroot/var/lib/archpad/boot-pending; sync
+
+mkdir -p /newroot/var/log
+cat /tmp/archinit.log /tmp/insmod.log > /newroot/var/log/archinit.log 2>/dev/null
+
+# busybox switch_root refuses to run unless /init is a regular file. It may be absent
+# if LK loaded no init_boot ramdisk, and a failed exec of PID 1 would panic the kernel.
+[ -f /init ] || : > /init
+[ -x /newroot/usr/lib/systemd/systemd ] || { umount /newroot; hold "systemd missing on userdata"; }
+
+umount /dev/pts /tmp /proc /sys 2>/dev/null
+mount --move /dev /newroot/dev 2>/dev/null
+exec switch_root /newroot /usr/lib/systemd/systemd

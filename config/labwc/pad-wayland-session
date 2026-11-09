@@ -1,0 +1,22 @@
+#!/bin/bash
+# Moto Pad (archpad) GPU desktop: labwc on the Mali GPU (libhybris) + XFCE panel/desktop, run on tty1 as the user.
+# Opt-in: ~/.bash_profile runs this instead of startx when ~/.pad-wayland exists.
+# Needs the Android services (tab-android-mount.sh + tab-gpu-restart.sh) for the GPU and buffer allocator.
+# Safety: if labwc dies within 15 s, ~/.pad-wayland is removed so the next autologin starts XFCE on Xorg again.
+LOG=~/.pad-wayland.log
+if ! pgrep -f 'graphics.allocator@4.0-service' >/dev/null; then
+  echo "$(date) Android allocator service not running - using Xorg this time" >> "$LOG"
+  exec startx /usr/bin/startxfce4 -- /usr/local/bin/Xpad vt1 -keeptty > ~/.xorg-session.log 2>&1
+fi
+export WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput WLR_NO_HARDWARE_CURSORS=1
+export LD_LIBRARY_PATH=/usr/local/pad/lib  # patched wlroots (wlroots-pad/), system wlroots0.20 untouched
+export HYBRIS_LD_LIBRARY_PATH=/vendor/lib64:/system/lib64:/odm/lib64:/usr/local/hybris/compat EGL_PLATFORM=null
+export XDG_CURRENT_DESKTOP=XFCE:labwc XDG_SESSION_TYPE=wayland MOZ_ENABLE_WAYLAND=1
+start=$(date +%s)
+echo "$(date) starting labwc" >> "$LOG"
+labwc > ~/.pad-wayland-labwc.log 2>&1
+rc=$?
+if [ $(( $(date +%s) - start )) -lt 15 ]; then
+  echo "$(date) labwc exited after <15 s (rc $rc) - disabling the Wayland session (rm ~/.pad-wayland)" >> "$LOG"
+  rm -f ~/.pad-wayland
+fi

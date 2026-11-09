@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- Moto Pad (archpad) labwc config, installed to /etc/xdg/labwc/rc.xml (labwc only; Xorg is unaffected).
+     Touch: same rotation as the Xorg setup (panel is portrait, output transform 90 = landscape). -->
+<labwc_config>
+  <libinput>
+    <device category="touch">
+      <calibrationMatrix>0 1 0 -1 0 1</calibrationMatrix>
+    </device>
+  </libinput>
+  <touch deviceName="himax-touchscreen" mapToOutput="DSI-1" mouseEmulation="yes" />
+  <!-- The touchscreen sends one emulated tap when it is opened. labwc's default desktop-click menus then run
+       before the output is ready and labwc segfaults (NULL output in ShowMenu, about half of all starts).
+       The XFCE panel provides the menu instead. -->
+  <mouse>
+    <default />
+    <context name="Root">
+      <mousebind button="Left" action="Press"><action name="None" /></mousebind>
+      <mousebind button="Right" action="Press"><action name="None" /></mousebind>
+      <mousebind button="Middle" action="Press"><action name="None" /></mousebind>
+    </context>
+  </mouse>
+</labwc_config>

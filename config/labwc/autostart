@@ -1,0 +1,3 @@
+# Moto Pad (archpad) labwc autostart (/etc/xdg/labwc/autostart): the XFCE pieces that work on Wayland.
+xfce4-panel &
+xfdesktop &

@@ -1,0 +1,1 @@
+grep -nE "Index|New Index|Open Index|Index Info|MGMT|Unconfigured|Read Local Supported Codecs|Status: (Unknown|Command|Unsupported)" /tmp/btmon.txt | tail -15; echo; tail -12 /tmp/btmon.txt; echo; bluetoothctl list 2>&1; btmgmt info 2>&1 | head -4
