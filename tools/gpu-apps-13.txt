@@ -1,0 +1,1 @@
+8 env LD_PRELOAD= EGL_PLATFORM=null LIBEGL=/vendor/lib64/egl/libGLES_mali.so LIBGLESV2=/vendor/lib64/egl/libGLES_mali.so /tmp/tls-probe

@@ -1,0 +1,12 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = firefox
+
+[Action]
+Description = Rebuilding GPU Firefox (firefox-hybris) for the Moto Pad...
+When = PostTransaction
+Exec = /usr/local/lib/archpad/firefox-hybris-update
+Depends = binutils
+Depends = python

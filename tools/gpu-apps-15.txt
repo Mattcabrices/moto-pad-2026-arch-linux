@@ -1,0 +1,1 @@
+40 rm -f /tmp/fflog*; (sleep 25; ps -o pid,args -u matt | grep -E 'firefox' | grep -v grep | cut -c1-150 > /tmp/ff-ps.txt) & MOZ_ENABLE_WAYLAND=1 MOZ_LOG='sync,WebRender:4,Widget:3,WidgetWayland:4,GfxInfo:4,gfx2d:4,glcontext:4' MOZ_LOG_FILE=/tmp/fflog /usr/lib/firefox/firefox-hybris --new-instance --profile /tmp/ff-gpu about:support > /tmp/ff-gpu.log 2>&1

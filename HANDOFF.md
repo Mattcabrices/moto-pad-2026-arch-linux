@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-09 14:30 (GPU apps: glmark2, GTK4, mpv work; Firefox/Chromium stay software; see "14:30").
+Last updated: 2026-11-09 16:20 (Firefox runs with hardware WebRender + WebGL 2 on the Mali GPU via firefox-gpu; repo going public; see "16:20").
 
 ## Goal
 
@@ -260,7 +260,30 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
-- **14:30 (11-09) MORE GPU APPS; MATT AT WORK, FULL APPROVAL ON THE TABLET (RESUME HERE).**
+- **16:20 (11-09) GPU FIREFOX WORKS (RESUME HERE).** Matt: "Yes, try Firefox", full permission; "if this all works for
+  gpu hardware accel you can make the repo public".
+  - Measured (`tools/src/tls-probe.c`, scripts/70): Android's GL wrappers write exactly tp+24 (TLS_SLOT_OPENGL, current
+    context) and tp+32 (TLS_SLOT_OPENGL_API, GL hooks) on every thread that makes a context current. Loading Mali
+    directly (LIBEGL/LIBGLESV2 env) still writes tp+24 and breaks makeCurrent on a 2nd thread: not an option.
+  - Firefox's executable has 56 bytes of local-exec TLS at tp+0x10..0x48 used by mozjemalloc/PHC (malloc, moz_arena_*),
+    so a save/restore swap around GL calls would not be safe (Android code mallocs mid-call).
+  - Fix: `tools/ff-tls-relocate.py` writes `/usr/lib/firefox/firefox-hybris` with every relaxed-TLSDESC offset
+    (`movz xN,#0,lsl#16; movk xN,#off`, 232 sites found by `tools/tab-ff-tls-scan.sh`, all within the block) moved
+    +0x40 and PT_TLS memsz 0x38 -> 0x78. Slots now hit padding. Child processes use the same binary (/proc/self/exe).
+  - libhybris: `eglSwapBuffersWithDamageKHR` now maps to libhybris' wrapper (it did only the EXT name); Firefox got
+    Android's raw function, buffers were queued but never attached, and dequeueBuffer blocked forever.
+  - Result: about:support Compositing "WebRender" (hardware), WebGL 2 "ARM -- Mali-G57 MC2, OpenGL ES 3.2"; 867 GPU
+    buffers presented in 30 s (`shots/firefox-gpu-webgl.png`, `shots/firefox-gpu-launcher.png`). WebGL 1 still fails
+    (tryNativeGL FEATURE_FAILURE_EGL; probably a GLES2 context/config attribute); sites mostly use WebGL 2.
+  - Daily use (`tools/push-firefox-gpu.sh` -> `tools/tab-firefox-gpu-install.sh`, sources in `config/firefox/`):
+    `/usr/local/bin/firefox-gpu` (patched binary through hybris-run inside the GPU desktop, plain Firefox elsewhere);
+    AutoConfig `/usr/lib/firefox/archpad.cfg` + `defaults/pref/archpad-autoconfig.js` sets the GPU prefs only when
+    ARCHPAD_GPU=1; `/usr/local/share/applications/firefox.desktop` uses firefox-gpu; pacman hook
+    `/etc/pacman.d/hooks/archpad-firefox-hybris.hook` rebuilds firefox-hybris after Firefox updates (tested with a
+    reinstall; on failure it removes the copy so the launcher falls back).
+  - WSL idles out and drops the usbipd attachment: keep `wsl -d archlinux -- sleep 86400` running and use
+    `usbipd attach --wsl --busid 2-1 --auto-attach`.
+- **14:30 (11-09) MORE GPU APPS.**
   - `pacman -Syu` done (only desktop-file-utils + libstemmer were behind; labwc/wlroots0.20 still 0.20.2, held with
     --ignore anyway). Installed mpv 0.41, glmark2, gtk4-demos, firefox 159, ltrace.
   - Works on the GPU via hybris-run: glmark2-es2-wayland (Mali-G57 MC2, GLES 3.2 r38p1; score 353 at 1280x720,

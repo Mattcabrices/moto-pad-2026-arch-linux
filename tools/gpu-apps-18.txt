@@ -1,0 +1,3 @@
+4 pkill -u matt -x firefox-hybris; sleep 1; rm -f /tmp/ff-gpu/lock /tmp/ff-gpu/.parentlock; echo cleaned
+40 MOZ_ENABLE_WAYLAND=1 WAYLAND_DEBUG=client /usr/lib/firefox/firefox-hybris --new-instance --profile /tmp/ff-gpu 'about:support#graphics' > /tmp/ff-wl.log 2>&1
+3 echo "GPU buffer attaches: $(grep -c -E 'attach\(wl_buffer#42781[0-9]+' /tmp/ff-wl.log)  server buffers: $(grep -c get_server_buffer_handle /tmp/ff-wl.log)"; pkill -u matt -x firefox-hybris; true

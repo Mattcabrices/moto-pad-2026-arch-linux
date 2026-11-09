@@ -1,0 +1,1 @@
+45 MOZ_ENABLE_WAYLAND=1 /usr/lib/firefox/firefox-hybris --new-instance --profile /tmp/ff-gpu about:support > /tmp/ff-gpu.log 2>&1 & P=$!; sleep 20; gdb -q -p $P -batch -ex 'thread apply all bt 12' > /tmp/ff-bt.txt 2>&1; sleep 30

@@ -1,0 +1,11 @@
+#!/bin/bash
+# Moto Pad (archpad): Firefox with GPU WebRender + WebGL on the Mali GPU inside the GPU desktop (labwc).
+# Uses /usr/lib/firefox/firefox-hybris: Firefox's executable with its TLS moved clear of Android's GL TLS slots
+# (tools/ff-tls-relocate.py; rebuilt by a pacman hook after each Firefox update). Anywhere else (Xorg session,
+# Android services down, patched binary missing) it starts the normal Firefox.
+FF=/usr/lib/firefox/firefox-hybris
+if [ -x "$FF" ] && [ -n "$WAYLAND_DISPLAY" ] && pgrep -f 'graphics.allocator@4.0-service' >/dev/null; then
+  export ARCHPAD_GPU=1 MOZ_ENABLE_WAYLAND=1   # ARCHPAD_GPU turns on the GPU prefs (archpad.cfg)
+  exec hybris-run "$FF" "$@"
+fi
+exec /usr/lib/firefox/firefox "$@"

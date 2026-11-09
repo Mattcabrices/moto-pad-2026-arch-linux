@@ -16,7 +16,7 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
 | Boot | Rebuilt Android GKI kernel `5.15.185-archpad` in `boot_a`, Arch on `userdata` (ext4), boot-loop breaker with a telnet rescue console |
 | Display and touch | 1600x2560 @ 90 Hz panel, used in landscape; Himax touchscreen |
 | Desktop | XFCE. Default: **GPU-composited Wayland session** (labwc on the Mali GPU through libhybris). Fallback: Xorg |
-| GPU | Compositing on the GPU with zero-copy scanout. Apps render on the Mali-G57 (GLES 3.2) via `hybris-run <app>`: glmark2, GTK4 apps, mpv (also from its menu entry). Firefox and Chromium still render in software |
+| GPU | Compositing on the GPU with zero-copy scanout. Apps render on the Mali-G57 (OpenGL ES 3.2): glmark2, GTK4 apps, mpv, and **Firefox with hardware WebRender and WebGL 2** (menu entry uses `firefox-gpu`). Chromium still renders in software |
 | Wi-Fi, Bluetooth | Working, through MediaTek's Android helpers run in a small chroot with a property shim |
 | Audio | Speakers and the main microphone. Headphone jack not done yet |
 | USB | Network gadget (SSH over USB) |
@@ -37,6 +37,11 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
 - **GPU apps:** libhybris' `android_wlegl` protocol carries app buffers to the compositor. Two libhybris changes make it
   work on Android 16: an AHardwareBuffer gralloc backend (`scripts/libhybris-gralloc-ahb.c`) and a preload that keeps
   Android's TLS-slot writes off glibc's thread-local data (`tools/src/bionic-tls-pad.c`).
+- **GPU Firefox:** Android's GL stack writes two fixed thread-pointer slots (tp+24, tp+32) that overlap Firefox's own
+  thread-local variables (its allocator). `tools/ff-tls-relocate.py` makes `/usr/lib/firefox/firefox-hybris`, a copy
+  of the executable with all 232 local-exec TLS offsets moved 64 bytes up; a pacman hook rebuilds it after updates
+  (`config/firefox/`). Also needed two libhybris fixes: `EGL_EXT_platform_base` in the client extensions and
+  `eglSwapBuffersWithDamageKHR` routed through libhybris' Wayland presentation.
 - No vendor binaries or stock images are included in this repository. The scripts extract what they need from
   your own device's firmware.
 

@@ -1,0 +1,2 @@
+25 mkdir -p /tmp/ff-sw2 && env LD_LIBRARY_PATH= LD_PRELOAD= EGL_PLATFORM= MOZ_ENABLE_WAYLAND=1 /usr/lib/firefox/firefox-hybris --new-instance --profile /tmp/ff-sw2 about:support > /tmp/ff-sw2.log 2>&1; echo "sw rc=$?"
+40 MOZ_ENABLE_WAYLAND=1 /usr/lib/firefox/firefox-hybris --new-instance --profile /tmp/ff-gpu about:support > /tmp/ff-gpu.log 2>&1; echo "gpu rc=$?"

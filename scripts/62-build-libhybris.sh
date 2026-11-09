@@ -37,6 +37,12 @@ E="$R/root/hb/libhybris/hybris/egl/egl.c"
 grep -q '"EGL_EXT_client_extensions EGL_EXT_platform_base ' "$E" || \
   sed -i 's/"EGL_EXT_client_extensions EGL_EXT_platform_wayland EGL_KHR_platform_wayland"/"EGL_EXT_client_extensions EGL_EXT_platform_base EGL_EXT_platform_wayland EGL_KHR_platform_wayland"/' "$E"
 grep -c "EGL_EXT_platform_base EGL_EXT_platform_wayland" "$E"
+# eglSwapBuffersWithDamageKHR (same signature as the EXT one) must also go through libhybris' wrapper, which does
+# the Wayland attach/commit; otherwise eglGetProcAddress hands out Android's function, buffers are queued but never
+# presented, and the next dequeue blocks forever (Firefox WebRender).
+grep -q '"eglSwapBuffersWithDamageKHR"' "$E" || \
+  sed -i 's|^\tOVERRIDE_MY(eglSwapBuffersWithDamageEXT),$|&\n\t{ .name = "eglSwapBuffersWithDamageKHR", .func = (__eglMustCastToProperFunctionPointerType) _my_eglSwapBuffersWithDamageEXT }, /* archpad */|' "$E"
+grep -c '"eglSwapBuffersWithDamageKHR"' "$E"
 # Android 16 has no gralloc 0/1 module and no Halium libui_compat_layer.so: add an AHardwareBuffer backend.
 perl /mnt/c/mpad26/MotoPadArch/scripts/libhybris-archpad-gralloc.pl "$R/root/hb/libhybris/hybris"
 arch-chroot "$R" pacman -S --noconfirm --needed base-devel autoconf automake libtool pkgconf \

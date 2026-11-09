@@ -1,0 +1,19 @@
+#!/bin/bash
+# Moto Pad (archpad): (re)builds /usr/lib/firefox/firefox-hybris from the installed Firefox. Run by the pacman hook
+# archpad-firefox-hybris.hook after Firefox installs/upgrades. On any failure the patched copy is removed, so
+# firefox-gpu falls back to the normal Firefox.
+F=/usr/lib/firefox/firefox
+L=/usr/local/lib/archpad
+rm -f "$F-hybris"
+[ -x "$F" ] || exit 0
+P=$(mktemp)
+if bash $L/tab-ff-tls-scan.sh "$F" >/dev/null 2>&1; [ -s /tmp/ff-tls-pairs.txt ] && cp /tmp/ff-tls-pairs.txt "$P" &&
+   python3 $L/ff-tls-relocate.py "$F" "$F-hybris.new" "$P"; then
+  chmod 755 "$F-hybris.new" && mv "$F-hybris.new" "$F-hybris"
+  echo "archpad: rebuilt $F-hybris (GPU Firefox)"
+else
+  rm -f "$F-hybris.new"
+  echo "archpad: could not build $F-hybris; firefox-gpu will start the normal Firefox" >&2
+fi
+rm -f "$P"
+exit 0

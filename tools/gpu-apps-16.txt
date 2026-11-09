@@ -1,0 +1,1 @@
+30 MOZ_ENABLE_WAYLAND=1 WAYLAND_DEBUG=client /usr/lib/firefox/firefox-hybris --new-instance --profile /tmp/ff-gpu about:support > /tmp/ff-wl.log 2>&1
