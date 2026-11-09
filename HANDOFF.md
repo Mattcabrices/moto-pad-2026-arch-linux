@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-09 13:50 (apps can render on the Mali GPU: es2gears_wayland ~87 fps via `hybris-run`; see "13:50").
+Last updated: 2026-11-09 14:05 (GPU apps: es2gears and GTK4 work via hybris-run; Chromium stays software; see "14:05").
 
 ## Goal
 
@@ -260,7 +260,21 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
-- **13:50 (11-09) GPU RENDERING FOR APPS WORKS (RESUME HERE).** es2gears_wayland renders on the Mali GPU inside the labwc
+- **14:05 (11-09) REAL APPS ON THE GPU (RESUME HERE).** `tools/tab-gpu-apps.sh` runs each line of the newest
+  `/tmp/gpu-apps-*.txt` ("<secs> <command>") through hybris-run in matt's session and screenshots it (example list
+  `tools/gpu-apps-1.txt`; push it with pad-scp first). Results:
+  - GTK4 (zenity 4.2): GPU. Vulkan instance fails (no Vulkan), GTK falls back to GskGLRenderer on Mali; renders fine
+    (`shots/gpu-app-1.png`). GSK_RENDERER=ngl is now called `gl`; GDK_DEBUG=opengl trips libepoxy
+    ("No provider of eglQueryDisplayAttribEXT"), harmless.
+  - Chromium 156: runs, but SOFTWARE. ANGLE: "Failed to get system egl display" (it wants an off-screen EGL platform,
+    e.g. surfaceless, and dma-buf presentation via a DRM render node; libhybris and the tablet have neither).
+    Needs real work (libhybris platform support + dma-buf export); deferred.
+  - eglinfo -p wayland: EGL 1.4 Android, no dma-buf import/export.
+  - Could not install mpv, glmark2, gtk4-demos, firefox: the mirror moved on (404), needs `pacman -Syu` first.
+    Risk: an upgraded labwc built for a newer wlroots would break the GPU session (wlroots-pad is 0.20.2);
+    use IgnorePkg=labwc wlroots0.20 or rebuild wlroots-pad to match.
+  - Keep hybris-run opt-in: a global LD_LIBRARY_PATH would hand hybris libEGL to Xwayland/glamor and other apps.
+- **13:50 (11-09) GPU RENDERING FOR APPS WORKS.** es2gears_wayland renders on the Mali GPU inside the labwc
   desktop (screenshot `shots/gpu-client-2.png`), ~690 frames in 8 s (~87 fps, 90 Hz panel = vsync-bound), zero-copy into
   the compositor. Last fix: AHardwareBuffer_createFromHandle method values are REGISTER = 2, CLONE = 3 (1 gave -22).
   Launcher: `/usr/local/bin/hybris-run <app>` (source `config/labwc/hybris-run`): sets LD_LIBRARY_PATH=/usr/local/hybris/lib,

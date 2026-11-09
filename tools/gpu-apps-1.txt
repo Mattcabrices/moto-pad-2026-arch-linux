@@ -1,0 +1,3 @@
+8 GSK_DEBUG=renderer zenity --info --text='GPU test (GTK default renderer)'
+8 GSK_RENDERER=ngl GSK_DEBUG=renderer GDK_DEBUG=opengl zenity --info --text='GPU test (GTK GL renderer)'
+30 chromium --ozone-platform=wayland --disable-gpu-sandbox --user-data-dir=/tmp/chr-gpu --no-first-run --enable-logging=stderr --v=0 chrome://gpu
