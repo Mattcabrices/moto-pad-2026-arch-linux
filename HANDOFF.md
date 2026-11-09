@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-09 12:45 (Android services autostart at boot; the GPU Wayland desktop comes up by itself after a reboot; see "12:45"). **Arch Linux with XFCE runs on the tablet, and touch works.**
+Last updated: 2026-11-09 13:50 (apps can render on the Mali GPU: es2gears_wayland ~87 fps via `hybris-run`; see "13:50").
 
 ## Goal
 
@@ -260,7 +260,35 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
-- **12:45 (11-09) ANDROID SERVICES AUTOSTART; GPU DESKTOP SURVIVES REBOOT (RESUME HERE).** Units in `config/android-units/`, pushed + installed by `tools/push-android-units.sh` (WSL) -> `tools/tab-android-units-install.sh`. pad-android.target (enabled, WantedBy multi-user) wants: pad-android-mount (oneshot, runs tab-android-mount.sh installed as /usr/local/sbin/pad-android-mount via /bin/bash, it has no shebang), pad-android-logd (fake-logd.py), pad-servicemanager / pad-hwservicemanager / pad-vndservicemanager, pad-gralloc (allocator HAL; ExecStartPost /usr/local/sbin/pad-gralloc-wait waits for IAllocator/default in lshal). All Restart=on-failure, run as `chroot /opt/android-full /system/bin/env LD_PRELOAD=/data/local/libpropshim.so <bin>` (preload inside the chroot so Arch ld.so does not complain). getty@tty1 drop-in android.conf: After=pad-android.target (ordering only; if Android fails, login falls back to Xorg). Verified with a real reboot: all units active, labwc started on its own, screenshot `shots/boot-autostart.png`. pad-gralloc restarts once at boot (starts before hwservicemanager is ready; Restart covers it). Undo: `systemctl disable --now pad-android.target`. tab-android-sm.sh / tab-android-alloc.sh / tab-gpu-restart.sh are now only for manual debugging (stop the units first).
+- **13:50 (11-09) GPU RENDERING FOR APPS WORKS (RESUME HERE).** es2gears_wayland renders on the Mali GPU inside the labwc
+  desktop (screenshot `shots/gpu-client-2.png`), ~690 frames in 8 s (~87 fps, 90 Hz panel = vsync-bound), zero-copy into
+  the compositor. Last fix: AHardwareBuffer_createFromHandle method values are REGISTER = 2, CLONE = 3 (1 gave -22).
+  Launcher: `/usr/local/bin/hybris-run <app>` (source `config/labwc/hybris-run`): sets LD_LIBRARY_PATH=/usr/local/hybris/lib,
+  LD_PRELOAD=bionic-tls-pad.so, HYBRIS_LD_LIBRARY_PATH, EGL_PLATFORM=wayland. Not global on purpose (Xorg and the
+  compositor must not load hybris libEGL that way). Next: try real apps (GTK4 GL renderer, Chromium/Firefox with
+  EGL, mpv); desktop-file wrappers for the ones that work; Xwayland still untested.
+- **13:45 (11-09) GITHUB REPO + GPU APPS IN PROGRESS.**
+  - Repo: https://github.com/Mattcabrices/moto-pad-2026-arch-linux (private, branch main, author "Matt Cabrices"
+    <961821+Mattcabrices@users.noreply.github.com>, gh CLI signed in). `.gitignore` keeps out `out/` (images, SSH key),
+    `tools/.pad-password` (pad-sudo.sh reads the tablet password from it; default `archpad`). `.gitattributes` forces LF.
+    Beware: Python on Windows writes CRLF unless `newline=''`; strip `
+` before running scripts on the tablet.
+  - GPU clients (apps rendering on the Mali GPU) via libhybris wayland-egl + android_wlegl:
+    1. wlroots-pad: `wlr_hybris_bind_wl_display()` (from wlr_renderer_init_wl_shm) calls eglBindWaylandDisplayWL and registers a
+       wlr_buffer resource interface for android_wlegl wl_buffers; each gets a placeholder memfd "dma-buf" that
+       `wlr_hybris_create_image()` maps back to `eglCreateImageKHR(EGL_WAYLAND_BUFFER_WL)`. Built and installed; labwc stays up.
+    2. libhybris: `server_wlegl_buffer_from()` now checks the resource type (was unsafe for other buffer types).
+    3. Client crash in sscanf: Android code writes bionic TLS slots (tpidr_el0+24..72) which overlap glibc's TLS (locale
+       pointer) in programs without TLS. Fix: LD_PRELOAD `/usr/local/hybris/lib/bionic-tls-pad.so`
+       (`tools/src/bionic-tls-pad.c`, `scripts/68-build-bionic-tls-pad.sh`). After it: no crash.
+    4. Then: "failed to allocate buffer ... format 1 usage 0xb00": libhybris gralloc needs Halium's libui_compat_layer.so
+       (absent). Added an AHardwareBuffer gralloc backend (`scripts/libhybris-gralloc-ahb.c`, wired in by
+       `scripts/libhybris-archpad-gralloc.pl` from scripts/62; import uses AHardwareBuffer_createFromHandle with the
+       buffer description, new `hybris_gralloc_import_buffer_desc`). Rebuilding/testing at 13:45.
+  - Test: `tools/push-gpu-client-test.sh` (WSL) -> `tools/tab-gpu-client-test.sh` (es2gears_wayland in matt's desktop, grim
+    to /tmp/gpu-client-shot.png); protocol trace `tools/tab-gpu-client-trace.sh`; gdb `tools/tab-gpu-client-gdb2.sh`.
+- **13:45 (11-09) TOUCH FIXED ON THE GPU DESKTOP (Matt confirmed "WORKS").** labwc already rotates touch with the output transform, so the Xorg calibration matrix (0 1 0 -1 0 1) rotated it twice (taps landed on the far side) and its opposite was wrong too. Fix: no <libinput> calibrationMatrix in config/labwc/rc.xml; keep only <touch deviceName="himax-touchscreen" mapToOutput="DSI-1">. Installed by tools/tab-touch-fix.sh. Raw axes: x 0..15999 (short side), y 0..25599 (tools/tab-touch-raw.sh). No mouse pointer while using touch is normal on Wayland.
+- **12:45 (11-09) ANDROID SERVICES AUTOSTART; GPU DESKTOP SURVIVES REBOOT.** Units in `config/android-units/`, pushed + installed by `tools/push-android-units.sh` (WSL) -> `tools/tab-android-units-install.sh`. pad-android.target (enabled, WantedBy multi-user) wants: pad-android-mount (oneshot, runs tab-android-mount.sh installed as /usr/local/sbin/pad-android-mount via /bin/bash, it has no shebang), pad-android-logd (fake-logd.py), pad-servicemanager / pad-hwservicemanager / pad-vndservicemanager, pad-gralloc (allocator HAL; ExecStartPost /usr/local/sbin/pad-gralloc-wait waits for IAllocator/default in lshal). All Restart=on-failure, run as `chroot /opt/android-full /system/bin/env LD_PRELOAD=/data/local/libpropshim.so <bin>` (preload inside the chroot so Arch ld.so does not complain). getty@tty1 drop-in android.conf: After=pad-android.target (ordering only; if Android fails, login falls back to Xorg). Verified with a real reboot: all units active, labwc started on its own, screenshot `shots/boot-autostart.png`. pad-gralloc restarts once at boot (starts before hwservicemanager is ready; Restart covers it). Undo: `systemctl disable --now pad-android.target`. tab-android-sm.sh / tab-android-alloc.sh / tab-gpu-restart.sh are now only for manual debugging (stop the units first).
 - **12:35 (11-09) CHARGER LOG LOOP FIXED.** Cause: a feedback loop. journald enriches each kernel message with device info by reading the device's sysfs `uevent`; for mtk-master/slave-charger that read makes the sc8960x/MTK charger drivers printk 4 lines, which journald reads again. Fix (`tools/tab-journald-fix.sh`): /etc/systemd/journald.conf.d/archpad.conf with ReadKMsg=no, SystemMaxUse=200M, RuntimeMaxUse=50M. Result: 0 journal lines in 5 s (was ~17k/10 s), journald 0% CPU, journal 3.6 GB -> 182 MB. Kernel messages are no longer in journalctl; use `dmesg`. Load average stays ~14 because 13 MediaTek kernel threads (wdtk-*, hang_detect, disp_echk, ccci_poll, mddp_rx) sit in D state; CPU is 95% idle, so it is cosmetic. Diagnosis script: `tools/tab-charger-spam.sh`.
 - **12:25 (11-09) GPU DESKTOP SWITCHED ON.** Matt said "Yes, switch it on". `tools/tab-wayland-session-on.sh` (run via pad-sudo.sh) touches /home/matt/.pad-wayland and restarts getty@tty1; labwc, xfce4-panel and xfdesktop run as matt, Xorg is off, screenshot `shots/session-on.png` shows the full desktop. The flag stays on, so tty1 logins now use labwc while the Android services are up (after a reboot they still need starting by hand, else the session falls back to startx). Undo: `rm ~/.pad-wayland` and restart getty@tty1. Touch still not checked by hand.
   FOUND: the kernel logs ~100k lines/min of charger-driver errors (`get_charger_zcv ... -95`, sc8960x get_input/charging_current, "driver reporting unsupported"), so systemd-journald burns ~50% of a core (11 h CPU in 22 h uptime) and the journal is 3.6 GB. Likely something polling the power_supply sysfs (upower/xfce4-power-manager?). Not fixed yet: cap the journal (SystemMaxUse) and find the poller.

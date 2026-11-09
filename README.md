@@ -16,7 +16,7 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
 | Boot | Rebuilt Android GKI kernel `5.15.185-archpad` in `boot_a`, Arch on `userdata` (ext4), boot-loop breaker with a telnet rescue console |
 | Display and touch | 1600x2560 @ 90 Hz panel, used in landscape; Himax touchscreen |
 | Desktop | XFCE. Default: **GPU-composited Wayland session** (labwc on the Mali GPU through libhybris). Fallback: Xorg |
-| GPU | Compositing on the GPU, zero-copy scanout. Apps still render on the CPU (GPU rendering for apps is in progress) |
+| GPU | Compositing on the GPU with zero-copy scanout. Apps can render on the GPU too: `hybris-run <app>` (EGL/GLES Wayland apps; es2gears ~87 fps at the 90 Hz panel limit) |
 | Wi-Fi, Bluetooth | Working, through MediaTek's Android helpers run in a small chroot with a property shim |
 | Audio | Speakers and the main microphone. Headphone jack not done yet |
 | USB | Network gadget (SSH over USB) |
@@ -34,6 +34,9 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
   (`wlroots-pad/`) adds a `hybris` renderer, an AHardwareBuffer allocator and a minimal `pad` display backend
   that sticks to the KMS calls the vendor display driver handles safely. labwc runs on top; XFCE's panel and
   desktop run inside it.
+- **GPU apps:** libhybris' `android_wlegl` protocol carries app buffers to the compositor. Two libhybris changes make it
+  work on Android 16: an AHardwareBuffer gralloc backend (`scripts/libhybris-gralloc-ahb.c`) and a preload that keeps
+  Android's TLS-slot writes off glibc's thread-local data (`tools/src/bionic-tls-pad.c`).
 - No vendor binaries or stock images are included in this repository. The scripts extract what they need from
   your own device's firmware.
 

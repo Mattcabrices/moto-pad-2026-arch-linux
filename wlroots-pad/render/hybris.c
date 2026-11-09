@@ -18,7 +18,19 @@
 #include <sys/mman.h>
 #include <wayland-server-core.h>
 #include <wayland-server-protocol.h>
-#include <EGL/eglmesaext.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+
+/* EGL_WL_bind_wayland_display (libhybris implements it; Mesa's eglmesaext.h does not build here). */
+#ifndef EGL_WAYLAND_BUFFER_WL
+#define EGL_WAYLAND_BUFFER_WL 0x31D5
+#endif
+#ifndef EGL_TEXTURE_RGB
+#define EGL_TEXTURE_RGB 0x305D
+#define EGL_TEXTURE_RGBA 0x305E
+#endif
+typedef EGLBoolean (*hybris_bind_wl_display_fn)(EGLDisplay, struct wl_display *);
+typedef EGLBoolean (*hybris_query_wl_buffer_fn)(EGLDisplay, struct wl_resource *, EGLint, EGLint *);
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -117,7 +129,7 @@ EGLImageKHR wlr_hybris_create_image(EGLDisplay display, int dmabuf_fd) {
  * memfd as its "dma-buf"; wlr_hybris_create_image() maps it back to the wl_resource. */
 
 static EGLDisplay hybris_display = EGL_NO_DISPLAY;
-static PFNEGLQUERYWAYLANDBUFFERWL query_wl_buffer;
+static hybris_query_wl_buffer_fn query_wl_buffer;
 
 struct hybris_client_buffer {
 	struct wlr_buffer base;
@@ -246,7 +258,7 @@ void wlr_hybris_bind_wl_display(struct wl_display *wl_display) {
 	if (hybris_display == EGL_NO_DISPLAY) {
 		return;
 	}
-	PFNEGLBINDWAYLANDDISPLAYWL bind = (void *)eglGetProcAddress("eglBindWaylandDisplayWL");
+	hybris_bind_wl_display_fn bind = (void *)eglGetProcAddress("eglBindWaylandDisplayWL");
 	query_wl_buffer = (void *)eglGetProcAddress("eglQueryWaylandBufferWL");
 	if (!bind || !query_wl_buffer || !bind(hybris_display, wl_display)) {
 		wlr_log(WLR_ERROR, "hybris: eglBindWaylandDisplayWL failed; GPU clients unavailable");
