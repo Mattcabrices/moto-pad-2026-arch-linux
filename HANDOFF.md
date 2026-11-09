@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-09 16:20 (Firefox runs with hardware WebRender + WebGL 2 on the Mali GPU via firefox-gpu; repo going public; see "16:20").
+Last updated: 2026-11-09 16:35 (on-screen keyboard in the GPU desktop; Xwayland works; see "16:35").
 
 ## Goal
 
@@ -260,7 +260,16 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
-- **16:20 (11-09) GPU FIREFOX WORKS (RESUME HERE).** Matt: "Yes, try Firefox", full permission; "if this all works for
+- **16:35 (11-09) ON-SCREEN KEYBOARD + XWAYLAND (RESUME HERE).** Matt: "Lets keep going!".
+  - squeekboard (extra) autostarts in the GPU desktop (`config/labwc/autostart`, `tools/tab-osk-install.sh`) and pops up
+    on text fields by itself (text-input-v3 / input-method-v2 / virtual-keyboard, all offered by labwc). Landscape
+    scale 0.7 (`gsettings sm.puri.Squeekboard scale-in-horizontal-screen-orientation`). Screenshot `shots/osk-2.png`.
+    Typing by touch not tested by hand. Onboard (X11-only) still serves the Xorg session.
+  - Package installs need `pacman -Sy` first whenever the mirror has moved (404s otherwise); nothing else was out of date.
+  - Xwayland: labwc starts it on demand (DISPLAY=:0 for apps); a GDK_BACKEND=x11 GTK app shows fine
+    (`shots/xwayland-1.png`). X11 apps render in software (no DRI3/render node). xwm "xcb error ... Window" lines on
+    close are harmless.
+- **16:20 (11-09) GPU FIREFOX WORKS.** Matt: "Yes, try Firefox", full permission; "if this all works for
   gpu hardware accel you can make the repo public".
   - Measured (`tools/src/tls-probe.c`, scripts/70): Android's GL wrappers write exactly tp+24 (TLS_SLOT_OPENGL, current
     context) and tp+32 (TLS_SLOT_OPENGL_API, GL hooks) on every thread that makes a context current. Loading Mali

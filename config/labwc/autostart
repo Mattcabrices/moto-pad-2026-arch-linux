@@ -1,3 +1,5 @@
 # Moto Pad (archpad) labwc autostart (/etc/xdg/labwc/autostart): the XFCE pieces that work on Wayland.
 xfce4-panel &
 xfdesktop &
+# On-screen keyboard (Onboard is X11-only). Pops up on text fields via text-input-v3/input-method-v2.
+squeekboard &
