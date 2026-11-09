@@ -1,0 +1,3 @@
+4 pkill -u matt -x firefox-hybris; sleep 1; rm -rf /tmp/ff-auto; mkdir -p /tmp/ff-auto; echo ok
+40 ARCHPAD_EGL_TRACE=1 firefox-gpu --new-instance --profile /tmp/ff-auto 'about:support#graphics' > /tmp/ff-trace.log 2>&1
+3 pkill -u matt -x firefox-hybris; grep -c egl-trace /tmp/ff-trace.log; true

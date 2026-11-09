@@ -16,11 +16,11 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
 | Boot | Rebuilt Android GKI kernel `5.15.185-archpad` in `boot_a`, Arch on `userdata` (ext4), boot-loop breaker with a telnet rescue console |
 | Display and touch | 1600x2560 @ 90 Hz panel, used in landscape; Himax touchscreen |
 | Desktop | XFCE. Default: **GPU-composited Wayland session** (labwc on the Mali GPU through libhybris). Fallback: Xorg |
-| GPU | Compositing on the GPU with zero-copy scanout. Apps render on the Mali-G57 (OpenGL ES 3.2): glmark2, GTK4 apps, mpv, and **Firefox with hardware WebRender and WebGL 2** (menu entry uses `firefox-gpu`). Chromium still renders in software |
+| GPU | Compositing on the GPU with zero-copy scanout. Apps render on the Mali-G57 (OpenGL ES 3.2): glmark2, GTK4 apps, mpv, and **Firefox with hardware WebRender, WebGL 1 and WebGL 2** (menu entry uses `firefox-gpu`). Chromium still renders in software |
 | Wi-Fi, Bluetooth | Working, through MediaTek's Android helpers run in a small chroot with a property shim |
-| Audio | Speakers and the main microphone. Headphone jack not done yet |
+| Audio | Speakers, the main microphone, and headphone jack switching (headphones and headset mic) |
 | USB | Network gadget (SSH over USB) |
-| Extras | On-screen keyboard (squeekboard) in the GPU desktop, Xwayland for X11 apps, Claude Code |
+| Extras | On-screen keyboard (squeekboard) in the GPU desktop, Xwayland for X11 apps, Claude Code. Optional Arch boot logo (`config/logo/`, not flashed yet) |
 | Not working | Camera, modem, headphone jack |
 
 ## How it works (short version)

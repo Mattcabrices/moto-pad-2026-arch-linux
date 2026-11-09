@@ -1,0 +1,16 @@
+<!doctype html><meta charset="utf-8"><title>WebGL check</title>
+<style>body{background:#111;color:#eee;font:28px sans-serif;margin:30px}b{color:#1793d1}canvas{border:1px solid #444}</style>
+<h1>Moto Pad WebGL check</h1><div id="o"></div><canvas id="c1" width="300" height="200"></canvas>
+<script>
+function probe(kind){const c=document.createElement('canvas');const g=c.getContext(kind);
+ if(!g)return kind+': <b style="color:#e55">FAILED</b>';const d=g.getExtension('WEBGL_debug_renderer_info');
+ return kind+': <b>'+(d?g.getParameter(d.UNMASKED_RENDERER_WEBGL):g.getParameter(g.RENDERER))+'</b> / '+g.getParameter(g.VERSION);}
+document.getElementById('o').innerHTML=probe('webgl')+'<br>'+probe('webgl2')+'<br><br>WebGL 1 triangle:';
+const g=document.getElementById('c1').getContext('webgl');
+if(g){const s=(t,src)=>{const x=g.createShader(t);g.shaderSource(x,src);g.compileShader(x);return x};
+ const p=g.createProgram();g.attachShader(p,s(g.VERTEX_SHADER,'attribute vec2 a;void main(){gl_Position=vec4(a,0,1);}'));
+ g.attachShader(p,s(g.FRAGMENT_SHADER,'precision mediump float;void main(){gl_FragColor=vec4(0.09,0.58,0.82,1);}'));
+ g.linkProgram(p);g.useProgram(p);g.bindBuffer(g.ARRAY_BUFFER,g.createBuffer());
+ g.bufferData(g.ARRAY_BUFFER,new Float32Array([0,.8,-.8,-.8,.8,-.8]),g.STATIC_DRAW);
+ g.enableVertexAttribArray(0);g.vertexAttribPointer(0,2,g.FLOAT,false,0,0);g.clearColor(.15,.15,.15,1);g.clear(g.COLOR_BUFFER_BIT);g.drawArrays(g.TRIANGLES,0,3);}
+</script>

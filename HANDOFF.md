@@ -260,7 +260,21 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
-- **18:10 (11-09) HEADPHONE JACK (RESUME HERE).** Matt picked it; he has not plugged anything in yet (needs his ears).
+- **18:25 (11-09) WEBGL 1 IN FIREFOX WORKS; ARCH BOOT LOGO READY (RESUME HERE).**
+  - Cause: Firefox's WebGL 1 path passes context attribute `0x3483=0` to eglCreateContext; Mali rejects every such
+    context with EGL_BAD_ATTRIBUTE (0x3004). WebGL 2 does not send it. Found with a new optional libhybris EGL trace
+    (`scripts/libhybris-egl-trace.pl`, env `ARCHPAD_EGL_TRACE=1`, logs display/bind/config/context/pbuffer calls and
+    failed proc lookups to stderr). Fix: `scripts/libhybris-ctx-attribs.pl` drops `0x3483=0` (the default) in
+    libhybris' eglCreateContext. Both wired into scripts/62; installed with `tools/tab-hybris-install.sh`.
+  - Verified: `tools/web/webgl-check.html` in firefox-gpu shows webgl and webgl2 both on the Mali GPU and draws a
+    WebGL 1 triangle (`shots/firefox-webgl1.png`). Firefox reports the GPU as "Mali-G51, or similar" (its generalised name).
+  - Boot logo (subagent, NOT flashed): logo_a is classic MTK logo.bin (512-byte header 0x58881688, 123 zlib frames,
+    BGRA8888 1600x2560; frame 0 = boot logo, landscape picture rotated 90 CW). `tools/make-logo.py` (info/extract/
+    build/check) rebuilds stock bit-exactly; `config/logo/arch-logo.png` + `draw-arch-logo.py`; output
+    `out/logo/arch-logo.bin` (git-ignored). Backup/flash/readback/restore commands in `config/logo/README.md`.
+    Risk: the image is unsigned; LK may require a signed logo even unlocked (unverified). Flash only with Matt present,
+    after a backup (`dd if=/dev/disk/by-partlabel/logo_a` works from running Arch).
+- **18:10 (11-09) HEADPHONE JACK.** Matt picked it; he has not plugged anything in yet (needs his ears).
   - Jack: input device "mt6835-mt6377 Headset Jack" (event4, MT6377 ACCDET) reports SW_HEADPHONE_INSERT /
     SW_MICROPHONE_INSERT / SW_LINEOUT_INSERT. `tools/pad-jackd` (python, /usr/local/sbin, `pad-jack.service`) reads the
     state with EVIOCGSW at start, then follows events. Install: `tools/tab-jack-install.sh` (push pad-jackd first).
@@ -449,7 +463,7 @@ xorg.conf also ignores `DP-1` (USB-C output reports connected with nothing attac
 2. Wi-Fi: the driver needs Android helpers (`wmt_loader`, `wmt_launcher`, `conninfra_loader`,
    `wlan_assistant`), which are bionic binaries. Not solved.
 3. Audio: speakers, mic and headphone jack switching done (jack not yet tested by ear).
-4. Fun boot logo in the `logo` partition (read it via BROM first and keep a backup).
+4. Boot logo: Arch logo.bin built (`config/logo/`); flash with Matt present after a backup.
 5. Back burner (Matt, 2026-11-08): GPU acceleration via libhybris (Android Mali blob). Panfrost was the other option.
 6. Optional: change the USB gadget VID/PID (Windows binds `18d1:4e23` to its ADB driver),
    rebuild on the exact .020 GKI source `2d8ad9139b89` (5.15.197; current 5.15.185 passes the

@@ -45,6 +45,10 @@ grep -q '"eglSwapBuffersWithDamageKHR"' "$E" || \
 grep -c '"eglSwapBuffersWithDamageKHR"' "$E"
 # Android 16 has no gralloc 0/1 module and no Halium libui_compat_layer.so: add an AHardwareBuffer backend.
 perl /mnt/c/mpad26/MotoPadArch/scripts/libhybris-archpad-gralloc.pl "$R/root/hb/libhybris/hybris"
+# Optional EGL call trace (ARCHPAD_EGL_TRACE=1), off by default.
+perl /mnt/c/mpad26/MotoPadArch/scripts/libhybris-egl-trace.pl "$E"
+# Firefox WebGL 1: drop context attribute 0x3483=0, which Mali rejects.
+perl /mnt/c/mpad26/MotoPadArch/scripts/libhybris-ctx-attribs.pl "$E"
 arch-chroot "$R" pacman -S --noconfirm --needed base-devel autoconf automake libtool pkgconf \
   wayland wayland-protocols libdrm libglvnd >/dev/null
 arch-chroot "$R" env RESUME="${RESUME:-}" bash -euo pipefail -c '
