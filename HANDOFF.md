@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-09 16:35 (on-screen keyboard in the GPU desktop; Xwayland works; see "16:35").
+Last updated: 2026-11-09 16:45 (compositor scan-out buffers locked = no tearing; WebGL 1 findings; see "16:45").
 
 ## Goal
 
@@ -260,7 +260,18 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
-- **16:35 (11-09) ON-SCREEN KEYBOARD + XWAYLAND (RESUME HERE).** Matt: "Lets keep going!".
+- **16:45 (11-09) DOUBLE-BUFFERED SCAN-OUT; WEBGL 1 NOTES (RESUME HERE).**
+  - Tearing fix in `wlroots-pad/backend/pad/pad.c`: the backend now locks the buffer handed to drmModePageFlip
+    (`queued`) and the one on screen (`current`), releasing the old one on the flip event. Before, wlroots could render
+    the next frame into the buffer being scanned out. labwc now holds 4 scan-out dma-bufs; glmark2 build 637 fps (was
+    616); desktop verified.
+  - WebGL 1 in Firefox still fails ("tryNativeGL FEATURE_FAILURE_EGL"). Findings: Firefox tries desktop GL first
+    (eglBindAPI(OPENGL) fails -> that failureId), then GLES 2. `tools/src/ctx-probe.c` (scripts/71): Mali accepts ES2
+    and ES3 no-config contexts plain, with EXT robustness, and via CLIENT_VERSION; it rejects EGL 1.5/KHR robust-access
+    attributes (0x31B2 or CONTEXT_FLAGS robust bit) for both versions, which Firefox retries past. No GL spew for the
+    WebGL 1 attempt (MOZ_GL_SPEW=1), so it fails before a context exists. Next idea: gdb is too slow on Firefox; add a
+    trace in libhybris' eglCreateContext/eglChooseConfig instead, or try pref webgl.1.request_es2=false / gfx.egl.prefer-gles.enabled.
+- **16:35 (11-09) ON-SCREEN KEYBOARD + XWAYLAND.** Matt: "Lets keep going!".
   - squeekboard (extra) autostarts in the GPU desktop (`config/labwc/autostart`, `tools/tab-osk-install.sh`) and pops up
     on text fields by itself (text-input-v3 / input-method-v2 / virtual-keyboard, all offered by labwc). Landscape
     scale 0.7 (`gsettings sm.puri.Squeekboard scale-in-horizontal-screen-orientation`). Screenshot `shots/osk-2.png`.

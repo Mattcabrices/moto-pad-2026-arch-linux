@@ -41,7 +41,9 @@ struct pad_output {
 	drmModeModeInfo drm_mode;
 	uint32_t crtc, connector;
 	bool crtc_set, flip_pending;
-	struct wlr_buffer *scanout; // last buffer sent to the panel (debug dump)
+	/* Buffers the panel uses, locked so wlroots' swapchain cannot render into them (no tearing):
+	 * queued = handed to drmModePageFlip, current = on screen since the last flip event. */
+	struct wlr_buffer *queued, *current;
 	struct wl_event_source *frame_timer;
 	struct wlr_drm_format_set formats;
 };
@@ -148,6 +150,25 @@ static int send_frame_cb(void *data) {
 	return 0;
 }
 
+static void set_queued(struct pad_output *po, struct wlr_buffer *buffer) {
+	if (po->queued) {
+		wlr_buffer_unlock(po->queued);
+	}
+	po->queued = wlr_buffer_lock(buffer);
+}
+
+/* The queued buffer is now on screen: release the one it replaced. */
+static void promote_queued(struct pad_output *po) {
+	if (!po->queued) {
+		return;
+	}
+	if (po->current) {
+		wlr_buffer_unlock(po->current);
+	}
+	po->current = po->queued;
+	po->queued = NULL;
+}
+
 static bool output_commit(struct wlr_output *wlr_output, const struct wlr_output_state *state) {
 	struct pad_output *po = pad_output(wlr_output);
 	struct pad_backend *pb = po->backend;
@@ -179,7 +200,10 @@ static bool output_commit(struct wlr_output *wlr_output, const struct wlr_output
 		/* Flip to the same framebuffer so the vblank event drives present + frame, like every later commit. */
 		if (drmModePageFlip(pb->fd, po->crtc, fb, DRM_MODE_PAGE_FLIP_EVENT, po) == 0) {
 			po->flip_pending = true;
+			set_queued(po, state->buffer);
 		} else {
+			set_queued(po, state->buffer);
+			promote_queued(po);
 			wlr_log_errno(WLR_ERROR, "pad: page flip after modeset failed, using a timer");
 			struct wlr_output_event_present present = { .commit_seq = wlr_output->commit_seq + 1, .presented = true };
 			output_defer_present(wlr_output, present);
@@ -196,7 +220,7 @@ static bool output_commit(struct wlr_output *wlr_output, const struct wlr_output
 		return false;
 	}
 	po->flip_pending = true;
-	po->scanout = state->buffer;
+	set_queued(po, state->buffer);
 	return true;
 }
 
@@ -209,10 +233,10 @@ static void dump_scanout(struct pad_output *po) {
 	clock_gettime(CLOCK_MONOTONIC, &now);
 	if (t0.tv_sec == 0) t0 = now;
 	const char *path = getenv("PAD_DUMP");
-	if (done || !path || !po->scanout || now.tv_sec - t0.tv_sec < 8) return;
+	if (done || !path || !po->current || now.tv_sec - t0.tv_sec < 8) return;
 	done = true;
 	struct wlr_dmabuf_attributes d;
-	if (!wlr_buffer_get_dmabuf(po->scanout, &d)) return;
+	if (!wlr_buffer_get_dmabuf(po->current, &d)) return;
 	size_t size = (size_t)d.stride[0] * d.height;
 	uint8_t *m = mmap(NULL, size, PROT_READ, MAP_SHARED, d.fd[0], 0);
 	if (m == MAP_FAILED) { wlr_log_errno(WLR_ERROR, "pad: dump mmap"); return; }
@@ -236,6 +260,7 @@ static void handle_flip(int fd, unsigned seq, unsigned sec, unsigned usec, void 
 	(void)fd;
 	struct pad_output *po = data;
 	po->flip_pending = false;
+	promote_queued(po);
 	dump_scanout(po);
 	static unsigned flips;
 	if (++flips <= 5 || flips % 300 == 0) wlr_log(WLR_DEBUG, "pad: flip done #%u", flips);
@@ -269,6 +294,8 @@ static const struct wlr_drm_format_set *output_get_primary_formats(struct wlr_ou
 
 static void output_destroy(struct wlr_output *wlr_output) {
 	struct pad_output *po = pad_output(wlr_output);
+	if (po->queued) wlr_buffer_unlock(po->queued);
+	if (po->current) wlr_buffer_unlock(po->current);
 	wlr_output_finish(wlr_output);
 	wl_event_source_remove(po->frame_timer);
 	wlr_drm_format_set_finish(&po->formats);

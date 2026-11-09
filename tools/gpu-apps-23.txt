@@ -1,0 +1,3 @@
+4 pkill -u matt -x firefox-hybris; sleep 1; rm -f /tmp/ff-auto/lock /tmp/ff-auto/.parentlock; echo ok
+50 ARCHPAD_GPU=1 MOZ_ENABLE_WAYLAND=1 timeout 45 gdb -q -batch -x /tmp/ff-egl.gdb --args /usr/lib/firefox/firefox-hybris --new-instance --profile /tmp/ff-auto 'about:support#graphics' > /tmp/ff-gdb.log 2>&1
+3 pkill -u matt -x firefox-hybris; true

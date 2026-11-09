@@ -1,0 +1,3 @@
+4 pkill -u matt -x firefox-hybris; sleep 1; rm -f /tmp/ff-auto/lock /tmp/ff-auto/.parentlock; echo ok
+30 MOZ_GL_SPEW=1 firefox-gpu --new-instance --profile /tmp/ff-auto 'about:support#graphics' > /tmp/ff-spew.log 2>&1
+3 pkill -u matt -x firefox-hybris; true
