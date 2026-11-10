@@ -224,9 +224,11 @@ def lerp(a, b, t):
     return tuple(int(round(x + (y - x) * t)) for x, y in zip(a, b))
 
 
-def draw_glow(W, H, font_path):
+def draw_glow(W, H, font_path, word=("arch", "linux"), tagline=None, spark=False):
     """Dark navy background with a soft blue glow, a gradient Arch mark, a lowercase "archlinux" wordmark and thin
-    glowing light streaks in two corners. Everything is drawn here, so the result is free to share with the code."""
+    glowing light streaks in two corners. Everything is drawn here, so the result is free to share with the code.
+    word: the two halves of the wordmark (white, blue). tagline: optional small spaced line under it.
+    spark: a small flare where the streaks cross."""
     from PIL import ImageChops, ImageFilter
 
     SS = 2
@@ -248,13 +250,16 @@ def draw_glow(W, H, font_path):
     scale = mark_h / 22.8
     font = ImageFont.truetype(font_path, int(H * 0.095) * SS)
     probe = ImageDraw.Draw(img)
-    words = [("arch", TEXT_LIGHT), ("linux", (0x1E, 0xA6, 0xE6))]
+    words = [(word[0], TEXT_LIGHT), (word[1], (0x1E, 0xA6, 0xE6))]
     widths = [probe.textlength(t, font=font) for t, _ in words]
     x_top = font.getbbox("x")[1]
     l_top = font.getbbox("l")[1]
     gap = int(H * 0.05) * SS
     text_h = font.getbbox("x")[3] - l_top
-    top = (h - (mark_h + gap + text_h)) // 2
+    tag_font = ImageFont.truetype(font_path, int(H * 0.026) * SS)
+    tag_gap = int(H * 0.035) * SS
+    tag_h = (tag_font.getbbox("d")[3] - tag_font.getbbox("d")[1] + tag_gap) if tagline else 0
+    top = (h - (mark_h + gap + text_h + tag_h)) // 2
     mx, my = (w - 24 * scale) / 2, top - 0.605 * scale
 
     # The mark as a mask, filled with a diagonal light-to-deep cyan gradient.
@@ -311,6 +316,23 @@ def draw_glow(W, H, font_path):
     streak_core.paste((0x50, 0xC8, 0xFF), mask=core)
     img = ImageChops.add(img, ImageChops.add(streak_glow, streak_core))
 
+    if spark:
+        # A small flare where the two long streaks of each corner cross: closest pair of points between the curves.
+        flare = Image.new("L", (w, h), 0)
+        fd = ImageDraw.Draw(flare)
+        for a, b in ((0, 1), (3, 4)):
+            pa = [(x * w, y * h) for x, y in bez(*curves[a])]
+            pb = [(x * w, y * h) for x, y in bez(*curves[b])]
+            cx, cy = min(((p, q) for p in pa[::4] for q in pb[::4]),
+                         key=lambda pq: (pq[0][0] - pq[1][0]) ** 2 + (pq[0][1] - pq[1][1]) ** 2)[0]
+            r = 5 * SS
+            fd.ellipse((cx - r, cy - r, cx + r, cy + r), fill=255)
+        flare_img = Image.new("RGB", (w, h), (0, 0, 0))
+        flare_img.paste((0x30, 0xB0, 0xFF), mask=flare.filter(ImageFilter.GaussianBlur(26 * SS)))
+        flare_core = Image.new("RGB", (w, h), (0, 0, 0))
+        flare_core.paste((0xC0, 0xEE, 0xFF), mask=flare.filter(ImageFilter.GaussianBlur(3 * SS)))
+        img = ImageChops.add(img, ImageChops.add(flare_img, ImageChops.add(flare_img, flare_core)))
+
     # Mark and wordmark on top.
     img.paste(fill, mask=mask)
     dr = ImageDraw.Draw(img)
@@ -319,6 +341,17 @@ def draw_glow(W, H, font_path):
     for (t, col), tw in zip(words, widths):
         dr.text((x, ty), t, font=font, fill=col)
         x += tw
+    if tagline:
+        # Thin, widely spaced, muted: letters placed one by one with extra tracking.
+        track = int(H * 0.012) * SS
+        chars = list(tagline)
+        cw = [dr.textlength(c, font=tag_font) for c in chars]
+        total = sum(cw) + track * (len(chars) - 1)
+        x = (w - total) / 2
+        tag_y = top + mark_h + gap + text_h + tag_gap - tag_font.getbbox("d")[1]
+        for c, cwi in zip(chars, cw):
+            dr.text((x, tag_y), c, font=tag_font, fill=(0x6F, 0x8E, 0xA8))
+            x += cwi + track
     del x_top
     return img.resize((W, H), Image.LANCZOS)
 
@@ -330,12 +363,16 @@ def main():
     ap.add_argument("--size", default="2560x1600", help="WIDTHxHEIGHT as the viewer sees it (default 2560x1600)")
     ap.add_argument("--style", choices=["plain", "glow"], default="plain",
                     help="plain: mark + 'Arch Linux' on black; glow: navy background, glow, light streaks")
+    ap.add_argument("--word", default="arch,linux", help="glow: the wordmark's white and blue halves (default arch,linux)")
+    ap.add_argument("--tagline", help="glow: small spaced line under the wordmark, e.g. 'pad edition'")
+    ap.add_argument("--spark", action="store_true", help="glow: small flare where the streaks cross")
     a = ap.parse_args()
     W, H = (int(v) for v in a.size.lower().split("x"))
     here = os.path.dirname(os.path.abspath(__file__))
     if a.style == "glow":
         out = a.output or os.path.join(here, "arch-logo-glow.png")
-        draw_glow(W, H, find_regular_font(a.font)).save(out, optimize=True)
+        draw_glow(W, H, find_regular_font(a.font), tuple(a.word.split(",", 1)), a.tagline,
+                  a.spark).save(out, optimize=True)
         print("wrote %s (%dx%d)" % (out, W, H))
         return
     a.output = a.output or os.path.join(here, "arch-logo.png")
