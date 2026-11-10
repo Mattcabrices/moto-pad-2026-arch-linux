@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draws config/logo/arch-logo.png: the Arch Linux mark and an "Arch Linux" wordmark,
+"""Draws config/logo/arch-logo.png (plain) or arch-logo-glow.png (--style glow): the Arch Linux mark and a wordmark,
 centered on black, at the tablet's landscape resolution (2560x1600).
 
 Needs only Pillow. The mark is drawn from an SVG path (24x24 units) that this script
@@ -8,7 +8,7 @@ pass --font, or the script tries DejaVu Sans Bold, Segoe UI Bold and Arial Bold.
 
 The Arch Linux name and logo are trademarks (see config/logo/README.md).
 
-Usage: python3 draw-arch-logo.py [-o arch-logo.png] [--font FILE] [--size 2560x1600]
+Usage: python3 draw-arch-logo.py [--style plain|glow] [-o FILE] [--font FILE] [--size 2560x1600]
 """
 import argparse
 import math
@@ -202,13 +202,143 @@ def find_font(path):
     sys.exit("no bold sans font found; pass --font /path/to/font.ttf")
 
 
+FONT_REGULAR_CANDIDATES = [
+    "/usr/share/fonts/TTF/DejaVuSans.ttf",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    "C:/Windows/Fonts/segoeui.ttf",
+    "/mnt/c/Windows/Fonts/segoeui.ttf",
+    "C:/Windows/Fonts/arial.ttf",
+    "/mnt/c/Windows/Fonts/arial.ttf",
+    "/usr/share/fonts/TTF/LiberationSans-Regular.ttf",
+]
+
+
+def find_regular_font(path):
+    for f in ([path] if path else []) + FONT_REGULAR_CANDIDATES:
+        if f and os.path.exists(f):
+            return f
+    sys.exit("no regular sans font found; pass --font /path/to/font.ttf")
+
+
+def lerp(a, b, t):
+    return tuple(int(round(x + (y - x) * t)) for x, y in zip(a, b))
+
+
+def draw_glow(W, H, font_path):
+    """Dark navy background with a soft blue glow, a gradient Arch mark, a lowercase "archlinux" wordmark and thin
+    glowing light streaks in two corners. Everything is drawn here, so the result is free to share with the code."""
+    from PIL import ImageChops, ImageFilter
+
+    SS = 2
+    w, h = W * SS, H * SS
+    NAVY_CENTER, NAVY_EDGE = (0x0B, 0x1D, 0x30), (0x02, 0x05, 0x0B)
+    CYAN_LIGHT, CYAN_DEEP = (0x3F, 0xD8, 0xFF), (0x10, 0x8F, 0xD6)
+
+    # Background: radial gradient (computed small, then scaled up smoothly).
+    small = Image.new("RGB", (160, 100))
+    px = small.load()
+    for yy in range(100):
+        for xx in range(160):
+            d = math.hypot((xx - 80) / 80, (yy - 47) / 60)
+            px[xx, yy] = lerp(NAVY_CENTER, NAVY_EDGE, min(1.0, d) ** 1.3)
+    img = small.resize((w, h), Image.BICUBIC)
+
+    # Geometry: mark above, wordmark below, the pair centered.
+    mark_h = int(H * 0.33) * SS
+    scale = mark_h / 22.8
+    font = ImageFont.truetype(font_path, int(H * 0.095) * SS)
+    probe = ImageDraw.Draw(img)
+    words = [("arch", TEXT_LIGHT), ("linux", (0x1E, 0xA6, 0xE6))]
+    widths = [probe.textlength(t, font=font) for t, _ in words]
+    x_top = font.getbbox("x")[1]
+    l_top = font.getbbox("l")[1]
+    gap = int(H * 0.05) * SS
+    text_h = font.getbbox("x")[3] - l_top
+    top = (h - (mark_h + gap + text_h)) // 2
+    mx, my = (w - 24 * scale) / 2, top - 0.605 * scale
+
+    # The mark as a mask, filled with a diagonal light-to-deep cyan gradient.
+    mask = Image.new("L", (w, h), 0)
+    md = ImageDraw.Draw(mask)
+    for poly in path_to_polygons(ARCH_MARK):
+        md.polygon([(mx + a * scale, my + b * scale) for a, b in poly], fill=255)
+    grad_small = Image.new("RGB", (64, 64))
+    gp = grad_small.load()
+    for yy in range(64):
+        for xx in range(64):
+            t = min(1.0, max(0.0, (xx * 0.6 + yy) / 64 / 1.2))
+            gp[xx, yy] = lerp(CYAN_LIGHT, CYAN_DEEP, t)
+    bx0, by0 = int(mx), int(my + 0.605 * scale)
+    grad = grad_small.resize((int(24 * scale), int(mark_h) + 2), Image.BICUBIC)
+    fill = Image.new("RGB", (w, h), CYAN_DEEP)
+    fill.paste(grad, (bx0, by0))
+
+    # Glow: a wide blurred copy of the mark, plus a broad soft halo, added on top of the background.
+    glow = Image.new("RGB", (w, h), (0, 0, 0))
+    glow.paste((0x10, 0x70, 0xB0), mask=mask.filter(ImageFilter.GaussianBlur(28 * SS)))
+    halo = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(halo).ellipse((mx + 2 * scale, my + 2 * scale, mx + 22 * scale, my + 24 * scale), fill=110)
+    glow2 = Image.new("RGB", (w, h), (0, 0, 0))
+    glow2.paste((0x08, 0x40, 0x70), mask=halo.filter(ImageFilter.GaussianBlur(90 * SS)))
+    img = ImageChops.add(img, ImageChops.add(glow, glow2))
+
+    # Light streaks: thin bezier curves sweeping in from two corners, each with a blurred glow and a bright core.
+    def bez(p0, p1, p2, p3):
+        return [(p0[0] * (1 - t) ** 3 + 3 * p1[0] * (1 - t) ** 2 * t + 3 * p2[0] * (1 - t) * t ** 2 + p3[0] * t ** 3,
+                 p0[1] * (1 - t) ** 3 + 3 * p1[1] * (1 - t) ** 2 * t + 3 * p2[1] * (1 - t) * t ** 2 + p3[1] * t ** 3)
+                for t in (k / 400 for k in range(401))]
+
+    curves = [  # in fractions of the screen
+        ((-0.02, 0.42), (0.18, 0.30), (0.32, 0.12), (0.46, -0.02)),
+        ((-0.02, 0.60), (0.12, 0.42), (0.28, 0.22), (0.40, -0.02)),
+        ((0.00, 0.20), (0.10, 0.16), (0.20, 0.10), (0.30, -0.02)),
+        ((1.02, 0.58), (0.82, 0.70), (0.68, 0.88), (0.54, 1.02)),
+        ((1.02, 0.40), (0.88, 0.58), (0.72, 0.78), (0.60, 1.02)),
+        ((1.00, 0.80), (0.90, 0.84), (0.80, 0.90), (0.70, 1.02)),
+    ]
+    core = Image.new("L", (w, h), 0)
+    cd = ImageDraw.Draw(core)
+    for c in curves:
+        pts = [(x * w, y * h) for x, y in bez(*c)]
+        n = len(pts)
+        for k in range(n - 1):
+            # Brightest in the middle of each streak, fading toward both ends.
+            v = int(255 * math.sin(math.pi * k / (n - 1)) ** 1.5)
+            cd.line([pts[k], pts[k + 1]], fill=v, width=max(1, int(1.6 * SS)))
+    streak_glow = Image.new("RGB", (w, h), (0, 0, 0))
+    streak_glow.paste((0x10, 0x90, 0xE0), mask=core.filter(ImageFilter.GaussianBlur(6 * SS)))
+    streak_core = Image.new("RGB", (w, h), (0, 0, 0))
+    streak_core.paste((0x50, 0xC8, 0xFF), mask=core)
+    img = ImageChops.add(img, ImageChops.add(streak_glow, streak_core))
+
+    # Mark and wordmark on top.
+    img.paste(fill, mask=mask)
+    dr = ImageDraw.Draw(img)
+    x = (w - sum(widths)) / 2
+    ty = top + mark_h + gap - l_top
+    for (t, col), tw in zip(words, widths):
+        dr.text((x, ty), t, font=font, fill=col)
+        x += tw
+    del x_top
+    return img.resize((W, H), Image.LANCZOS)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("-o", "--output", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "arch-logo.png"))
+    ap.add_argument("-o", "--output", help="default: arch-logo.png (plain) or arch-logo-glow.png (glow)")
     ap.add_argument("--font", help="TTF/OTF for the wordmark")
     ap.add_argument("--size", default="2560x1600", help="WIDTHxHEIGHT as the viewer sees it (default 2560x1600)")
+    ap.add_argument("--style", choices=["plain", "glow"], default="plain",
+                    help="plain: mark + 'Arch Linux' on black; glow: navy background, glow, light streaks")
     a = ap.parse_args()
     W, H = (int(v) for v in a.size.lower().split("x"))
+    here = os.path.dirname(os.path.abspath(__file__))
+    if a.style == "glow":
+        out = a.output or os.path.join(here, "arch-logo-glow.png")
+        draw_glow(W, H, find_regular_font(a.font)).save(out, optimize=True)
+        print("wrote %s (%dx%d)" % (out, W, H))
+        return
+    a.output = a.output or os.path.join(here, "arch-logo.png")
 
     SS = 4  # supersampling for smooth edges
     img = Image.new("RGB", (W * SS, H * SS), (0, 0, 0))

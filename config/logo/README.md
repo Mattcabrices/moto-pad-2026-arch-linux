@@ -5,6 +5,9 @@ partition. This folder has an Arch Linux replacement and the tools to make your 
 
 - `arch-logo.png`: the Arch mark and an "Arch Linux" wordmark, centered on black, 2560x1600
   (the screen in landscape). Made by `draw-arch-logo.py`.
+- `arch-logo-glow.png`: the same mark with a lowercase "archlinux" wordmark on a dark navy background, with a soft
+  blue glow and thin light streaks in two corners, 2560x1600. Made by `draw-arch-logo.py --style glow` (wordmark in
+  Segoe UI or DejaVu Sans regular). Matt's pick for the boot logo.
 - `draw-arch-logo.py`: draws `arch-logo.png` with Pillow (the mark is an SVG path the script
   flattens itself; the wordmark uses DejaVu Sans Bold, Segoe UI Bold or Arial Bold, or `--font`).
 - `../../tools/make-logo.py`: turns any picture into a flashable logo image.
