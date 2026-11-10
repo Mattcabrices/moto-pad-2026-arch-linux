@@ -64,6 +64,16 @@ def read_conf():
         pass
 
 
+BTN_TOUCH = 0x14a
+
+
+def touching(fd):
+    """True while BTN_TOUCH is down on an input device (EVIOCGKEY: the current key state bitmap)."""
+    buf = bytearray(96)
+    fcntl.ioctl(fd, 0x80604518, buf)   # EVIOCGKEY(96)
+    return bool(buf[BTN_TOUCH // 8] & (1 << (BTN_TOUCH % 8)))
+
+
 class UInput:
     """A minimal uinput keyboard that re-emits the keys we take away from the desktop (volume down)."""
 
@@ -116,6 +126,12 @@ class Screen:
                 if path:
                     try:
                         fd = os.open(path, os.O_RDONLY | os.O_NONBLOCK)
+                        # Grabbing while a finger or the pen is down hides its release from the desktop, which then
+                        # keeps that touch pressed forever (stuck selection, no more taps). Wait until nothing is
+                        # touching (BTN_TOUCH up), for at most 5 s.
+                        end = time.monotonic() + 5
+                        while touching(fd) and time.monotonic() < end:
+                            time.sleep(0.05)
                         fcntl.ioctl(fd, EVIOCGRAB, 1)
                         self.grabbed.append(fd)
                     except OSError as e:
