@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Moto Pad: YouTube without AV1",
+  "version": "1.0",
+  "description": "Makes YouTube send VP9 instead of AV1, which the Moto Pad's video decoder can play in hardware.",
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*", "*://*.youtube-nocookie.com/*"],
+      "js": ["no-av1.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    }
+  ]
+}

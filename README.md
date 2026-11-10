@@ -16,14 +16,14 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
 | Boot | Rebuilt Android GKI kernel `5.15.185-archpad` in `boot_a`, Arch on `userdata` (ext4), boot-loop breaker with a telnet rescue console |
 | Display and touch | 1600x2560 @ 90 Hz panel, used in landscape; Himax touchscreen |
 | Desktop | XFCE. Default: **GPU-composited Wayland session** (labwc on the Mali GPU through libhybris). Fallback: Xorg |
-| GPU | Compositing on the GPU with zero-copy scanout. Apps render on the Mali-G57 (OpenGL ES 3.2): glmark2, GTK4 apps, mpv, and **Firefox with hardware WebRender, WebGL 1 and WebGL 2** (menu entry uses `firefox-gpu`). **Chromium**: rasterization, canvas, WebGL 1/2 and WebGPU on the GPU through ANGLE (menu entry uses `chromium-gpu`); its compositing stays in software |
+| GPU | Compositing on the GPU with zero-copy scanout. Apps render on the Mali-G57 (OpenGL ES 3.2): glmark2, GTK4 apps, mpv, and **Firefox with hardware WebRender, WebGL 1 and WebGL 2** (menu entry uses `firefox-gpu`). **Chromium with GPU compositing**, rasterization, canvas, WebGL 1/2 and WebGPU on the GPU through ANGLE (menu entry uses `chromium-gpu`) |
 | Wi-Fi, Bluetooth | Working, through MediaTek's Android helpers run in a small chroot with a property shim |
-| Video | **Hardware video decoding** on MediaTek's decoder: H.264, HEVC, VP9 (also MPEG-4, H.263) up to 2560x1440, 8-bit; bit-exact with software decoding. `mpv` (and its menu entry) uses it automatically: 1080p60 plays full screen at the full frame rate with no dropped frames, using about half the CPU of software decoding. Firefox decodes H.264 and HEVC video up to 40 fps on it too (MP4 files and sites that serve H.264; YouTube sends VP9/AV1, which stays in software) |
+| Video | **Hardware video decoding** on MediaTek's decoder: H.264, HEVC, VP9 (also MPEG-4, H.263) up to 2560x1440, 8-bit; bit-exact with software decoding. `mpv` (and its menu entry) uses it automatically: 1080p60 plays full screen at the full frame rate with no dropped frames, using about half the CPU of software decoding. **Chromium** decodes H.264 and VP9 on it, 1080p60 at full frame rate; on YouTube a small built-in extension (`config/chromium/no-av1`) turns off AV1 so YouTube sends VP9. Firefox decodes H.264 and HEVC up to 40 fps on it (MP4 files and sites that serve H.264; YouTube's VP9/AV1 stays in software there) |
 | Audio | Speakers, the main microphone, and headphone jack switching (headphones and headset mic) |
 | USB | Network gadget (SSH over USB) |
 | Web server | Caddy + Node (Express) + SQLite + React starter site on port 80; Cloudflare Tunnel (`cloudflared`) to publish it without port forwarding; Codex CLI. See [Web server](#web-server) |
 | Extras | On-screen keyboard (squeekboard) in the GPU desktop, Xwayland for X11 apps, Claude Code. Optional Arch boot logo (`config/logo/`, not flashed yet) |
-| Not working | Camera, modem. Hardware video decoding in Chromium, and for VP9/AV1 (YouTube) in Firefox |
+| Not working | Camera, modem. Hardware video decoding for HEVC in Chromium, and for VP9/AV1 in Firefox |
 
 ## How it works (short version)
 
@@ -47,8 +47,13 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
   `eglSwapBuffersWithDamageKHR` routed through libhybris' Wayland presentation.
 - **GPU Chromium:** ANGLE asks for an off-screen EGL display (GBM/surfaceless); libhybris now advertises those
   platforms and maps them to its plain Android path, and `eglGetProcAddress` returns libhybris' own EGL wrappers.
-  With no DRM render node Chromium can't hand frames to the compositor as dma-bufs, so `chromium-gpu` turns GPU
-  compositing off: pages and WebGL still render on the Mali GPU and are read back once per frame.
+  Chromium hands GPU-composited frames to the compositor only as dma-bufs it allocates through GBM, which needs a
+  render node and a Mesa driver the tablet doesn't have. `libgbm.so.1` from `tools/src/archpad-gbm.c` (preloaded by
+  `chromium-gpu`) allocates them as Android AHardwareBuffers instead; libhybris' EGL turns those dma-bufs back into
+  Android buffers for import (`scripts/libhybris-dmabuf-import.pl`), and each buffer is also sent to the compositor
+  over a socket so wlroots-pad can import Chromium's linux-dmabuf wl_buffers the same way. With GPU compositing on,
+  Chromium's own V4L2 video decoder runs (through the shim), writing frames into GBM buffers the GPU samples directly.
+  Install: `tools/push-crgpu.sh` (after the libhybris and wlroots-pad builds).
 - **Video decoding:** the vendor V4L2 decoder (`mtk-vcodec-dec`, with the VCP co-processor's firmware doing the work)
   decodes fine, but only takes dma-buf bitstream buffers, outputs MediaTek's tiled `M21S` format, calls HEVC `H265` and
   hands back frames out of display order. `libmtk-v4l2-shim.so` (`tools/src/mtk-v4l2-shim.c`, LD_PRELOAD) hides all four,

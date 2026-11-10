@@ -1,11 +1,33 @@
 #!/bin/bash
 # Moto Pad (archpad): Chromium on the Mali GPU inside the GPU desktop (labwc). ANGLE runs on the Android GL driver
-# through libhybris (surfaceless/GBM EGL display): canvas, rasterization, WebGL 1/2 and WebGPU on the GPU. Compositing
-# stays in software (no DRM render node for dma-buf presentation), so frames are read back once per frame.
+# through libhybris (GBM/surfaceless EGL display): canvas, rasterization, WebGL 1/2 and WebGPU on the GPU.
+# GPU compositing: Chromium hands its frames to the compositor as dma-bufs it allocates through GBM. The tablet has no
+# render node or Mesa driver, so /usr/local/lib/archpad-gbm/libgbm.so.1 (tools/src/archpad-gbm.c) allocates them as
+# Android AHardwareBuffers and shares each one with the compositor (wlroots-pad, $XDG_RUNTIME_DIR/archpad-ahb.sock).
+# Without those pieces it falls back to software compositing (frames read back once per frame).
+# Hardware video decoding (GPU compositing only): Chromium's V4L2 decoder through libmtk-v4l2-shim.so.
 # The GPU process sandbox must be off (its seccomp policy blocks Android's binder calls); renderers stay sandboxed.
-# Anywhere else (Xorg session, Android services down) it starts the normal Chromium.
+# ARCHPAD_CR_GPU_COMPOSITING=0 forces software compositing. Anywhere else (Xorg session, Android services down) it
+# starts the normal Chromium.
 if [ -n "$WAYLAND_DISPLAY" ] && [ -x /usr/local/bin/hybris-run ] && pgrep -f 'graphics.allocator@4.0-service' >/dev/null; then
-  exec /usr/local/bin/hybris-run /usr/bin/chromium --ozone-platform=wayland --ignore-gpu-blocklist --disable-gpu-sandbox \
-    --use-gl=angle --use-angle=gles-egl --disable-gpu-compositing "$@"
+  GBM=/usr/local/lib/archpad-gbm/libgbm.so.1
+  SHIM=/usr/local/lib/libmtk-v4l2-shim.so
+  set -- --ozone-platform=wayland --ignore-gpu-blocklist --disable-gpu-sandbox --use-gl=angle --use-angle=gles-egl "$@"
+  if [ "${ARCHPAD_CR_GPU_COMPOSITING:-1}" != 0 ] && [ -e "$GBM" ] && [ -S "${XDG_RUNTIME_DIR:-/nonexistent}/archpad-ahb.sock" ]; then
+    export LD_PRELOAD=$GBM${LD_PRELOAD:+:$LD_PRELOAD}
+    set -- --render-node-override=/dev/dri/card0 "$@"
+    if [ "${ARCHPAD_CR_HWDEC:-1}" != 0 ] && [ -e "$SHIM" ] && [ -w /dev/dma_heap/system ]; then
+      export LD_PRELOAD=$LD_PRELOAD:$SHIM MTK_V4L2_SHIM_NO_HEVC=1   # HEVC fails in Chromium's V4L2 path here
+      set -- --enable-features=AcceleratedVideoDecoder,AcceleratedVideoDecodeLinuxGL,PreferV4L2VideoAcceleration "$@"
+      # YouTube: no AV1 (software only here), so it sends VP9 (hardware). ARCHPAD_CR_AV1=1 keeps AV1.
+      NOAV1=/usr/local/share/archpad/chromium-no-av1
+      if [ "${ARCHPAD_CR_AV1:-0}" = 0 ] && [ -e "$NOAV1/manifest.json" ]; then
+        set -- --load-extension=$NOAV1 --disable-features=DisableLoadExtensionCommandLineSwitch "$@"
+      fi
+    fi
+  else
+    set -- --disable-gpu-compositing "$@"
+  fi
+  exec /usr/local/bin/hybris-run /usr/bin/chromium "$@"
 fi
 exec /usr/bin/chromium "$@"

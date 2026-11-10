@@ -53,6 +53,8 @@ perl /mnt/c/mpad26/MotoPadArch/scripts/libhybris-ctx-attribs.pl "$E"
 perl /mnt/c/mpad26/MotoPadArch/scripts/libhybris-surfaceless.pl "$E"
 # eglGetProcAddress returns libhybris' own egl* wrappers (ANGLE loads all entry points that way).
 perl /mnt/c/mpad26/MotoPadArch/scripts/libhybris-procaddr-self.pl "$E"
+# Chromium GPU compositing: dma-buf import for buffers from the archpad GBM library (tools/src/archpad-gbm.c).
+perl /mnt/c/mpad26/MotoPadArch/scripts/libhybris-dmabuf-import.pl "$E"
 arch-chroot "$R" pacman -S --noconfirm --needed base-devel autoconf automake libtool pkgconf \
   wayland wayland-protocols libdrm libglvnd >/dev/null
 arch-chroot "$R" env RESUME="${RESUME:-}" bash -euo pipefail -c '

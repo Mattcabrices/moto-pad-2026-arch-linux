@@ -73,6 +73,11 @@ edit("render/egl.c",
      '\tif (wlr_hybris_enabled()) {\n\t\t*external_only = false;\n'
      '\t\treturn wlr_hybris_create_image(egl->display, attributes->fd[0]);\n\t}\n')
 
+# linux-dmabuf (Chromium's GPU-composited buffers) needs a renderer DRM fd.
+edit("render/egl.c", 'int wlr_egl_dup_drm_fd(struct wlr_egl *egl) {\n',
+     'int wlr_egl_dup_drm_fd(struct wlr_egl *egl) {\n\tif (wlr_hybris_enabled()) {\n'
+     '\t\treturn wlr_hybris_dup_drm_fd();\n\t}\n')
+
 # pad.c uses output_defer_present from the internal header.
 edit("backend/pad/pad.c", '#include "backend/pad.h"\n', '#include "backend/pad.h"\n#include "types/wlr_output.h"\n')
 print("apply.py: archpad wlroots changes applied")

@@ -61,8 +61,11 @@ static dev_t dec_rdev;
 static int dec_rdev_known;
 
 /* q = 0: OUTPUT (bitstream), q = 1: CAPTURE (frames). */
-struct sbuf { int dfd; size_t size; void *map; void *client; };
-struct squeue { int n; int faked; struct sbuf b[MAXBUF]; };
+/* client: the client's view of the buffer (MMAP queues: a mapping we fill; DMABUF CAPTURE queues: its own dma-buf,
+ * cfd/cnum/cmap/clen/cino, mapped on first use and kept while the client keeps queueing the same dma-buf). */
+struct sbuf { int dfd; size_t size; void *map; void *client; int cfd, cnum; void *cmap; size_t clen; ino_t cino;
+              void *gbo; int exported; };
+struct squeue { int n; int faked; int client_dmabuf; struct sbuf b[MAXBUF]; };
 /* Decoded frames the driver returned early, waiting to be handed out in timestamp order. */
 struct pend { struct v4l2_buffer b; struct v4l2_plane p[VIDEO_MAX_PLANES]; };
 struct ctx {
@@ -152,7 +155,14 @@ static void free_queue(struct squeue *q)
 {
 	for (int i = 0; i < q->n; i++) {
 		struct sbuf *b = &q->b[i];
-		if (b->client && b->client != b->map) real_munmap(b->client, b->size);
+		if (b->client && b->client != b->map && b->client != b->cmap) real_munmap(b->client, b->size);
+		if (b->cmap) real_munmap(b->cmap, b->clen);
+		if (b->cfd > 0) real_close(b->cfd);
+		if (b->gbo) {
+			static void (*bo_destroy)(void *);
+			if (!bo_destroy) bo_destroy = dlsym(RTLD_DEFAULT, "gbm_bo_destroy");
+			if (bo_destroy) bo_destroy(b->gbo);
+		}
 		if (b->map) real_munmap(b->map, b->size);
 		if (b->dfd >= 0) real_close(b->dfd);
 	}
@@ -194,17 +204,41 @@ static void fmt_to_driver(struct v4l2_format *f)
 
 /* ---- untiling ---- */
 /* Tile rows [ty0, ty1) of a plane in 16-byte-wide tiles of th rows. */
-static void detile_rows(const uint8_t *src, uint8_t *dst, uint32_t w, uint32_t th, uint32_t ty0, uint32_t ty1)
+/* ds: destination row stride (w for packed output). */
+static void detile_rows(const uint8_t *src, uint8_t *dst, uint32_t w, uint32_t th, uint32_t ty0, uint32_t ty1, uint32_t ds)
 {
 	uint32_t tiles_x = w / 16;
 	size_t tile = 16 * th;
 	for (uint32_t ty = ty0; ty < ty1; ty++) {
 		const uint8_t *trow = src + (size_t)ty * tiles_x * tile;
-		uint8_t *drow = dst + (size_t)ty * th * w;
+		uint8_t *drow = dst + (size_t)ty * th * ds;
 		for (uint32_t tx = 0; tx < tiles_x; tx++) {
 			const uint8_t *t = trow + tx * tile;          /* read each tile sequentially */
 			uint8_t *d = drow + tx * 16;
-			for (uint32_t r = 0; r < th; r++) memcpy(d + (size_t)r * w, t + r * 16, 16);
+			for (uint32_t r = 0; r < th; r++) memcpy(d + (size_t)r * ds, t + r * 16, 16);
+		}
+	}
+}
+
+/* Interleaved chroma tile rows written as VU (NV21): Android's allocator has no NV12 buffers, only NV21. */
+static void detile_vu_rows(const uint8_t *src, uint8_t *dst, uint32_t w, uint32_t ty0, uint32_t ty1, uint32_t ds)
+{
+	uint32_t tiles_x = w / 16;
+	for (uint32_t ty = ty0; ty < ty1; ty++) {
+		const uint8_t *trow = src + (size_t)ty * tiles_x * 256;
+		for (uint32_t tx = 0; tx < tiles_x; tx++) {
+			const uint8_t *t = trow + tx * 256;
+			for (uint32_t r = 0; r < 16; r++) {
+				const uint8_t *sp = t + r * 16;
+				uint8_t *d = dst + (size_t)(ty * 16 + r) * ds + tx * 16;
+#ifdef __aarch64__
+				uint8x8x2_t v = vld2_u8(sp);
+				uint8x8x2_t sw = { { v.val[1], v.val[0] } };
+				vst2_u8(d, sw);
+#else
+				for (int i = 0; i < 8; i++) { d[2 * i] = sp[2 * i + 1]; d[2 * i + 1] = sp[2 * i]; }
+#endif
+			}
 		}
 	}
 }
@@ -234,17 +268,21 @@ static void detile_uv_split_rows(const uint8_t *src, uint8_t *du, uint8_t *dv, u
 
 /* One frame's untiling, split by tile rows across threads (luma tiles are 32 rows, chroma 16 rows of half
  * height, so both planes have h/32 tile rows). */
-struct untile_job { const uint8_t *src; uint8_t *dst; uint32_t w, h; int i420; uint32_t r0, r1; };
+/* Destination layout: luma rows `ds` bytes apart, chroma at `uvoff` (packed: ds = w, uvoff = w * h). */
+struct dlayout { uint32_t ds, uvoff; int nv21; };
+struct untile_job { const uint8_t *src; uint8_t *dst; uint32_t w, h; int i420; struct dlayout l; uint32_t r0, r1; };
 
 static void *untile_part(void *arg)
 {
 	const struct untile_job *j = arg;
 	size_t ys = (size_t)j->w * j->h;
-	detile_rows(j->src, j->dst, j->w, 32, j->r0, j->r1);
+	detile_rows(j->src, j->dst, j->w, 32, j->r0, j->r1, j->l.ds);
 	if (j->i420)
 		detile_uv_split_rows(j->src + ys, j->dst + ys, j->dst + ys + ys / 4, j->w, j->r0, j->r1);
+	else if (j->l.nv21)
+		detile_vu_rows(j->src + ys, j->dst + j->l.uvoff, j->w, j->r0, j->r1, j->l.ds);
 	else
-		detile_rows(j->src + ys, j->dst + ys, j->w, 16, j->r0, j->r1);
+		detile_rows(j->src + ys, j->dst + j->l.uvoff, j->w, 16, j->r0, j->r1, j->l.ds);
 	return NULL;
 }
 
@@ -255,7 +293,7 @@ static int untile_threads(void)
 	return n;
 }
 
-static void untile_frame(const uint8_t *src, uint8_t *dst, uint32_t w, uint32_t h, int i420)
+static void untile_frame(const uint8_t *src, uint8_t *dst, uint32_t w, uint32_t h, int i420, const struct dlayout *l)
 {
 	uint32_t rows = h / 32;
 	int n = untile_threads();
@@ -264,7 +302,7 @@ static void untile_frame(const uint8_t *src, uint8_t *dst, uint32_t w, uint32_t 
 	pthread_t th[8];
 	int started[8] = {0};
 	for (int i = 0; i < n; i++)
-		jobs[i] = (struct untile_job){ src, dst, w, h, i420, rows * i / n, rows * (i + 1) / n };
+		jobs[i] = (struct untile_job){ src, dst, w, h, i420, *l, rows * i / n, rows * (i + 1) / n };
 	for (int i = 1; i < n; i++) started[i] = !pthread_create(&th[i], NULL, untile_part, &jobs[i]);
 	untile_part(&jobs[0]);
 	for (int i = 1; i < n; i++) {
@@ -273,20 +311,66 @@ static void untile_frame(const uint8_t *src, uint8_t *dst, uint32_t w, uint32_t 
 	}
 }
 
+/* Layout of a GBM buffer from the archpad GBM library (Android allocator: may be padded, and NV21). */
+static void dmabuf_layout(int fd, uint32_t w, uint32_t h, struct dlayout *l)
+{
+	static int (*q)(int, uint32_t *, uint32_t *, int *);
+	static int looked;
+	if (!looked) { q = dlsym(RTLD_DEFAULT, "archpad_gbm_dmabuf_layout"); looked = 1; }
+	*l = (struct dlayout){ w, w * h, 0 };
+	if (q && q(fd, &l->ds, &l->uvoff, &l->nv21) != 0) *l = (struct dlayout){ w, w * h, 0 };
+}
+
 static void deliver_frame(struct ctx *c, struct sbuf *b, size_t used)
 {
+	int dma = c->q[1].client_dmabuf || b->exported;
+	if (dma) {   /* a dma-buf the client sees (its own, or one we exported): map it once, write the frame into it */
+		if (!b->cmap && b->cfd > 0) {
+			off_t len = lseek(b->cfd, 0, SEEK_END);
+			void *p = len > 0 ? real_mmap(NULL, len, PROT_READ | PROT_WRITE, MAP_SHARED, b->cfd, 0) : MAP_FAILED;
+			if (p == MAP_FAILED) { logf_("cannot map the client's dma-buf: %s", strerror(errno)); return; }
+			b->cmap = p; b->clen = len;
+		}
+		if (!b->cmap || b->clen < b->size / 2) return;
+		b->client = b->cmap;
+		struct dma_buf_sync cs = { DMA_BUF_SYNC_START | DMA_BUF_SYNC_WRITE };
+		real_ioctl(b->cfd, DMA_BUF_IOCTL_SYNC, &cs);
+	}
 	if (!b->client || b->client == b->map) return;
+	size_t cap = dma ? b->clen : b->size;
 	struct dma_buf_sync sy = { DMA_BUF_SYNC_START | DMA_BUF_SYNC_READ };
 	real_ioctl(b->dfd, DMA_BUF_IOCTL_SYNC, &sy);
 	uint32_t w = c->cap_w, h = c->cap_h;
 	size_t ys = (size_t)w * h;
-	if (c->cap_tiled && !(w % 16) && !(h % 32) && ys + ys / 2 <= b->size) {
-		untile_frame(b->map, b->client, w, h, client_yuv() == V4L2_PIX_FMT_YUV420);
+	struct dlayout l = { w, w * h, 0 };
+	if (dma) dmabuf_layout(b->cfd, w, h, &l);
+	if (c->cap_tiled && !(w % 16) && !(h % 32) && ys + ys / 2 <= b->size &&
+	    (size_t)l.uvoff + (size_t)l.ds * h / 2 <= cap && l.ds >= w) {
+		untile_frame(b->map, b->client, w, h, client_yuv() == V4L2_PIX_FMT_YUV420, &l);
 	} else {
-		memcpy(b->client, b->map, used && used <= b->size ? used : b->size);
+		size_t n = used && used <= b->size ? used : b->size;
+		memcpy(b->client, b->map, n < cap ? n : cap);
 	}
 	sy.flags = DMA_BUF_SYNC_END | DMA_BUF_SYNC_READ;
 	real_ioctl(b->dfd, DMA_BUF_IOCTL_SYNC, &sy);
+	if (dma) {
+		struct dma_buf_sync cs = { DMA_BUF_SYNC_END | DMA_BUF_SYNC_WRITE };
+		real_ioctl(b->cfd, DMA_BUF_IOCTL_SYNC, &cs);
+	}
+}
+
+/* DMABUF CAPTURE queue: remember which client dma-buf goes with buffer `i` (re-mapped only if it changed). */
+static void set_client_dmabuf(struct sbuf *b, int fd)
+{
+	struct stat st;
+	if (fd < 0 || fstat(fd, &st)) return;
+	if (b->cfd > 0 && b->cino == st.st_ino) { b->cnum = fd; return; }
+	if (b->cmap) real_munmap(b->cmap, b->clen);
+	if (b->cfd > 0) real_close(b->cfd);
+	b->cmap = NULL; b->clen = 0; b->client = NULL;
+	b->cfd = fcntl(fd, F_DUPFD_CLOEXEC, 1);
+	b->cnum = fd;
+	b->cino = st.st_ino;
 }
 
 /* ---- buffers ---- */
@@ -326,13 +410,16 @@ static int do_reqbufs(struct ctx *c, int fd, struct v4l2_requestbuffers *rb)
 {
 	int qi = qidx(rb->type);
 	struct squeue *q = &c->q[qi];
-	if (rb->memory != V4L2_MEMORY_MMAP || !mplane(rb->type)) { free_queue(q); return real_ioctl(fd, VIDIOC_REQBUFS, rb); }
+	/* MMAP queues, and DMABUF CAPTURE queues (the client's dma-bufs get untiled frames written into them). */
+	int cdma = qi == 1 && rb->memory == V4L2_MEMORY_DMABUF;
+	if ((rb->memory != V4L2_MEMORY_MMAP && !cdma) || !mplane(rb->type)) { free_queue(q); return real_ioctl(fd, VIDIOC_REQBUFS, rb); }
 	struct v4l2_requestbuffers r = *rb;
 	r.memory = V4L2_MEMORY_DMABUF;
 	if (r.count > MAXBUF) r.count = MAXBUF;
 	int ret = real_ioctl(fd, VIDIOC_REQBUFS, &r);
 	if (ret) return ret;
 	free_queue(q);
+	q->client_dmabuf = cdma;
 	rb->count = r.count;
 	rb->capabilities = r.capabilities | V4L2_BUF_CAP_SUPPORTS_MMAP;
 	if (!r.count) return 0;
@@ -355,7 +442,8 @@ static int do_reqbufs(struct ctx *c, int fd, struct v4l2_requestbuffers *rb)
 		struct v4l2_control ctl = { .id = V4L2_CID_MIN_BUFFERS_FOR_CAPTURE };
 		c->cap_min = real_ioctl(fd, VIDIOC_G_CTRL, &ctl) == 0 ? ctl.value : 0;
 	}
-	logf_("%s: %u dma-heap buffers of %zu bytes", qi ? "CAPTURE" : "OUTPUT", r.count, sz);
+	logf_("%s: %u dma-heap buffers of %zu bytes%s", qi ? "CAPTURE" : "OUTPUT", r.count, sz,
+	      cdma ? " (client dma-bufs)" : "");
 	return 0;
 }
 
@@ -363,6 +451,14 @@ static int do_reqbufs(struct ctx *c, int fd, struct v4l2_requestbuffers *rb)
 static void to_client(struct ctx *c, struct v4l2_buffer *b)
 {
 	struct squeue *q = &c->q[qidx(b->type)];
+	if (q->client_dmabuf) {
+		b->memory = V4L2_MEMORY_DMABUF;
+		if (b->index >= (unsigned)q->n || !b->m.planes || b->length < 1) return;
+		struct sbuf *s = &q->b[b->index];
+		b->m.planes[0].m.fd = s->cnum;
+		b->m.planes[0].length = s->clen ? s->clen : s->size;
+		return;
+	}
 	b->memory = V4L2_MEMORY_MMAP;
 	if (b->index >= (unsigned)q->n || !b->m.planes || b->length < 1) return;
 	b->m.planes[0].length = q->b[b->index].size;
@@ -373,7 +469,9 @@ static int to_driver(struct ctx *c, struct v4l2_buffer *b)
 {
 	struct squeue *q = &c->q[qidx(b->type)];
 	if (b->index >= (unsigned)q->n || !b->m.planes || b->length < 1) { errno = EINVAL; return -1; }
+	if (q->client_dmabuf) set_client_dmabuf(&q->b[b->index], b->m.planes[0].m.fd);
 	b->memory = V4L2_MEMORY_DMABUF;
+	for (uint32_t i = 1; i < b->length; i++) b->m.planes[i].m.fd = q->b[b->index].dfd;   /* driver: one plane */
 	b->m.planes[0].m.fd = q->b[b->index].dfd;
 	b->m.planes[0].length = q->b[b->index].size;
 	return 0;
@@ -457,7 +555,13 @@ static int cap_dqbuf(struct ctx *c, int fd, struct v4l2_buffer *ub)
 	sel.b.flags &= ~V4L2_BUF_FLAG_LAST;
 	if (c->last_seen && !c->npend) { sel.b.flags |= V4L2_BUF_FLAG_LAST; c->last_seen = 0; }
 	else if (had_last) { /* moved to a later buffer */ }
-	if (sel.p[0].bytesused && sel.b.index < (unsigned)q->n) deliver_frame(c, &q->b[sel.b.index], sel.p[0].bytesused);
+	if (sel.p[0].bytesused && sel.b.index < (unsigned)q->n) {
+		/* Not under the lock: syncing a dma-buf the GPU still reads waits for the GPU, and Mali's own threads call our
+		 * close()/munmap() wrappers (which take the lock) to finish that work. Holding it here deadlocked Chromium. */
+		pthread_mutex_unlock(&lock);
+		deliver_frame(c, &q->b[sel.b.index], sel.p[0].bytesused);
+		pthread_mutex_lock(&lock);
+	}
 	struct v4l2_plane *up = ub->m.planes;
 	uint32_t ulen = ub->length;
 	*ub = sel.b;
@@ -470,12 +574,60 @@ static int cap_dqbuf(struct ctx *c, int fd, struct v4l2_buffer *ub)
 	return 0;
 }
 
+/* VIDIOC_EXPBUF on an MMAP CAPTURE buffer (Chromium wraps decoded frames as dma-bufs): hand out a linear NV12 buffer
+ * from GBM (in Chromium that is the archpad GBM library, i.e. an Android buffer the GPU can sample) that every
+ * dequeue of this index fills. Without a usable GBM it fails as before. */
+static int export_capture(struct ctx *c, struct v4l2_exportbuffer *e)
+{
+	struct sbuf *b = &c->q[1].b[e->index];
+	if (!b->exported) {
+		static void *dev;
+		static void *(*create_dev)(int);
+		static void *(*bo_create)(void *, uint32_t, uint32_t, uint32_t, uint32_t);
+		static int (*bo_fd)(void *);
+		if (!create_dev) {
+			create_dev = dlsym(RTLD_DEFAULT, "gbm_create_device");
+			bo_create = dlsym(RTLD_DEFAULT, "gbm_bo_create");
+			bo_fd = dlsym(RTLD_DEFAULT, "gbm_bo_get_fd");
+		}
+		/* The allocator may need Mali's threads, which may be waiting for our lock (see cap_dqbuf). */
+		uint32_t w = c->cap_w, h = c->cap_h;
+		pthread_mutex_unlock(&lock);
+		if (!dev && create_dev && bo_create && bo_fd) dev = create_dev(-1);
+		void *bo = dev ? bo_create(dev, w, h, V4L2_PIX_FMT_NV12 /* = DRM_FORMAT_NV12 */, 0) : NULL;
+		int fd = bo ? bo_fd(bo) : -1;
+		pthread_mutex_lock(&lock);
+		if (fd < 0) { logf_("EXPBUF: no GBM NV12 buffer"); errno = ENOTTY; return -1; }
+		b->gbo = bo; b->cfd = fd; b->cnum = fd; b->exported = 1;
+		logf_("EXPBUF cap %u: GBM NV12 %ux%u fd %d", e->index, c->cap_w, c->cap_h, fd);
+	}
+	e->fd = fcntl(b->cfd, F_DUPFD_CLOEXEC, 0);
+	return e->fd < 0 ? -1 : 0;
+}
+
 static int handle(struct ctx *c, int fd, unsigned long req, void *arg)
 {
 	switch (req) {
 	case VIDIOC_ENUM_FMT: {
 		struct v4l2_fmtdesc *d = arg;
-		int r = real_ioctl(fd, req, arg);
+		int r;
+		static int no_hevc = -1;
+		if (no_hevc < 0) no_hevc = getenv("MTK_V4L2_SHIM_NO_HEVC") != NULL;
+		if (no_hevc && qidx(d->type) == 0) {
+			/* Hide HEVC (Chromium: its V4L2 path fails on this driver's HEVC, so sites should not be offered it). */
+			uint32_t want = d->index, ci = 0;
+			for (uint32_t di = 0;; di++) {
+				d->index = di;
+				if ((r = real_ioctl(fd, req, arg))) break;
+				if (d->pixelformat == FMT_H265) continue;
+				if (ci++ == want) break;
+			}
+			int e = errno;
+			d->index = want;
+			errno = e;
+		} else {
+			r = real_ioctl(fd, req, arg);
+		}
 		if (!r && d->pixelformat == FMT_M21S) {
 			d->flags &= ~V4L2_FMT_FLAG_COMPRESSED;
 			snprintf((char *)d->description, sizeof d->description, "Y/UV 4:2:0 (archpad untiled)");
@@ -521,7 +673,8 @@ static int handle(struct ctx *c, int fd, unsigned long req, void *arg)
 	case VIDIOC_PREPARE_BUF: {
 		struct v4l2_buffer *b = arg;
 		int qi = qidx(b->type);
-		if (qi < 0 || !c->q[qi].faked || b->memory != V4L2_MEMORY_MMAP) return real_ioctl(fd, req, arg);
+		if (qi < 0 || !c->q[qi].faked) return real_ioctl(fd, req, arg);
+		if (b->memory != (c->q[qi].client_dmabuf ? V4L2_MEMORY_DMABUF : V4L2_MEMORY_MMAP)) return real_ioctl(fd, req, arg);
 		struct squeue *q = &c->q[qi];
 		if (req == VIDIOC_DQBUF && qi == 1 && mplane(b->type)) return cap_dqbuf(c, fd, b);
 		if (req == VIDIOC_DQBUF) {
@@ -562,7 +715,8 @@ static int handle(struct ctx *c, int fd, unsigned long req, void *arg)
 			e->fd = fcntl(c->q[0].b[e->index].dfd, F_DUPFD_CLOEXEC, 0);
 			return e->fd < 0 ? -1 : 0;
 		}
-		if (qi == 1 && c->q[1].faked) { errno = ENOTTY; return -1; }   /* exported buffers would be tiled */
+		if (qi == 1 && c->q[1].faked && !c->q[1].client_dmabuf && e->index < (unsigned)c->q[1].n)
+			return export_capture(c, e);   /* a linear copy (Chromium); the hardware buffers are tiled */
 		return real_ioctl(fd, req, arg);
 	}
 	}
@@ -574,6 +728,9 @@ int ioctl(int fd, unsigned long req, ...)
 	va_list ap; va_start(ap, req); void *arg = va_arg(ap, void *); va_end(ap);
 	init();
 	if (_IOC_TYPE(req) != 'V') return real_ioctl(fd, req, arg);
+	/* Chromium passes the request as a signed int: _IOR/_IOWR numbers arrive sign-extended (0xffffffffc0405602). The
+	 * kernel only looks at the low 32 bits; do the same so the cases below match. */
+	req = (unsigned int)req;
 	pthread_mutex_lock(&lock);
 	struct ctx *c = get_ctx(fd, 1);
 	if (!c) { pthread_mutex_unlock(&lock); return real_ioctl(fd, req, arg); }

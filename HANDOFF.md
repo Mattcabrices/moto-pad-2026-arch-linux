@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-10 10:15 (Chromium video decoding blocked by software compositing; see "10:15 (11-10)").
+Last updated: 2026-11-10 11:15 (Chromium GPU compositing + hardware video decoding; see "11:15 (11-10)").
 
 ## Goal
 
@@ -279,7 +279,69 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     `http://localhost:80` (optionally SSH -> `ssh://localhost:22` behind a Cloudflare Access policy). (2) `codex login
     --device-auth` in a terminal on the tablet (or `codex login` with an API key). I can't enter either credential.
   - Caveats for real hosting: tablet must stay on the charger (charge limit not known), Wi-Fi only.
-- **10:15 (11-10) CHROMIUM VIDEO DECODING: BLOCKED BY SOFTWARE COMPOSITING (RESUME HERE).** Matt: "Chromium video decode".
+- **11:15 (11-10) CHROMIUM GPU COMPOSITING + HARDWARE VIDEO DECODING (RESUME HERE).** Matt: "Why does it have to stay
+  off? Go ahead and build it." (also: README thanks/license section for a Reddit post, done in `32a1873`).
+  - Result: `chromium-gpu` now runs Chromium with **GPU compositing** (chrome://gpu `gpu_compositing: enabled`) and
+    Chromium's own **V4L2 video decoder** on the MediaTek decoder for H.264 and VP9. 1080p, CPU as share of one core
+    (`tools/tab-crv.sh`, `tools/crv-cpu.sh`):
+    - H.264 1080p60: old setup (software compositing) 212 %, ~13 % frames dropped; GPU compositing + software decode
+      228 %, 2 drops; GPU compositing + hardware decode **153 %, 1 drop in ~1600**.
+    - VP9 1080p30: old 222 %; hardware **104 %** (renderer 18 %, GPU process 76 % - mostly the CPU untiling).
+    - H.264 1080p30: 112 % (was 153 %).
+    - HEVC fails in Chromium's V4L2 path (it picks its older V4L2VideoDecoder backend, "DecoderStatus::201" after two
+      packets); Chromium could not play HEVC before either (no HEVC in its FFmpeg). The launcher sets
+      `MTK_V4L2_SHIM_NO_HEVC=1` so the shim hides HEVC and sites aren't offered it.
+  - Pieces:
+    1. `tools/src/archpad-gbm.c` -> `/usr/local/lib/archpad-gbm/libgbm.so.1` (LD_PRELOAD by chromium-gpu, soname
+       libgbm.so.1 so it also satisfies Chromium's DT_NEEDED). GBM on AHardwareBuffers (libhybris android_dlopen of
+       libnativewindow); warm-up allocation in gbm_create_device (same EGL gotcha as wlroots-pad). Exports
+       `archpad_gbm_ahb_from_dmabuf_fd` (for libhybris) and `archpad_gbm_dmabuf_layout` (for the shim). Sends every
+       new buffer to the compositor (`AHardwareBuffer_sendHandleToUnixSocket`, `$XDG_RUNTIME_DIR/archpad-ahb.sock`,
+       first byte 'A'; frees as {dev, ino} on a 'F' connection). Chromium flag `--render-node-override=/dev/dri/card0`
+       (its path finder only takes real render nodes). Chromium is BIND_NOW: every gbm symbol it imports must exist.
+    2. `scripts/libhybris-dmabuf-import.pl` (in scripts/62): eglCreateImageKHR(EGL_LINUX_DMA_BUF_EXT) -> look up the
+       AHardwareBuffer through `archpad_gbm_ahb_from_dmabuf_fd` (dlsym RTLD_DEFAULT) -> EGL_NATIVE_BUFFER_ANDROID.
+       Advertises EGL_EXT_image_dma_buf_import only in processes that have that symbol (others unchanged).
+    3. wlroots-pad: `render/hybris.c` listens on archpad-ahb.sock, keeps received AHardwareBuffers by dma-buf inode,
+       and `wlr_hybris_create_image` uses them for client dma-bufs (drains the sockets on a miss, since the buffer is
+       sent before Chromium's browser process creates the wl_buffer). `wlr_egl_dup_drm_fd` returns a card0 fd under
+       hybris, which turns on linux-dmabuf (the old "Failed to get renderer DRM FD"). New harmless log line at
+       start: "Failed to pick primary buffer format for output" (desktop fine).
+    4. Shim (`tools/src/mtk-v4l2-shim.c`):
+       - **ioctl request normalized to 32 bits**: Chromium passes `int` requests, so _IOR/_IOWR numbers arrived
+         sign-extended and no case matched (Chromium saw raw 'H265'/'M21S' and found "No devices").
+       - VIDIOC_EXPBUF on MMAP CAPTURE buffers (Chromium's stateful decoder wraps its frames as dma-bufs): a GBM NV12
+         buffer per index, filled at every dequeue.
+       - DMABUF CAPTURE queues (client's own dma-bufs) supported too (not used by Chromium in the end).
+       - MediaTek's gralloc has **no NV12**: Y8Cb8Cr8_420 and every other 4:2:0 request come back NV21 (probe:
+         `tools/src/gbm-nv12-probe.c`). GBM still offers NV12; the GPU samples the AHardwareBuffer by its real format,
+         and the shim writes chroma as VU (`detile_vu_rows`, NEON) after asking archpad_gbm_dmabuf_layout. Colors
+         verified on the test pattern.
+       - **Deadlock fix**: frame copy (dma-buf sync waits for the GPU) and GBM allocation now run without the shim's
+         lock. Mali's own threads call our close()/munmap() wrappers to finish GPU work; holding the lock there hung
+         Chromium's GPU process ~1 run in 6 (watchdog kill, exit_code=512, no core dump). Found with gdb thread dumps.
+       - `MTK_V4L2_SHIM_NO_HEVC=1` hides HEVC from ENUM_FMT.
+       - mpv/Firefox paths unchanged (ffmpeg HEVC/VP9 still bit-exact; the H.264 frame-30 spot check gives PSNR 20 with
+         the old build too: frame selection by output index, not a decode error).
+    5. `config/chromium/chromium-gpu`: GPU compositing when the GBM lib and the compositor socket exist (else the old
+       --disable-gpu-compositing); hardware decoding adds the shim and
+       `--enable-features=AcceleratedVideoDecoder,AcceleratedVideoDecodeLinuxGL,PreferV4L2VideoAcceleration`
+       (both VA-API and V4L2 are compiled in; VA-API wins without PreferV4L2VideoAcceleration).
+       Off switches: `ARCHPAD_CR_GPU_COMPOSITING=0`, `ARCHPAD_CR_HWDEC=0`.
+  - Install: libhybris (scripts/62 + tools/tab-hybris-install.sh), wlroots-pad (scripts/66 + tools/tab-wlr-install.sh,
+    restarts the desktop), then `tools/push-crgpu.sh` and `tools/push-vdec.sh` (shim). Backup of the previous shim
+    on the tablet: /usr/local/lib/libmtk-v4l2-shim.so.c7f8c6f.
+  - **YouTube** (`tools/tab-cryt.sh`): YouTube sends Chromium **AV1** (software dav1d, ~1.2 cores). Chromium has no
+    switch to drop AV1, so `config/chromium/no-av1/` (tiny MV3 extension, MAIN-world content script on youtube.com,
+    installed to /usr/local/share/archpad/chromium-no-av1) reports av01 as unsupported in isTypeSupported/canPlayType/
+    mediaCapabilities. chromium-gpu loads it with `--load-extension` (+ `--disable-features=DisableLoadExtension
+    CommandLineSwitch`) while hardware decoding is on; `ARCHPAD_CR_AV1=1` keeps AV1. Result: Big Buck Bunny on
+    YouTube -> VP9, V4L2VideoDecoder, all Chromium 98 % (vs 124 % with AV1 at 480p).
+  - Stability after the deadlock fix: 2 GPU-process restarts in the first 10 runs (both in the first seconds, cause
+    not caught), then 0 in 16 runs in a row (`tools/tab-crv.sh` loop with a gdb dump on freeze). Chromium restarts the
+    GPU process by itself; a restart costs a few seconds of video.
+  - Not tried: long sessions, many tabs, Matt on real sites.
+- **10:15 (11-10) CHROMIUM VIDEO DECODING: BLOCKED BY SOFTWARE COMPOSITING.** Matt: "Chromium video decode".
   - Result: not possible as `chromium-gpu` is set up now. Nothing installed or changed on the tablet except a
     `/dev/video-dec0 -> video1` symlink (harmless, gone after reboot). Chromium still decodes in software.
   - Why the Firefox trick doesn't carry over: Chromium 156 (Arch Linux ARM) has FFmpeg **statically linked** (no

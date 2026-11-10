@@ -20,6 +20,9 @@ EGLImageKHR wlr_hybris_create_image(EGLDisplay display, int dmabuf_fd);
 
 struct wlr_renderer *wlr_hybris_renderer_create(void);
 
+/* A DRM fd for linux-dmabuf feedback (card0; the tablet has no render node). */
+int wlr_hybris_dup_drm_fd(void);
+
 /* Offers libhybris' android_wlegl global on the display and accepts its wl_buffers (GPU-rendered clients). */
 struct wl_display;
 void wlr_hybris_bind_wl_display(struct wl_display *wl_display);

@@ -5,16 +5,22 @@
  *   Each buffer exposes its dma-buf (the "/dmabuf:" fd in the native handle) to wlroots, so the pad
  *   backend can scan it out with ADDFB2.
  * - Mali has no EGL_EXT_image_dma_buf_import, so render/egl.c asks wlr_hybris_create_image() to turn
- *   our own dma-bufs back into EGLImages via EGL_NATIVE_BUFFER_ANDROID. Client dma-bufs are not supported
- *   (clients use wl_shm).
+ *   our own dma-bufs back into EGLImages via EGL_NATIVE_BUFFER_ANDROID. Client dma-bufs (linux-dmabuf) work
+ *   only for buffers whose AHardwareBuffer the client also sent over archpad-ahb.sock (Chromium through
+ *   tools/src/archpad-gbm.c); others fail to import.
  * Gotcha: the FIRST AHardwareBuffer allocation (it loads the gralloc mapper) breaks EGL if EGL is already
  * initialized: later GL calls crash or silently do nothing (FBO status 0, nothing rendered). So the
  * renderer makes one throw-away allocation before eglInitialize. Later allocations are then fine
  * (tools/src/ahb-late.c FIX=warm: correct pixels on both the texture and renderbuffer paths).
  */
-#define _GNU_SOURCE /* memfd_create */
+#define _GNU_SOURCE /* memfd_create, accept4 */
 #include <dlfcn.h>
 #include <drm_fourcc.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <poll.h>
+#include <sys/socket.h>
+#include <sys/un.h>
 #include <sys/mman.h>
 #include <wayland-server-core.h>
 #include <wayland-server-protocol.h>
@@ -51,6 +57,7 @@ static int (*AHB_allocate)(const AHBDesc *, void **);
 static void (*AHB_describe)(const void *, AHBDesc *);
 static void (*AHB_release)(void *);
 static const NativeHandle *(*AHB_getNativeHandle)(const void *);
+static int (*AHB_recv)(int, void **);
 
 #define AHB_USAGE (2ULL /* CPU_READ_RARELY: keeps the buffer linear */ | (1ULL << 8) /* GPU_SAMPLED */ | \
                    (1ULL << 9) /* GPU_FRAMEBUFFER */ | (1ULL << 11) /* COMPOSER_OVERLAY */)
@@ -72,6 +79,7 @@ static bool load_ahb(void) {
 	AHB_describe = android_dlsym(nw, "AHardwareBuffer_describe");
 	AHB_release = android_dlsym(nw, "AHardwareBuffer_release");
 	AHB_getNativeHandle = android_dlsym(nw, "AHardwareBuffer_getNativeHandle");
+	AHB_recv = android_dlsym(nw, "AHardwareBuffer_recvHandleFromUnixSocket");
 	AHB_allocate = android_dlsym(nw, "AHardwareBuffer_allocate");
 	return AHB_allocate && AHB_describe && AHB_release && AHB_getNativeHandle;
 }
@@ -102,6 +110,189 @@ void *wlr_hybris_ahb_from_dmabuf(int fd) {
 
 static struct wl_resource *client_resource_from_fd(int fd);
 
+/* --- AHardwareBuffers sent by clients (Chromium's GPU process through tools/src/archpad-gbm.c) ---
+ * Their dma-bufs arrive as ordinary linux-dmabuf wl_buffers; the AHardwareBuffer behind each one comes over
+ * $XDG_RUNTIME_DIR/archpad-ahb.sock first (AHardwareBuffer_sendHandleToUnixSocket). A connection's first byte says
+ * what it carries: 'A' = buffers, 'F' = 16-byte {st_dev, st_ino} messages for buffers the client destroyed. */
+
+
+
+struct remote_ahb {
+	void *ahb;
+	dev_t dev;
+	ino_t ino;
+	int conn;
+	struct remote_ahb *next;
+};
+static struct remote_ahb *remote_ahbs;
+
+struct ahb_conn {
+	int fd;
+	char kind;
+	struct wl_event_source *source;
+	struct ahb_conn *next;
+};
+static struct ahb_conn *ahb_conns;
+
+static void remote_drop(bool (*match)(struct remote_ahb *, const void *), const void *arg) {
+	for (struct remote_ahb **p = &remote_ahbs; *p;) {
+		struct remote_ahb *r = *p;
+		if (match(r, arg)) {
+			*p = r->next;
+			AHB_release(r->ahb);
+			free(r);
+		} else {
+			p = &r->next;
+		}
+	}
+}
+
+static bool match_conn(struct remote_ahb *r, const void *arg) {
+	return r->conn == *(const int *)arg;
+}
+
+static bool match_ino(struct remote_ahb *r, const void *arg) {
+	const uint64_t *m = arg;
+	return r->dev == (dev_t)m[0] && r->ino == (ino_t)m[1];
+}
+
+static void ahb_conn_close(struct ahb_conn *c) {
+	if (c->kind == 'A') {
+		remote_drop(match_conn, &c->fd);
+	}
+	wl_event_source_remove(c->source);
+	close(c->fd);
+	for (struct ahb_conn **p = &ahb_conns; *p; p = &(*p)->next) {
+		if (*p == c) {
+			*p = c->next;
+			break;
+		}
+	}
+	free(c);
+}
+
+/* Reads everything waiting on one connection. Returns false when the connection is gone. */
+static bool ahb_conn_read(struct ahb_conn *c) {
+	for (;;) {
+		if (c->kind == 0) {
+			char k;
+			ssize_t n = recv(c->fd, &k, 1, MSG_DONTWAIT);
+			if (n == 1 && (k == 'A' || k == 'F')) {
+				c->kind = k;
+				continue;
+			}
+			return n < 0 && errno == EAGAIN;
+		}
+		if (c->kind == 'F') {
+			uint64_t m[2];
+			ssize_t n = recv(c->fd, m, sizeof(m), MSG_DONTWAIT);
+			if (n == sizeof(m)) {
+				remote_drop(match_ino, m);
+				continue;
+			}
+			return n < 0 && errno == EAGAIN;
+		}
+		struct pollfd pfd = { .fd = c->fd, .events = POLLIN };
+		if (poll(&pfd, 1, 0) <= 0) {
+			return true;
+		}
+		if (pfd.revents & (POLLHUP | POLLERR) && !(pfd.revents & POLLIN)) {
+			return false;
+		}
+		void *ahb = NULL;
+		if (AHB_recv(c->fd, &ahb) != 0 || !ahb) {
+			return false;
+		}
+		const NativeHandle *nh = AHB_getNativeHandle(ahb);
+		struct stat st = { 0 };
+		bool found = false;
+		for (int k = 0; nh && k < nh->numFds && !found; k++) {
+			char p[64], l[64] = "";
+			snprintf(p, sizeof(p), "/proc/self/fd/%d", nh->data[k]);
+			ssize_t n = readlink(p, l, sizeof(l) - 1);
+			found = n > 0 && strncmp(l, "/dmabuf:", 8) == 0 && fstat(nh->data[k], &st) == 0;
+		}
+		struct remote_ahb *r = found ? calloc(1, sizeof(*r)) : NULL;
+		if (!r) {
+			AHB_release(ahb);
+			continue;
+		}
+		*r = (struct remote_ahb){ .ahb = ahb, .dev = st.st_dev, .ino = st.st_ino, .conn = c->fd, .next = remote_ahbs };
+		remote_ahbs = r;
+		wlr_log(WLR_DEBUG, "hybris: client buffer ino %lu received", (unsigned long)st.st_ino);
+	}
+}
+
+static int ahb_conn_event(int fd, uint32_t mask, void *data) {
+	struct ahb_conn *c = data;
+	if (!ahb_conn_read(c) || (mask & (WL_EVENT_HANGUP | WL_EVENT_ERROR))) {
+		ahb_conn_close(c);
+	}
+	return 0;
+}
+
+static int ahb_listen_event(int fd, uint32_t mask, void *data) {
+	struct wl_event_loop *loop = data;
+	int s = accept4(fd, NULL, NULL, SOCK_CLOEXEC | SOCK_NONBLOCK);
+	if (s < 0) {
+		return 0;
+	}
+	struct ahb_conn *c = calloc(1, sizeof(*c));
+	if (!c) {
+		close(s);
+		return 0;
+	}
+	c->fd = s;
+	c->source = wl_event_loop_add_fd(loop, s, WL_EVENT_READABLE, ahb_conn_event, c);
+	c->next = ahb_conns;
+	ahb_conns = c;
+	return 0;
+}
+
+static void ahb_listen(struct wl_display *wl_display) {
+	const char *dir = getenv("XDG_RUNTIME_DIR");
+	if (!dir || !AHB_recv) {
+		return;
+	}
+	struct sockaddr_un a = { .sun_family = AF_UNIX };
+	snprintf(a.sun_path, sizeof(a.sun_path), "%s/archpad-ahb.sock", dir);
+	unlink(a.sun_path);
+	int s = socket(AF_UNIX, SOCK_SEQPACKET | SOCK_CLOEXEC | SOCK_NONBLOCK, 0);
+	if (s < 0 || bind(s, (struct sockaddr *)&a, sizeof(a)) != 0 || listen(s, 16) != 0) {
+		wlr_log_errno(WLR_ERROR, "hybris: client buffer socket %s", a.sun_path);
+		if (s >= 0) {
+			close(s);
+		}
+		return;
+	}
+	chmod(a.sun_path, 0600);
+	struct wl_event_loop *loop = wl_display_get_event_loop(wl_display);
+	wl_event_loop_add_fd(loop, s, WL_EVENT_READABLE, ahb_listen_event, loop);
+	wlr_log(WLR_INFO, "hybris: client buffers (linux-dmabuf) accepted through %s", a.sun_path);
+}
+
+static void *remote_ahb_from_fd(int fd) {
+	struct stat st;
+	if (fstat(fd, &st) != 0) {
+		return NULL;
+	}
+	for (int pass = 0; pass < 2; pass++) {
+		for (struct remote_ahb *r = remote_ahbs; r; r = r->next) {
+			if (r->ino == st.st_ino && r->dev == st.st_dev) {
+				return r->ahb;
+			}
+		}
+		/* The client sends the buffer before its wl_buffer exists, but we may not have read it yet. */
+		for (struct ahb_conn *c = ahb_conns, *next; c; c = next) {
+			next = c->next;
+			if (!ahb_conn_read(c)) {
+				ahb_conn_close(c);
+			}
+		}
+	}
+	return NULL;
+}
+
 EGLImageKHR wlr_hybris_create_image(EGLDisplay display, int dmabuf_fd) {
 	static PFNEGLGETNATIVECLIENTBUFFERANDROIDPROC get_cb;
 	static PFNEGLCREATEIMAGEKHRPROC create_image;
@@ -111,6 +302,9 @@ EGLImageKHR wlr_hybris_create_image(EGLDisplay display, int dmabuf_fd) {
 	}
 	const EGLint attribs[] = { EGL_IMAGE_PRESERVED_KHR, EGL_TRUE, EGL_NONE };
 	void *ahb = wlr_hybris_ahb_from_dmabuf(dmabuf_fd);
+	if (!ahb) {
+		ahb = remote_ahb_from_fd(dmabuf_fd);
+	}
 	if (ahb) {
 		return create_image(display, EGL_NO_CONTEXT, EGL_NATIVE_BUFFER_ANDROID, get_cb(ahb), attribs);
 	}
@@ -267,6 +461,12 @@ void wlr_hybris_bind_wl_display(struct wl_display *wl_display) {
 	}
 	wlr_buffer_register_resource_interface(&client_buffer_resource_interface);
 	wlr_log(WLR_INFO, "hybris: android_wlegl bound; GPU clients can render with the Mali GPU");
+	ahb_listen(wl_display);
+}
+
+/* linux-dmabuf needs a DRM device for its feedback; the panel's card0 stands in (it has no render node). */
+int wlr_hybris_dup_drm_fd(void) {
+	return open("/dev/dri/card0", O_RDWR | O_CLOEXEC);
 }
 
 /* --- allocator --- */
