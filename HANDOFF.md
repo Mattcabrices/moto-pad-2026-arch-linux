@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-10 11:15 (Chromium GPU compositing + hardware video decoding; see "11:15 (11-10)").
+Last updated: 2026-11-10 18:15 (boot stuck at the logo after a restart; see "18:15 (11-10)").
 
 ## Goal
 
@@ -279,7 +279,23 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     `http://localhost:80` (optionally SSH -> `ssh://localhost:22` behind a Cloudflare Access policy). (2) `codex login
     --device-auth` in a terminal on the tablet (or `codex login` with an API key). I can't enter either credential.
   - Caveats for real hosting: tablet must stay on the charger (charge limit not known), Wi-Fi only.
-- **11:15 (11-10) CHROMIUM GPU COMPOSITING + HARDWARE VIDEO DECODING (RESUME HERE).** Matt: "Why does it have to stay
+- **18:15 (11-10) STUCK ON "HELLO MOTO" AFTER A RESTART (RESUME HERE).** Matt powered off (clean systemd power-off
+  18:02:31), turned it on, pressed the power button once more. Sequence found:
+  1. 18:02:53 Arch boot died ~1 s into userspace (journal boot -1 has 7 lines; no error logged). Most likely the
+     extra power-button press reset it.
+  2. The bootloader then started the **stock Android kernel from slot B** (pstore console-ramoops: `5.15.185-android13-
+     8-...ab14024729`, dm-verity "Hash device is too small", "Attempted to kill init" panic at 2 s), even though misc
+     (`/dev/sdc1`, offset 2048, BCAB) says slot A priority 15 / successful, slot B priority 14 / tries 0. Why LK
+     tried B is not known.
+  3. Back on Arch, the boot-loop breaker saw the unfinished 18:02:53 boot and held at the telnet console. The screen
+     keeps the boot logo there, which looks like a hang. `reboot -f` from the console -> normal boot, desktop fine.
+  - Gadget moved to usbipd busid **3-1** (was 2-1): attach with `usbipd attach --wsl --busid 3-1 --auto-attach`.
+  - Ideas: show something on screen when the breaker holds (part of the boot-splash idea); consider making slot B
+    unbootable in misc (priority 0) so LK can't wander there (needs care: CRC32 over the struct).
+  - Boot logo: Matt picked an Arch wallpaper (blue mark + "archlinux" wordmark on dark blue with light streaks), saved
+    locally as `config/logo/local/arch-wallpaper.webp` (git-excluded: third-party art with the Arch trademark).
+    Use it with `tools/make-logo.py` when flashing the logo (Matt present, backup first).
+- **11:15 (11-10) CHROMIUM GPU COMPOSITING + HARDWARE VIDEO DECODING.** Matt: "Why does it have to stay
   off? Go ahead and build it." (also: README thanks/license section for a Reddit post, done in `32a1873`).
   - Result: `chromium-gpu` now runs Chromium with **GPU compositing** (chrome://gpu `gpu_compositing: enabled`) and
     Chromium's own **V4L2 video decoder** on the MediaTek decoder for H.264 and VP9. 1080p, CPU as share of one core
