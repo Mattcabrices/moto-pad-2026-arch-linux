@@ -3,11 +3,16 @@
 const P = new URLSearchParams(location.search), src = P.get('src') || 't1080.mp4', seek = +P.get('seek') || 0;
 if (seek) setInterval(() => { v.currentTime = Math.random() * 9; }, seek * 1000);
 v.src = 'file:///tmp/vdec/' + src;
+const say = s => window.dump ? dump(s + '\n') : console.log(s);
+for (const [c, ct] of [['h264', 'video/mp4; codecs="avc1.640028"'], ['hevc', 'video/mp4; codecs="hvc1.1.6.L120.90"'],
+                       ['vp9', 'video/webm; codecs="vp09.00.40.08"']])
+  navigator.mediaCapabilities.decodingInfo({ type: 'file', video: { contentType: ct, width: 1920, height: 1080,
+    bitrate: 8e6, framerate: 30 } }).then(r => say(`ffv caps ${c} supported=${r.supported} powerEfficient=${r.powerEfficient}`));
 let last = 0, lastDrop = 0;
 setInterval(() => {
   const q = v.getVideoPlaybackQuality();
   const s = `ffv ${src} t=${v.currentTime.toFixed(1)} frames=${q.totalVideoFrames} (+${q.totalVideoFrames-last}) dropped=${q.droppedVideoFrames} (+${q.droppedVideoFrames-lastDrop}) paused=${v.paused} err=${v.error ? v.error.code : 0}`;
   last = q.totalVideoFrames; lastDrop = q.droppedVideoFrames;
-  document.title = s; dump(s + '\n');
+  document.title = s; window.dump ? dump(s + '\n') : console.log(s);
 }, 2000);
 </script></body>

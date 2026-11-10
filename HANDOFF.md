@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-10 02:15 (Firefox hardware video decoding; see "02:15 (11-10)").
+Last updated: 2026-11-10 10:15 (Chromium video decoding blocked by software compositing; see "10:15 (11-10)").
 
 ## Goal
 
@@ -279,7 +279,36 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     `http://localhost:80` (optionally SSH -> `ssh://localhost:22` behind a Cloudflare Access policy). (2) `codex login
     --device-auth` in a terminal on the tablet (or `codex login` with an API key). I can't enter either credential.
   - Caveats for real hosting: tablet must stay on the charger (charge limit not known), Wi-Fi only.
-- **02:15 (11-10) FIREFOX HARDWARE VIDEO DECODING (RESUME HERE).** Matt: "Browser video decode".
+- **10:15 (11-10) CHROMIUM VIDEO DECODING: BLOCKED BY SOFTWARE COMPOSITING (RESUME HERE).** Matt: "Chromium video decode".
+  - Result: not possible as `chromium-gpu` is set up now. Nothing installed or changed on the tablet except a
+    `/dev/video-dec0 -> video1` symlink (harmless, gone after reboot). Chromium still decodes in software.
+  - Why the Firefox trick doesn't carry over: Chromium 156 (Arch Linux ARM) has FFmpeg **statically linked** (no
+    libavcodec in `ldd`; only dav1d/openh264), so its decoder calls can't be interposed. Software decoding also runs
+    in the seccomp-sandboxed renderer, which would refuse V4L2 ioctls.
+  - Chromium's own V4L2 decoder is compiled in (`V4L2VideoDecoder`, stateful backend) next to VA-API. Findings:
+    - Both built -> VA-API is chosen unless `--enable-features=PreferV4L2VideoAcceleration` (media/base/decoder.cc
+      `ActiveLinuxVideoDecoderType`). With it, the GPU process enumerates `/dev/video*` itself (no symlink needed) and
+      sees H264/VP9 through the shim. HEVC is skipped: the driver's ENUM_FMT says `H265`, Chromium wants `HEVC`
+      (the shim only renames it in S_FMT/TRY_FMT paths; renaming in ENUM_FMT too would fix that).
+    - **The blocker:** `RenderThreadImpl::GetGpuFactories()` returns null when GPU compositing is off ("VideoResourceUpdater
+      can't convert hardware resources to software resources"), so the renderer never even offers MojoVideoDecoder
+      (media log lists only Decrypting/Vpx/Dav1d -> "Selected FFmpegVideoDecoder"). `chromium-gpu` must use
+      `--disable-gpu-compositing` because Chromium on Wayland presents GPU-composited frames only as dma-bufs.
+  - What it would take (all of it is also what Chromium needs for GPU compositing, i.e. no per-frame readback):
+    1. A small libgbm for Chromium's GPU process that allocates through AHardwareBuffer/gralloc and exports dma-bufs.
+    2. A render-node path for Chromium (it gets it from the compositor's linux-dmabuf feedback / wl_drm).
+    3. libhybris EGL: advertise `EGL_EXT_image_dma_buf_import` and map a dma-buf back to its AHardwareBuffer (by inode,
+       as wlroots-pad's hybris renderer already does) -> EGLImage. The Mali EGL has no dma-buf import of its own.
+    4. wlroots-pad: linux-dmabuf protocol with that same import.
+    5. Shim: DMABUF capture buffers (Chromium hands the decoder NV12 pixmaps), detiling straight into them.
+    Each step can fail on something unknown (ANGLE's NV12 external-image checks, Chromium's GBM modifier probing).
+  - Test tools (new): `tools/tab-crv.sh` + `tools/crv-list.tmpl` (Chromium plays /tmp/vdec clip in `tools/ffv.html`,
+    now Chromium-aware via console.log), `tools/crv-cpu.sh` (CPU of all Chromium / GPU process / renderers),
+    `tools/cdp.py` (stdlib DevTools client: `gpu` = feature status + HW decode profiles, `media N` = which decoder
+    each player picked, media log). `ffv.html` also prints mediaCapabilities (powerEfficient = HW decoder offered).
+  - Baseline, 1080p30 H.264 in Chromium, software: plays at 30 fps, ~5-10 drops per loop start, all Chromium ~153 %
+    of a core (renderer 95 %, GPU process 48 %).
+- **02:15 (11-10) FIREFOX HARDWARE VIDEO DECODING.** Matt: "Browser video decode".
   - Result: Firefox (menu entry / `firefox-gpu`) decodes H.264 and HEVC up to 40 fps on the MediaTek decoder, with
     Firefox's RDD sandbox on and no prefs. 1080p30 H.264 (`tools/gpu-apps-68.txt`, the installed launcher): plays,
     loops, seeks; dropped frames same as software (~25 in the first 10 s, then ~0); RDD process 12-16 % of a core vs

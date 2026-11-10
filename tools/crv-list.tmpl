@@ -1,0 +1,3 @@
+4 pkill -u matt -f /usr/lib/chromium/chromium; sleep 1; rm -rf /tmp/cr-vdec; mkdir -p /tmp/cr-vdec; echo ok
+36 (sleep 6; python3 /tmp/cdp.py gpu; python3 /tmp/cdp.py media 24) > /tmp/crv.cdp 2>&1 & LD_PRELOAD=@PRELOAD@ MTK_V4L2_SHIM_DEBUG=@DEBUG@ chromium-gpu --user-data-dir=/tmp/cr-vdec --no-first-run --no-default-browser-check --autoplay-policy=no-user-gesture-required --remote-debugging-port=9222 --enable-logging=stderr --v=0 --vmodule=@VMODULE@ @FLAGS@ "file:///tmp/ffv.html?src=@CLIP@" > /tmp/crv.out 2>&1
+3 pkill -u matt -f /usr/lib/chromium/chromium; true
