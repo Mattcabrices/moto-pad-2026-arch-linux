@@ -315,6 +315,9 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     Firefox/mpv keeps the screen on) started from `/etc/xdg/labwc/autostart`; IDLE=300 s in /etc/archpad/screen.conf.
   - logind drop-in `50-archpad-powerkey.conf`: HandlePowerKey=ignore (until the service starts), long press poweroff.
   - Install: `tools/push-screen.sh`. Tested: off/on from the CLI (brightness 0 -> 102 restored).
+  - Bug found and fixed (ed49c12): grabbing the touchscreen while a finger was down left labwc with a stuck touch (blue
+    selection box, no taps). Now waits for BTN_TOUCH up first. Recovery if it ever happens: restart the desktop (udev
+    remove/add of the touch device did NOT clear it); Matt confirmed touch works after the restart.
 - **18:15 (11-10) STUCK ON "HELLO MOTO" AFTER A RESTART.** Matt powered off (clean systemd power-off
   18:02:31), turned it on, pressed the power button once more. Sequence found:
   1. 18:02:53 Arch boot died ~1 s into userspace (journal boot -1 has 7 lines; no error logged). Most likely the
