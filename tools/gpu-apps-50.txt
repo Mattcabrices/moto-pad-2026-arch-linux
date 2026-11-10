@@ -1,0 +1,2 @@
+14 /usr/local/bin/mpv --fs --log-file=/tmp/mpv-a.log /tmp/vdec/t1080b.mp4 > /dev/null 2>&1
+14 /usr/local/bin/mpv --fs --log-file=/tmp/mpv-b.log /tmp/vdec/t1080p60.mp4 > /dev/null 2>&1

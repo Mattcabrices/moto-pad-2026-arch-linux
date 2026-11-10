@@ -260,7 +260,37 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
-- **20:25 (11-09) CHROMIUM ON THE GPU (RESUME HERE).** Matt: "Yes, try Chromium".
+- **22:45 (11-09) HARDWARE VIDEO DECODING (RESUME HERE).** Matt: "do videos have gpu accel as well?" -> "Yes, try it".
+  - Hardware: `/dev/video1` = `mtk-vcodec-dec` (stock vendor module mtk_vcodec_dec_v1 + vcp; the VCP co-processor
+    firmware is already running, loaded by the bootloader). Output formats H264, H265, VP90, MPG4, H263, HEIF up to
+    2560x1440; capture only `M21S` (8-bit, luma 16x32 tiles, interleaved chroma 16x16 tiles, planes back to back).
+    No Android services needed. Driver source (close to the loaded build): Nest's kernel_device_modules-5.15
+    (sparse clone in WSL `/build/src/kdm`, `drivers/media/platform/mtk-vcodec/`).
+  - Driver quirks found: (1) MMAP bitstream buffers have no kernel mapping -> worker spams "src_addr is NULL" and never
+    decodes; DMABUF (dma-heap `system`) works. (2) Frames are dequeued out of display order (each keeps its own
+    timestamp). (3) HEVC fourcc is 'H265'. (4) Negative timestamps come back wrapped mod 2^32 us. Drain via
+    DECODER_CMD STOP works.
+  - `tools/src/vdec-test.c`: raw V4L2 test (Annex-B H.264 by access unit, dma-heap input). 1080p 115 fps, 720p 220 fps.
+    `tools/src/mm21-to-nv12.c` untiles a dump; frame 30 bit-exact vs software.
+  - `tools/src/mtk-v4l2-shim.c` -> `/usr/local/lib/libmtk-v4l2-shim.so` (LD_PRELOAD, only touches the mtk-vcodec-dec fd):
+    client MMAP queues become DMABUF queues on cached dma-heap buffers (fake mmap offsets); capture reported as NV12
+    and untiled into a private copy on DQBUF; H265<->HEVC; frames held and released in timestamp order (depth 6,
+    `MTK_V4L2_SHIM_REORDER`; wrap-safe compare) with poll() reporting held frames; `MTK_V4L2_SHIM_DEBUG=1` logs.
+  - Verified with FFmpeg h264/hevc/vp9_v4l2m2m on 1080p test clips: every frame identical to software decoding
+    (`tools/tab-vdec-h264chk.sh`). Decode speed through the shim: H.264 ~66-82 fps, HEVC ~86-90, VP9 ~40 (VP9 is the
+    slow one, firmware or untile cost, not investigated).
+  - mpv: `/usr/local/bin/mpv` wrapper (`config/video/mpv`) = shim + `--hwdec=v4l2m2m-copy` + `--video-sync=display-resample`
+    + hybris-run; menu entry points at it. udev rule `config/video/70-archpad-dma-heap.rules` (dma_heap/system ->
+    group video 0660). Install: `tools/push-vdec.sh` (WSL) -> `tools/tab-vdec-install.sh`. gcc is now on the tablet.
+  - mpv results (GPU desktop, fullscreen, `tools/gpu-apps-52..55.txt`): hwdec CPU ~0.5 core vs ~1.1 core software at
+    1080p60. The render/present path manages only ~37 fps at 1080p fullscreen (same with software decode, both gpu and
+    gpu-next VOs), so with mpv's default sync 30 fps video dropped half its frames; display-resample: 0 drops at 30 fps,
+    A/V in sync at 60 fps (shows ~35 fps). Screenshot `shots/mpv-hwdec.png`.
+  - Not done / next: (a) faster presentation for video (NV12 upload + scale via hybris GLES is the suspect; zero-copy
+    would need dma-buf import of the decoder buffers, which are tiled); (b) browsers (Firefox can use FFmpeg V4L2 decoding
+    only on some builds; Chromium needs its own V4L2 path); (c) 10-bit (MT21S10* formats, not mapped); (d) VP9 speed.
+    Not tested by Matt with a real video yet.
+- **20:25 (11-09) CHROMIUM ON THE GPU.** Matt: "Yes, try Chromium".
   - Three libhybris changes (all in scripts/62, idempotent perl patches on egl.c):
     1. `libhybris-surfaceless.pl`: client extensions add EGL_MESA_platform_surfaceless, EGL_KHR_platform_gbm,
        EGL_MESA_platform_gbm; platforms 0x31DD (surfaceless) and 0x31D7 (GBM) map to the "null" ws (plain Android),

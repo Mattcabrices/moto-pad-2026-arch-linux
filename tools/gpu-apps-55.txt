@@ -1,0 +1,2 @@
+15 /usr/local/bin/mpv --video-sync=display-resample --term-status-msg='${hwdec-current} vo-drop=${frame-drop-count} vfps=${estimated-vf-fps} avsync=${avsync} delayed=${vo-delayed-frame-count}' --length=10 --fs /tmp/vdec/t1080p60.mp4 > /tmp/mpvst-1.txt 2>&1
+15 /usr/local/bin/mpv --video-sync=display-resample --term-status-msg='${hwdec-current} vo-drop=${frame-drop-count} vfps=${estimated-vf-fps} avsync=${avsync} delayed=${vo-delayed-frame-count}' --length=10 --fs /tmp/vdec/t1080b.mp4 > /tmp/mpvst-2.txt 2>&1

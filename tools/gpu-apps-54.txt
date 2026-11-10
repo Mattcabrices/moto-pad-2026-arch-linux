@@ -1,0 +1,2 @@
+15 /usr/local/bin/mpv --framedrop=no --term-status-msg='${hwdec-current} vo-drop=${frame-drop-count} vfps=${estimated-vf-fps} avsync=${avsync}' --length=10 --fs /tmp/vdec/t1080p60.mp4 > /tmp/mpvst-1.txt 2>&1 & sleep 11; ps -o time= -C mpv > /tmp/mpvcpu-1.txt; wait
+15 /usr/local/bin/mpv --framedrop=no --hwdec=no --term-status-msg='${hwdec-current} vo-drop=${frame-drop-count} vfps=${estimated-vf-fps} avsync=${avsync}' --length=10 --fs /tmp/vdec/t1080p60.mp4 > /tmp/mpvst-2.txt 2>&1 & sleep 11; ps -o time= -C mpv > /tmp/mpvcpu-2.txt; wait

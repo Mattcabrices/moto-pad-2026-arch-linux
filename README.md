@@ -18,10 +18,11 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
 | Desktop | XFCE. Default: **GPU-composited Wayland session** (labwc on the Mali GPU through libhybris). Fallback: Xorg |
 | GPU | Compositing on the GPU with zero-copy scanout. Apps render on the Mali-G57 (OpenGL ES 3.2): glmark2, GTK4 apps, mpv, and **Firefox with hardware WebRender, WebGL 1 and WebGL 2** (menu entry uses `firefox-gpu`). **Chromium**: rasterization, canvas, WebGL 1/2 and WebGPU on the GPU through ANGLE (menu entry uses `chromium-gpu`); its compositing stays in software |
 | Wi-Fi, Bluetooth | Working, through MediaTek's Android helpers run in a small chroot with a property shim |
+| Video | **Hardware video decoding** on MediaTek's decoder: H.264, HEVC, VP9 (also MPEG-4, H.263) up to 2560x1440, 8-bit; bit-exact with software decoding. `mpv` (and its menu entry) uses it automatically; about half the CPU of software decoding at 1080p60 |
 | Audio | Speakers, the main microphone, and headphone jack switching (headphones and headset mic) |
 | USB | Network gadget (SSH over USB) |
 | Extras | On-screen keyboard (squeekboard) in the GPU desktop, Xwayland for X11 apps, Claude Code. Optional Arch boot logo (`config/logo/`, not flashed yet) |
-| Not working | Camera, modem, headphone jack |
+| Not working | Camera, modem. Hardware decoding in browsers |
 
 ## How it works (short version)
 
@@ -47,6 +48,10 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
   platforms and maps them to its plain Android path, and `eglGetProcAddress` returns libhybris' own EGL wrappers.
   With no DRM render node Chromium can't hand frames to the compositor as dma-bufs, so `chromium-gpu` turns GPU
   compositing off: pages and WebGL still render on the Mali GPU and are read back once per frame.
+- **Video decoding:** the vendor V4L2 decoder (`mtk-vcodec-dec`, with the VCP co-processor's firmware doing the work)
+  decodes fine, but only takes dma-buf bitstream buffers, outputs MediaTek's tiled `M21S` format, calls HEVC `H265` and
+  hands back frames out of display order. `libmtk-v4l2-shim.so` (`tools/src/mtk-v4l2-shim.c`, LD_PRELOAD) hides all four,
+  so FFmpeg's standard `*_v4l2m2m` decoders work unchanged: `mpv --hwdec=v4l2m2m-copy`. Install: `tools/push-vdec.sh`.
 - No vendor binaries or stock images are included in this repository. The scripts extract what they need from
   your own device's firmware.
 

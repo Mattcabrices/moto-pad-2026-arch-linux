@@ -1,0 +1,14 @@
+#!/bin/bash
+# Moto Pad (archpad): mpv with hardware video decoding (MediaTek decoder via libmtk-v4l2-shim) and, inside the GPU
+# desktop, GPU rendering (hybris-run). Installed as /usr/local/bin/mpv, ahead of /usr/bin/mpv in PATH.
+# H.264, HEVC, VP9, MPEG-4 and H.263 up to 2560x1440 (8-bit) decode in hardware; anything else (AV1, 10-bit, larger)
+# falls back to software automatically. Plain software decoding: mpv --hwdec=no ...
+SHIM=/usr/local/lib/libmtk-v4l2-shim.so
+HW=()
+if [ -e "$SHIM" ] && [ -w /dev/dma_heap/system ]; then
+  export LD_PRELOAD=$SHIM${LD_PRELOAD:+:$LD_PRELOAD}
+  HW=(--hwdec=v4l2m2m-copy)
+fi
+# display-resample: the GPU desktop shows 1080p at roughly 37 fps; with mpv's default sync it drops about half the
+# frames even of 30 fps video, with this it drops none (30 fps) or keeps audio in sync (60 fps).
+exec /usr/local/bin/hybris-run /usr/bin/mpv "${HW[@]}" --video-sync=display-resample "$@"

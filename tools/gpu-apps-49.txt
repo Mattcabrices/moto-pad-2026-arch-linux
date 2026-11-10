@@ -1,0 +1,3 @@
+16 /usr/local/bin/mpv --fs --term-status-msg='hwdec=${hwdec-current} fps=${estimated-vf-fps} drop=${frame-drop-count} decdrop=${decoder-frame-drop-count}' /tmp/vdec/t1080b.mp4 2>&1 | tr '\r' '\n' | grep -E "hwdec=|v4l2|Using|rror" | tail -4
+16 /usr/local/bin/mpv --fs --term-status-msg='hwdec=${hwdec-current} fps=${estimated-vf-fps} drop=${frame-drop-count} decdrop=${decoder-frame-drop-count}' /tmp/vdec/t1080p60.mp4 2>&1 | tr '\r' '\n' | grep -E "hwdec=|rror" | tail -3
+16 /usr/local/bin/mpv --hwdec=no --fs --term-status-msg='hwdec=${hwdec-current} fps=${estimated-vf-fps} drop=${frame-drop-count} decdrop=${decoder-frame-drop-count}' /tmp/vdec/t1080p60.mp4 2>&1 | tr '\r' '\n' | grep -E "hwdec=|rror" | tail -3
