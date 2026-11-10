@@ -8,5 +8,7 @@ c "ADDA_DL_CH2 DL1_CH2" on
 c "DAC In Mux" "Normal Path"
 c "LOL Mux" "Playback"
 c "Ext_Speaker_Amp Switch" on
+# Off first: if the amps were powered down, setting the profile they already show ("Music") would not wake them.
+for i in 0 1 2 3; do c "aw87xxx_profile_switch_$i" "Off"; done
 for i in 0 1 2 3; do c "aw87xxx_profile_switch_$i" "Music"; done
 echo "pad-audio: speaker path on"

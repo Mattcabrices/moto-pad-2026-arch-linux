@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-10 18:30 (screen off on the power button and after idle; see "18:30 (11-10)").
+Last updated: 2026-11-10 18:45 (speakers: one side drops out, not fixed; see "18:45 (11-10)").
 
 ## Goal
 
@@ -279,7 +279,26 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     `http://localhost:80` (optionally SSH -> `ssh://localhost:22` behind a Cloudflare Access policy). (2) `codex login
     --device-auth` in a terminal on the tablet (or `codex login` with an API key). I can't enter either credential.
   - Caveats for real hosting: tablet must stay on the charger (charge limit not known), Wi-Fi only.
-- **18:30 (11-10) SCREEN OFF: POWER BUTTON AND IDLE (RESUME HERE).** Matt: "Screen off on the power button or after
+- **18:45 (11-10) SPEAKERS: ONLY ONE SIDE STAYS ON (RESUME HERE, NOT FIXED).** Matt: "only 2 of the speakers are working".
+  - Layout (by ear, tablet in landscape): one pair on the **USB-port side** (left channel), one pair on the opposite
+    side (right channel). The opposite side is the one that drops out.
+  - Observed: right after `pad-audio-speaker` sets all four `aw87xxx_profile_switch_N` (I2C 6-0058..005b), both sides
+    play. Later only the USB side plays, while the four profiles still read "Music". dmesg showed all four Awinic
+    amps powered down (`reg=0x01, val = 0x00`) ~7 s after a stream ended (PipeWire suspend closes the PCM ->
+    DAPM "Ext_Speaker_Amp" off). Next playback brings the USB side back but not the Awinic side. So: the opposite-
+    side pair = the aw87xxx amps; the USB-side pair is powered by the codec/DAPM path itself.
+  - Tried: (1) `config/audio/90-pad-no-suspend.conf` (WirePlumber, session.suspend-timeout-seconds=0 for alsa
+    outputs; installed in /etc/wireplumber/wireplumber.conf.d/): after it, no power-down seen in a 12 s gap, but
+    minutes later the Awinic side was silent again (dmesg had rotated; cause not caught). (2) `pad-audio-speaker`
+    now sets the profiles Off then Music (re-run brings the side back). Both kept; neither is a fix by itself.
+  - Also found: stock `audio_device.xml` has `headphoneDualSpeaker_output` (HPL/HPR Mux = "Loud DualSPK Playback").
+    With it on as well, both sides play but the balance is off (USB side louder at Headset Volume 18 = -10 dB;
+    static at the out-of-range boot value 31). Turned back off; not needed for the four speakers.
+  - Leads for next time: watch dmesg (`dmesg -w | grep -i aw87`) during and after playback to see who powers the amps
+    down (aw87xxx monitor: `aw87xxx_monitor_switch_N`=1, `hal_monitor_time`=1000; pad-jackd jack events; DAPM). A
+    fix could be a small watcher that re-applies Off->Music when a stream starts, or disabling the aw87xxx monitor.
+  - Test sound: /tmp/chime-both.wav on the tablet (soft two-note chime; Matt's household prefers it to test tones).
+- **18:30 (11-10) SCREEN OFF: POWER BUTTON AND IDLE.** Matt: "Screen off on the power button or after
   idle is perfect" (real suspend not attempted: kernel offers only s2idle; display/Wi-Fi/Android-service resume untested).
   - Before this, a power-button press did a clean **systemd poweroff** (logind default HandlePowerKey=poweroff); that
     was the 18:02 "restart" in the entry below.
