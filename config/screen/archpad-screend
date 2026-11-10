@@ -1,0 +1,211 @@
+#!/usr/bin/env python3
+"""Moto Pad (archpad) screen on/off service (runs as root, archpad-screend.service).
+
+- Screen off = backlight 0 (/sys/class/leds/lcd-backlight); the display pipeline keeps running, so nothing touches the
+  fragile vendor display driver. The previous brightness comes back on screen on.
+- Power button (mtk-pmic-keys): short press toggles the screen; holding it 4 s powers off cleanly. The device is
+  grabbed so the desktop and logind never see the power key; its other key (volume down) is passed on through uinput.
+- While the screen is off, the touchscreen and the pen are grabbed, so taps go nowhere.
+- Cover (hall sensor): closing it turns the screen off, opening it turns it on (codes in HALL_CLOSE/HALL_OPEN).
+- Commands from the desktop (archpad-screen on|off|toggle, e.g. swayidle's idle timeout): /run/archpad-screen/ctl.
+"""
+import fcntl
+import os
+import select
+import struct
+import subprocess
+import sys
+import time
+
+LED = "/sys/class/leds/lcd-backlight"
+CTL_DIR = "/run/archpad-screen"
+CTL = CTL_DIR + "/ctl"
+STATE = CTL_DIR + "/state"
+EV_FMT = "llHHi"                 # struct input_event on 64-bit: timeval, type, code, value
+EV_SIZE = struct.calcsize(EV_FMT)
+EV_SYN, EV_KEY = 0, 1
+KEY_POWER, KEY_VOLUMEDOWN = 116, 114
+EVIOCGRAB = 0x40044590
+LONG_PRESS = 4.0
+# Hall sensor key codes (vendor-specific; see HANDOFF). Filled in from /etc/archpad/screen.conf if present.
+HALL_CLOSE, HALL_OPEN = set(), set()
+DEFAULT_BRIGHTNESS = 102
+
+
+def log(msg):
+    print("archpad-screend: " + msg, flush=True)
+
+
+def find_input(name):
+    for e in sorted(os.listdir("/sys/class/input")):
+        if e.startswith("event"):
+            try:
+                with open("/sys/class/input/%s/device/name" % e) as f:
+                    if f.read().strip() == name:
+                        return "/dev/input/" + e
+            except OSError:
+                pass
+    return None
+
+
+def read_conf():
+    global DEFAULT_BRIGHTNESS
+    try:
+        for line in open("/etc/archpad/screen.conf"):
+            k, _, v = line.partition("=")
+            k, v = k.strip(), v.strip()
+            if k == "HALL_CLOSE":
+                HALL_CLOSE.update(int(x) for x in v.split(",") if x.strip())
+            elif k == "HALL_OPEN":
+                HALL_OPEN.update(int(x) for x in v.split(",") if x.strip())
+            elif k == "BRIGHTNESS":
+                DEFAULT_BRIGHTNESS = int(v)
+    except OSError:
+        pass
+
+
+class UInput:
+    """A minimal uinput keyboard that re-emits the keys we take away from the desktop (volume down)."""
+
+    def __init__(self, keys):
+        self.fd = os.open("/dev/uinput", os.O_WRONLY | os.O_NONBLOCK)
+        fcntl.ioctl(self.fd, 0x40045564, EV_KEY)          # UI_SET_EVBIT
+        for k in keys:
+            fcntl.ioctl(self.fd, 0x40045565, k)           # UI_SET_KEYBIT
+        name = b"archpad-screend keys"
+        dev = struct.pack("80sHHHHi", name, 0x06, 0x1, 0x1, 1, 0) + b"\0" * (4 * 64 * 4)
+        os.write(self.fd, dev)                            # struct uinput_user_dev
+        fcntl.ioctl(self.fd, 0x5501)                      # UI_DEV_CREATE
+
+    def key(self, code, value):
+        os.write(self.fd, struct.pack(EV_FMT, 0, 0, EV_KEY, code, value))
+        os.write(self.fd, struct.pack(EV_FMT, 0, 0, EV_SYN, 0, 0))
+
+
+class Screen:
+    def __init__(self):
+        self.on = True
+        self.saved = None
+        self.grabbed = []
+
+    def brightness(self, v=None):
+        if v is None:
+            with open(LED + "/brightness") as f:
+                return int(f.read())
+        with open(LED + "/brightness", "w") as f:
+            f.write(str(v))
+
+    def set(self, on, why):
+        if on == self.on:
+            return
+        if on:
+            for fd in self.grabbed:
+                try:
+                    fcntl.ioctl(fd, EVIOCGRAB, 0)
+                    os.close(fd)
+                except OSError:
+                    pass
+            self.grabbed = []
+            self.brightness(self.saved or DEFAULT_BRIGHTNESS)
+        else:
+            cur = self.brightness()
+            if cur > 0:
+                self.saved = cur
+            for name in ("himax-touchscreen", "lenovo-stylus"):
+                path = find_input(name)
+                if path:
+                    try:
+                        fd = os.open(path, os.O_RDONLY | os.O_NONBLOCK)
+                        fcntl.ioctl(fd, EVIOCGRAB, 1)
+                        self.grabbed.append(fd)
+                    except OSError as e:
+                        log("could not hold %s: %s" % (name, e))
+            self.brightness(0)
+        self.on = on
+        try:
+            with open(STATE, "w") as f:
+                f.write("on\n" if on else "off\n")
+        except OSError:
+            pass
+        log("screen %s (%s)" % ("on" if on else "off", why))
+
+
+def main():
+    read_conf()
+    scr = Screen()
+    if scr.brightness() == 0:      # e.g. left off by a previous crash
+        scr.brightness(DEFAULT_BRIGHTNESS)
+    os.makedirs(CTL_DIR, exist_ok=True)
+    if not os.path.exists(CTL):
+        os.mkfifo(CTL)
+    os.chmod(CTL_DIR, 0o755)
+    os.chmod(CTL, 0o666)
+    with open(STATE, "w") as f:
+        f.write("on\n")
+    ctl = os.open(CTL, os.O_RDWR | os.O_NONBLOCK)
+
+    fds = {ctl: "ctl"}
+    pwr_path = find_input("mtk-pmic-keys")
+    pwr = None
+    ui = None
+    if pwr_path:
+        pwr = os.open(pwr_path, os.O_RDONLY | os.O_NONBLOCK)
+        fcntl.ioctl(pwr, EVIOCGRAB, 1)
+        fds[pwr] = "power"
+        try:
+            ui = UInput([KEY_VOLUMEDOWN])
+        except OSError as e:
+            log("no uinput, volume down will not reach the desktop: %s" % e)
+    hall_path = find_input("hall_irq")
+    if hall_path and (HALL_CLOSE or HALL_OPEN):
+        fds[os.open(hall_path, os.O_RDONLY | os.O_NONBLOCK)] = "hall"
+    log("ready (power: %s, cover: %s)" % (pwr_path, hall_path if (HALL_CLOSE or HALL_OPEN) else "not configured"))
+
+    pressed_at = None
+    while True:
+        timeout = None
+        if pressed_at is not None:
+            timeout = max(0.0, pressed_at + LONG_PRESS - time.monotonic())
+        r, _, _ = select.select(list(fds), [], [], timeout)
+        if pressed_at is not None and time.monotonic() - pressed_at >= LONG_PRESS:
+            log("power button held: powering off")
+            scr.set(True, "power off")
+            subprocess.run(["systemctl", "poweroff"])
+            pressed_at = None
+            continue
+        for fd in r:
+            kind = fds[fd]
+            if kind == "ctl":
+                for cmd in os.read(fd, 4096).decode(errors="replace").split():
+                    if cmd == "on":
+                        scr.set(True, "desktop")
+                    elif cmd == "off":
+                        scr.set(False, "desktop")
+                    elif cmd == "toggle":
+                        scr.set(not scr.on, "desktop")
+                continue
+            data = os.read(fd, EV_SIZE * 64)
+            for i in range(0, len(data) - EV_SIZE + 1, EV_SIZE):
+                _, _, typ, code, val = struct.unpack(EV_FMT, data[i:i + EV_SIZE])
+                if typ != EV_KEY:
+                    continue
+                if kind == "power":
+                    if code == KEY_POWER and val == 1:
+                        pressed_at = time.monotonic()
+                    elif code == KEY_POWER and val == 0 and pressed_at is not None:
+                        pressed_at = None
+                        scr.set(not scr.on, "power button")
+                    elif code != KEY_POWER and ui:
+                        ui.key(code, val)
+                elif kind == "hall" and val == 1:
+                    if code in HALL_CLOSE:
+                        scr.set(False, "cover closed")
+                    elif code in HALL_OPEN:
+                        scr.set(True, "cover opened")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(0)

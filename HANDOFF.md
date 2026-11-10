@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-10 18:15 (boot stuck at the logo after a restart; see "18:15 (11-10)").
+Last updated: 2026-11-10 18:30 (screen off on the power button and after idle; see "18:30 (11-10)").
 
 ## Goal
 
@@ -279,7 +279,24 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     `http://localhost:80` (optionally SSH -> `ssh://localhost:22` behind a Cloudflare Access policy). (2) `codex login
     --device-auth` in a terminal on the tablet (or `codex login` with an API key). I can't enter either credential.
   - Caveats for real hosting: tablet must stay on the charger (charge limit not known), Wi-Fi only.
-- **18:15 (11-10) STUCK ON "HELLO MOTO" AFTER A RESTART (RESUME HERE).** Matt powered off (clean systemd power-off
+- **18:30 (11-10) SCREEN OFF: POWER BUTTON AND IDLE (RESUME HERE).** Matt: "Screen off on the power button or after
+  idle is perfect" (real suspend not attempted: kernel offers only s2idle; display/Wi-Fi/Android-service resume untested).
+  - Before this, a power-button press did a clean **systemd poweroff** (logind default HandlePowerKey=poweroff); that
+    was the 18:02 "restart" in the entry below.
+  - `config/screen/archpad-screend` (root service `archpad-screend.service`, Python, no deps):
+    - Screen off = `/sys/class/leds/lcd-backlight/brightness` 0 (0-255, default 102); the display pipeline keeps running,
+      so no display-driver calls. Brightness is remembered.
+    - Grabs `mtk-pmic-keys` (event0: KEY_POWER + KEY_VOLUMEDOWN): short press toggles, 4 s hold = `systemctl
+      poweroff`. Volume down goes back to the desktop through a uinput device ("archpad-screend keys").
+    - While off, grabs `himax-touchscreen` and `lenovo-stylus` so taps do nothing.
+    - FIFO `/run/archpad-screen/ctl` (on/off/toggle), state in `/run/archpad-screen/state`; CLI `archpad-screen`.
+    - Hall sensor `hall_irq` (event5) sends vendor key codes 750-753; which is close/open is unknown (no events while
+      recording 40 s). Set HALL_CLOSE/HALL_OPEN in `/etc/archpad/screen.conf` to enable cover on/off.
+  - Idle: `archpad-screen idle` = swayidle (ext-idle-notify; honours idle inhibitors, so playing video in Chromium/
+    Firefox/mpv keeps the screen on) started from `/etc/xdg/labwc/autostart`; IDLE=300 s in /etc/archpad/screen.conf.
+  - logind drop-in `50-archpad-powerkey.conf`: HandlePowerKey=ignore (until the service starts), long press poweroff.
+  - Install: `tools/push-screen.sh`. Tested: off/on from the CLI (brightness 0 -> 102 restored).
+- **18:15 (11-10) STUCK ON "HELLO MOTO" AFTER A RESTART.** Matt powered off (clean systemd power-off
   18:02:31), turned it on, pressed the power button once more. Sequence found:
   1. 18:02:53 Arch boot died ~1 s into userspace (journal boot -1 has 7 lines; no error logged). Most likely the
      extra power-button press reset it.

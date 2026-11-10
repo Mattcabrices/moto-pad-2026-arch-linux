@@ -3,3 +3,5 @@ xfce4-panel &
 xfdesktop &
 # On-screen keyboard (Onboard is X11-only). Pops up on text fields via text-input-v3/input-method-v2.
 squeekboard &
+# Screen off after 5 minutes without input, unless a video is playing (config/screen; /etc/archpad/screen.conf).
+archpad-screen idle &

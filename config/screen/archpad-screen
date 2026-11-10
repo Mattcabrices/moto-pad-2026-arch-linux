@@ -1,0 +1,17 @@
+#!/bin/sh
+# Moto Pad (archpad): screen on/off from the desktop (talks to archpad-screend).
+#   archpad-screen on|off|toggle    backlight on/off (touch is ignored while off; power button turns it back on)
+#   archpad-screen status           prints on/off
+#   archpad-screen idle             runs swayidle: screen off after ARCHPAD_SCREEN_IDLE seconds (default 300) without
+#                                   input, except while an app blocks idle (video playing in a browser, mpv)
+CTL=/run/archpad-screen/ctl
+case "$1" in
+  on|off|toggle) [ -p "$CTL" ] && echo "$1" > "$CTL" ;;
+  status) cat /run/archpad-screen/state 2>/dev/null || echo unknown ;;
+  idle)
+    [ -r /etc/archpad/screen.conf ] && . /etc/archpad/screen.conf
+    T=${ARCHPAD_SCREEN_IDLE:-${IDLE:-300}}
+    [ "$T" -gt 0 ] 2>/dev/null || exit 0
+    exec swayidle -w timeout "$T" 'archpad-screen off' resume 'archpad-screen on' ;;
+  *) echo "usage: archpad-screen on|off|toggle|status|idle" >&2; exit 2 ;;
+esac

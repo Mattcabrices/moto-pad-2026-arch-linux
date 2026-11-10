@@ -1,0 +1,11 @@
+[Unit]
+Description=Moto Pad screen on/off (power button, idle, cover)
+After=systemd-udevd.service
+
+[Service]
+ExecStart=/usr/local/bin/archpad-screend
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
