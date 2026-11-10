@@ -2,8 +2,8 @@
 # Moto Pad (archpad): run a Wayland app with GPU rendering (Mali via libhybris) inside the GPU desktop.
 # Usage: hybris-run <command> [args...]   e.g. hybris-run mpv video.mkv
 # Works for apps that use EGL/GLES on Wayland: es2gears/glmark2, GTK4, mpv (--vo=gpu). Apps that only draw with
-# the CPU are unaffected. Known not to work: Firefox (its executable's TLS overlaps Android's TLS slots) and
-# Chromium (ANGLE needs EGL platforms libhybris lacks); run those normally.
+# the CPU are unaffected. Browsers have their own launchers that use this: firefox-gpu (needs a TLS-relocated
+# Firefox binary) and chromium-gpu (needs extra Chromium flags).
 # Outside the GPU desktop (Xorg session, or Android services not running) the app just runs normally.
 [ $# -gt 0 ] || { echo "usage: hybris-run <command> [args...]" >&2; exit 2; }
 if [ -z "$WAYLAND_DISPLAY" ] || ! pgrep -f 'graphics.allocator@4.0-service' >/dev/null; then

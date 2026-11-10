@@ -1,0 +1,3 @@
+3 pkill -u matt -x chromium; rm -rf /tmp/chr-auto; echo ok
+20 ARCHPAD_EGL_TRACE=1 strace -f -v -s 4000 -e trace=execve -o /tmp/chr-exec.txt chromium --user-data-dir=/tmp/chr-auto --no-first-run --ozone-platform=wayland --ignore-gpu-blocklist --no-sandbox --no-zygote --use-gl=angle --use-angle=gles-egl chrome://gpu > /tmp/chr.log 2>&1
+3 pkill -u matt -x chromium; grep 'type=gpu-process' /tmp/chr-exec.txt | head -1 | grep -o -E '"(LD_[A-Z_]*|ARCHPAD[A-Z_]*|HYBRIS[A-Z_]*|EGL_PLATFORM)=[^"]*"' 

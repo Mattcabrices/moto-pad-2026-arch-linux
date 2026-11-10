@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8"><title>WebGL anim</title>
+<style>body{background:#111;color:#eee;font:28px sans-serif;margin:30px}</style>
+<h1>WebGL 1 spinning triangle</h1><div id="s">starting</div><canvas id="c" width="500" height="400"></canvas>
+<script>
+const c=document.getElementById('c'),q=new URLSearchParams(location.search),g=c.getContext(q.get('v')||'webgl',{antialias:q.get('aa')!=='0'}),st=document.getElementById('s');document.title='WebGL '+location.search;
+c.addEventListener('webglcontextlost',e=>{st.textContent='CONTEXT LOST';});
+const sh=(t,src)=>{const x=g.createShader(t);g.shaderSource(x,src);g.compileShader(x);return x};
+const p=g.createProgram();
+g.attachShader(p,sh(g.VERTEX_SHADER,'attribute vec2 a;uniform float t;void main(){float c=cos(t),s=sin(t);gl_Position=vec4(c*a.x-s*a.y,s*a.x+c*a.y,0,1);}'));
+g.attachShader(p,sh(g.FRAGMENT_SHADER,'precision mediump float;void main(){gl_FragColor=vec4(0.09,0.58,0.82,1);}'));
+g.linkProgram(p);g.useProgram(p);const ut=g.getUniformLocation(p,'t');
+g.bindBuffer(g.ARRAY_BUFFER,g.createBuffer());g.bufferData(g.ARRAY_BUFFER,new Float32Array([0,.8,-.7,-.5,.7,-.5]),g.STATIC_DRAW);
+g.enableVertexAttribArray(0);g.vertexAttribPointer(0,2,g.FLOAT,false,0,0);
+let n=0,t0=performance.now();
+function f(t){g.clearColor(.15,.15,.15,1);g.clear(g.COLOR_BUFFER_BIT);g.uniform1f(ut,t/1000);g.drawArrays(g.TRIANGLES,0,3);
+ n++;if(t-t0>1000){st.textContent=n+' fps, '+location.search;n=0;t0=t;}requestAnimationFrame(f);}
+requestAnimationFrame(f);
+</script>

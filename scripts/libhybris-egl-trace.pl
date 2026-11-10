@@ -5,7 +5,20 @@
 use strict;
 my $f = shift or die "usage: $0 egl.c\n";
 open my $in, '<', $f or die "$f: $!\n"; local $/; my $s = <$in>; close $in;
-exit 0 if $s =~ /archpad_trace/;
+# Verbose part (ARCHPAD_EGL_TRACE=2): every proc lookup and query string; added separately so older trees get it too.
+sub verbose {
+  my $t = shift;
+  return $t if $t =~ /archpad_trace_v/;
+  $t =~ s/(__eglMustCastToProperFunctionPointerType eglGetProcAddress\(const char \*procname\)\n\{\n)/$1\tif (getenv("ARCHPAD_EGL_TRACE") && getenv("ARCHPAD_EGL_TRACE")[0] == '2') \/* archpad_trace_v *\/\n\t\tfprintf(stderr, "[egl-trace] eglGetProcAddress(%s)\\n", procname);\n/ or die "no eglGetProcAddress\n";
+  $t =~ s/(const char \* eglQueryString\(EGLDisplay dpy, EGLint name\)\n\{\n)/$1\tif (getenv("ARCHPAD_EGL_TRACE") && getenv("ARCHPAD_EGL_TRACE")[0] == '2')\n\t\tfprintf(stderr, "[egl-trace] eglQueryString(%p, %#x)\\n", dpy, name);\n/ or die "no eglQueryString\n";
+  return $t;
+}
+if ($s =~ /archpad_trace/) {
+  my $v = verbose($s);
+  if ($v ne $s) { open my $o, '>', $f or die; print $o $v; close $o; print "egl trace (verbose) applied\n"; }
+  exit 0;
+}
+$s = verbose($s);
 
 my $helpers = <<'C';
 /* archpad: EGL call trace (ARCHPAD_EGL_TRACE=1) */

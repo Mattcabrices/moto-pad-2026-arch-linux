@@ -1,0 +1,3 @@
+3 pkill -u matt -x chromium; pkill -u matt squeekboard; sleep 1; rm -rf /tmp/chr-auto; echo ok
+15 chromium --user-data-dir=/tmp/chr-auto --no-first-run --ozone-platform=wayland --ignore-gpu-blocklist --no-sandbox --no-zygote --use-gl=angle --use-angle=gles-egl --enable-logging=stderr --enable-gpu-service-logging --enable-gpu-client-logging 'file:///tmp/ff-anim.html?aa=0' > /tmp/chr.log 2>&1
+3 pkill -u matt -x chromium; (squeekboard >/dev/null 2>&1 &); grep -v 'cmd: ' /tmp/chr.log | grep -i -E 'lost|reset|GL_|error|fail' | grep -v -E 'UPower|Vulkan|vkCreate|drm render' | cut -d] -f2- | cut -c1-220 | sort | uniq -c | sort -rn | head -30

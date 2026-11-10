@@ -1,0 +1,11 @@
+#!/bin/bash
+# Moto Pad (archpad): Chromium on the Mali GPU inside the GPU desktop (labwc). ANGLE runs on the Android GL driver
+# through libhybris (surfaceless/GBM EGL display): canvas, rasterization, WebGL 1/2 and WebGPU on the GPU. Compositing
+# stays in software (no DRM render node for dma-buf presentation), so frames are read back once per frame.
+# The GPU process sandbox must be off (its seccomp policy blocks Android's binder calls); renderers stay sandboxed.
+# Anywhere else (Xorg session, Android services down) it starts the normal Chromium.
+if [ -n "$WAYLAND_DISPLAY" ] && [ -x /usr/local/bin/hybris-run ] && pgrep -f 'graphics.allocator@4.0-service' >/dev/null; then
+  exec /usr/local/bin/hybris-run /usr/bin/chromium --ozone-platform=wayland --ignore-gpu-blocklist --disable-gpu-sandbox \
+    --use-gl=angle --use-angle=gles-egl --disable-gpu-compositing "$@"
+fi
+exec /usr/bin/chromium "$@"

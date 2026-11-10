@@ -260,7 +260,29 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
-- **18:25 (11-09) WEBGL 1 IN FIREFOX WORKS; ARCH BOOT LOGO READY (RESUME HERE).**
+- **20:25 (11-09) CHROMIUM ON THE GPU (RESUME HERE).** Matt: "Yes, try Chromium".
+  - Three libhybris changes (all in scripts/62, idempotent perl patches on egl.c):
+    1. `libhybris-surfaceless.pl`: client extensions add EGL_MESA_platform_surfaceless, EGL_KHR_platform_gbm,
+       EGL_MESA_platform_gbm; platforms 0x31DD (surfaceless) and 0x31D7 (GBM) map to the "null" ws (plain Android),
+       or the already-loaded ws. Chromium's GPU process asks for GBM with a NULL device.
+    2. `libhybris-procaddr-self.pl`: eglGetProcAddress("egl*") returns libhybris' own exported function first. ANGLE
+       loads every entry point through eglGetProcAddress; before, it got Android's raw functions.
+    3. Trace now has a verbose level: `ARCHPAD_EGL_TRACE=2` also logs every eglGetProcAddress/eglQueryString.
+  - Result (ANGLE gles-egl on Mali): chrome://gpu shows Canvas, Rasterization, WebGL, WebGPU hardware accelerated;
+    GL_RENDERER "ANGLE (ARM, Mali-G57 MC2, OpenGL ES 3.2)". Compositing is software (no DRM render node -> no
+    dma-buf presentation). With GPU compositing left "on" in the renderer, every WebGL context was lost right after
+    its first frame (it hands frames over as GPU shared images the software compositor can't use);
+    `--disable-gpu-compositing` makes WebGL use readback: spinning triangle 90-91 fps, stable 40 s maximised.
+  - `config/chromium/chromium-gpu` -> /usr/local/bin (hybris-run + `--ozone-platform=wayland --ignore-gpu-blocklist
+    --disable-gpu-sandbox --use-gl=angle --use-angle=gles-egl --disable-gpu-compositing`), menu override
+    /usr/local/share/applications/chromium.desktop (`tools/tab-chromium-gpu-install.sh`). The GPU-process sandbox
+    has to be off (seccomp vs binder); renderers keep their sandbox. Chromium shows an "unsupported command-line
+    flag" bar for it. Vulkan errors in the log are harmless (no Vulkan on this path).
+  - Regression check after restarting the desktop on the new libhybris: labwc OK (4 scan-out buffers), glmark2 720,
+    Firefox WebGL 1/2 OK, Chromium from the menu OK. Shots: `shots/chromium-gpu-*.png`.
+  - Test pages: `tools/web/webgl-check.html`, `tools/web/webgl-anim.html` (?v=webgl2, ?aa=0). chrome:// URLs on the
+    command line are ignored; open them with `--remote-debugging-port=9222` + `curl -X PUT .../json/new?chrome://gpu`.
+- **18:25 (11-09) WEBGL 1 IN FIREFOX WORKS; ARCH BOOT LOGO READY.**
   - Cause: Firefox's WebGL 1 path passes context attribute `0x3483=0` to eglCreateContext; Mali rejects every such
     context with EGL_BAD_ATTRIBUTE (0x3004). WebGL 2 does not send it. Found with a new optional libhybris EGL trace
     (`scripts/libhybris-egl-trace.pl`, env `ARCHPAD_EGL_TRACE=1`, logs display/bind/config/context/pbuffer calls and
