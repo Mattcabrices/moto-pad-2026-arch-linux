@@ -1,0 +1,12 @@
+:root { color-scheme: light dark; font-family: system-ui, sans-serif; --bg: #f6f6f4; --fg: #1d1d1b; --muted: #6b6b66; --line: #ddd; }
+@media (prefers-color-scheme: dark) { :root { --bg: #161615; --fg: #ececea; --muted: #9a9a94; --line: #333; } }
+body { margin: 0; background: var(--bg); color: var(--fg); }
+main { max-width: 40rem; margin: 0 auto; padding: 2rem 1rem; }
+h1 { margin: 0 0 .25rem; font-size: 1.6rem; }
+.status { color: var(--muted); margin: 0 0 1.5rem; }
+form { display: flex; gap: .5rem; }
+input { flex: 1; padding: .6rem; font: inherit; border: 1px solid var(--line); border-radius: 6px; background: transparent; color: inherit; }
+button { padding: .6rem 1rem; font: inherit; border: 0; border-radius: 6px; background: #c2410c; color: #fff; cursor: pointer; }
+ul { list-style: none; padding: 0; margin: 1.5rem 0 0; }
+li { display: flex; justify-content: space-between; align-items: center; padding: .6rem 0; border-bottom: 1px solid var(--line); }
+.del { background: transparent; color: var(--muted); padding: 0 .5rem; font-size: 1.3rem; }

@@ -21,6 +21,7 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
 | Video | **Hardware video decoding** on MediaTek's decoder: H.264, HEVC, VP9 (also MPEG-4, H.263) up to 2560x1440, 8-bit; bit-exact with software decoding. `mpv` (and its menu entry) uses it automatically: 1080p60 plays full screen at the full frame rate with no dropped frames, using about half the CPU of software decoding |
 | Audio | Speakers, the main microphone, and headphone jack switching (headphones and headset mic) |
 | USB | Network gadget (SSH over USB) |
+| Web server | Caddy + Node (Express) + SQLite + React starter site on port 80; Cloudflare Tunnel (`cloudflared`) to publish it without port forwarding; Codex CLI. See [Web server](#web-server) |
 | Extras | On-screen keyboard (squeekboard) in the GPU desktop, Xwayland for X11 apps, Claude Code. Optional Arch boot logo (`config/logo/`, not flashed yet) |
 | Not working | Camera, modem. Hardware decoding in browsers |
 
@@ -54,6 +55,26 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
   so FFmpeg's standard `*_v4l2m2m` decoders work unchanged: `mpv --hwdec=v4l2m2m-copy`. Install: `tools/push-vdec.sh`.
 - No vendor binaries or stock images are included in this repository. The scripts extract what they need from
   your own device's firmware.
+
+## Web server
+
+`tools/push-web.sh` (from WSL) installs a small web hosting stack from `config/web/`:
+
+- **Caddy** on port 80 serves the built React site and passes `/api/*` to the Node app.
+- **Node/Express** app in `/srv/web/app` (`archpad-web-app.service`, user `web`): a starter to replace with your own site.
+- **SQLite** through Node's built-in `node:sqlite`, so there is no database server to run. PostgreSQL and MongoDB cannot run on this kernel: it has no System V shared memory.
+- **cloudflared** publishes the site through a Cloudflare Tunnel, with HTTPS and no port forwarding. To turn it on:
+  1. In the Cloudflare dashboard, create a tunnel (Zero Trust > Networks > Tunnels, connector "Cloudflared") and copy its token.
+  2. On the tablet:
+     ```bash
+     echo 'TUNNEL_TOKEN=<token>' | sudo tee /etc/cloudflared/tunnel.env
+     sudo chmod 600 /etc/cloudflared/tunnel.env
+     sudo systemctl start cloudflared
+     ```
+  3. In the tunnel's settings, add a public hostname that points to `http://localhost:80`.
+- **Codex CLI** (`codex`). Sign in once with `codex login --device-auth`.
+
+For real hosting, keep the tablet on the charger. It is Wi-Fi only.
 
 ## Layout
 

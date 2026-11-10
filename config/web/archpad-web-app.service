@@ -1,0 +1,15 @@
+# Moto Pad (archpad): the Node/Express API of the website in /srv/web/app (starter app: Express + SQLite + React).
+[Unit]
+Description=archpad web app (Node API)
+After=network.target
+
+[Service]
+User=web
+Group=web
+WorkingDirectory=/srv/web/app
+Environment=NODE_ENV=production PORT=3000 DB_FILE=data/site.db
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

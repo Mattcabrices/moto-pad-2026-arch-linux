@@ -1,0 +1,18 @@
+# Moto Pad (archpad): Cloudflare Tunnel. Publishes the tablet's web server (and SSH, if routed) through Cloudflare
+# with no port forwarding. Starts only once /etc/cloudflared/tunnel.env holds TUNNEL_TOKEN=<token from the
+# Cloudflare dashboard: Zero Trust > Networks > Tunnels > Create a tunnel > Cloudflared>. See README "Web server".
+[Unit]
+Description=Cloudflare Tunnel
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/etc/cloudflared/tunnel.env
+
+[Service]
+EnvironmentFile=/etc/cloudflared/tunnel.env
+ExecStart=/usr/bin/cloudflared --no-autoupdate tunnel run
+Restart=on-failure
+RestartSec=5
+DynamicUser=yes
+
+[Install]
+WantedBy=multi-user.target

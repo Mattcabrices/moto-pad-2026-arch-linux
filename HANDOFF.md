@@ -260,6 +260,25 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
+- **01:25 (11-10) WEB SERVER, CLOUDFLARE TUNNEL, CODEX (side session; browser video decode is a separate,
+  unfinished task in the other session).** Matt: "add cloudflare access, codex access, and the modern equivalent of a
+  LAMP server (maybe MEAN/MERN)", then "not committed to a specific entity, just something to host a good website on".
+  - Installed (`tools/push-web.sh` -> `tools/tab-web-install.sh`, files in `config/web/`): Caddy 2.11 on :80 (React
+    build from `/srv/web/app/client/dist`, `/api/*` -> Node on 127.0.0.1:3000), `archpad-web-app.service` (user `web`,
+    Express 5 starter in `/srv/web/app`, notes demo), SQLite via Node 26's built-in `node:sqlite`
+    (`/srv/web/app/data/site.db`), cloudflared 2026.10 + `cloudflared.service`, Codex CLI 0.167 (`npm -g @openai/codex`).
+  - No database server: **this kernel has no System V IPC** (`shmget` -> ENOSYS). PostgreSQL's initdb fails on it;
+    MongoDB 9.0.4 (official aarch64 tarball, Arch has no package) aborted at start before logging, likely the same.
+    Both removed again (the install script cleans them up). MariaDB is in the repo and may work (untested). Enabling
+    CONFIG_SYSVIPC needs a kernel rebuild + boot_a flash (Matt present).
+  - Verified: site + API from the PC over Wi-Fi (http://192.168.1.140), and a 20 s trycloudflare quick tunnel
+    (no account) served /api/health through Cloudflare's atl01 edge; tunnel stopped, test note deleted.
+  - Waiting on Matt: (1) Cloudflare dashboard > Zero Trust > Networks > Tunnels > create a tunnel (Cloudflared),
+    copy the token, then on the tablet `echo 'TUNNEL_TOKEN=<token>' | sudo tee /etc/cloudflared/tunnel.env;
+    sudo chmod 600 /etc/cloudflared/tunnel.env; sudo systemctl start cloudflared`, and add a public hostname ->
+    `http://localhost:80` (optionally SSH -> `ssh://localhost:22` behind a Cloudflare Access policy). (2) `codex login
+    --device-auth` in a terminal on the tablet (or `codex login` with an API key). I can't enter either credential.
+  - Caveats for real hosting: tablet must stay on the charger (charge limit not known), Wi-Fi only.
 - **23:45 (11-09) FASTER VIDEO DISPLAY (RESUME HERE).** Matt: "Faster video display".
   - Cause found: mpv's default scalers (gpu-next default profile) cost ~65 ms/frame full screen on the Mali -> 1080p ~15 fps
     untimed. Window size made no difference with `--profile=fast` (bilinear), so the rest is a fixed per-frame cost.

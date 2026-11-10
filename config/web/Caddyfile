@@ -1,0 +1,14 @@
+# Moto Pad (archpad): web server (installed as /etc/caddy/Caddyfile). Plain HTTP on port 80: on the LAN at
+# http://archpad.local or the tablet's IP, and to the internet through the Cloudflare tunnel, which adds HTTPS.
+# /api/* goes to the Node app (archpad-web-app.service, port 3000); everything else is the built React site.
+:80 {
+	encode zstd gzip
+	handle /api/* {
+		reverse_proxy 127.0.0.1:3000
+	}
+	handle {
+		root * /srv/web/app/client/dist
+		try_files {path} /index.html
+		file_server
+	}
+}
