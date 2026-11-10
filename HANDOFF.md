@@ -2,7 +2,7 @@
 
 Project by Matt Cabrices. Overview: README.md.
 
-Last updated: 2026-11-09 16:50 (Claude Code installed on the tablet with a menu entry; see "16:50").
+Last updated: 2026-11-10 02:15 (Firefox hardware video decoding; see "02:15 (11-10)").
 
 ## Goal
 
@@ -279,7 +279,46 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     `http://localhost:80` (optionally SSH -> `ssh://localhost:22` behind a Cloudflare Access policy). (2) `codex login
     --device-auth` in a terminal on the tablet (or `codex login` with an API key). I can't enter either credential.
   - Caveats for real hosting: tablet must stay on the charger (charge limit not known), Wi-Fi only.
-- **23:45 (11-09) FASTER VIDEO DISPLAY (RESUME HERE).** Matt: "Faster video display".
+- **02:15 (11-10) FIREFOX HARDWARE VIDEO DECODING (RESUME HERE).** Matt: "Browser video decode".
+  - Result: Firefox (menu entry / `firefox-gpu`) decodes H.264 and HEVC up to 40 fps on the MediaTek decoder, with
+    Firefox's RDD sandbox on and no prefs. 1080p30 H.264 (`tools/gpu-apps-68.txt`, the installed launcher): plays,
+    loops, seeks; dropped frames same as software (~25 in the first 10 s, then ~0); RDD process 12-16 % of a core vs
+    79 % in software. All of Firefox is still ~250 % (rendering/compositing), so the saving is ~0.6-1 core.
+  - How (`tools/src/ff-v4l2-redirect.c` -> `/usr/local/lib/libff-v4l2-redirect.so`, LD_PRELOAD by `firefox-gpu`
+    together with the shim and `MTK_V4L2_SHIM_FORMAT=i420`):
+    - Firefox's own V4L2 path needs a DRM render node + EGL dma-buf import (gfxPlatformGtk: HW decode requires
+      UseDMABuf; DMABufDevice "missing DRM render device"), so it is unusable here. Instead the redirect wraps
+      `dlsym` (Firefox dlsym's every libavcodec function; unwrapped calls tail-call glibc's dlsym so RTLD_NEXT
+      lookups by the shim and the sandbox still see the right caller) and hands out wrappers for avcodec_open2 /
+      send_packet / receive_frame / flush_buffers / free_context.
+    - When Firefox opens the system-FFmpeg h264/hevc software decoder, a private `*_v4l2m2m` context is opened from
+      the same parameters and does the work; Firefox's context stays open but idle. FFmpeg's V4L2 decoders have no
+      flush callback (after EOF they return EOF forever; after a seek old frames keep coming), so every flush
+      replaces the private context with a fresh one.
+    - Sets pkt_timebase 1/1000000 (Firefox sets none -> every frame pts was AV_NOPTS) and fills frame durations
+      (V4L2 gives 0 -> Firefox dropped ~50 % as late and never got past the end of a loop).
+    - First two packets are held to measure the frame rate: above 40 fps (`ARCHPAD_FF_HWDEC_MAXFPS`) the stream stays
+      in software. Reason: Firefox waits for each frame, and the hardware path then manages only ~50 fps, so 1080p60
+      dropped ~90 % (software 1080p60 drops ~20 % at ~4.4 cores).
+    - Firefox's copy path logs "Failed to copy image data" for every frame in the RDD, in software too (texture
+      allocation fails there); frames still display. Harmless, not ours.
+  - Shim changes: `MTK_V4L2_SHIM_FORMAT=i420` (planar YUV420; Firefox's software path only takes planar frames, NV12
+    failed its plane-layout check); NEON chroma split and untiling on 2 threads (`MTK_V4L2_SHIM_THREADS`), which also
+    sped up mpv's path (ffmpeg through shim: H.264 85, HEVC 75-93, VP9 53-56 fps 1080p, were 66-82/71-90/40-43);
+    timestamps unwrapped (driver keeps only 32 bits of microseconds: negative pts came back as +4295 s and Firefox
+    waited forever; now rebuilt from the last queued bitstream timestamp); up to 16 decoder instances per process
+    (was 4); decoder node lookup and dma-heap open moved to library load, because Firefox's RDD sandbox refuses
+    `/sys/class/video4linux` and `/dev/dma_heap` later (that was the "decoder opens but no frames" with sandbox on).
+    Every-frame check still identical for H.264/HEVC/VP9 in both NV12 and I420.
+  - Not covered: YouTube. It sends VP9/AV1, which Firefox decodes with its bundled FFmpeg (ffvpx, no V4L2 decoders);
+    `media.mediasource.vp9.enabled=false` did not change that (tested, `tools/tab-ffyt.sh`). An extension such as
+    h264ify (H.264, max 1080p) would make YouTube use the hardware path; not installed. VP9 through the redirect would
+    need ffvpx -> system-FFmpeg frame conversion (different libavcodec majors): possible later. Chromium: not done.
+  - Seeking in clips with sparse keyframes is slower than software (decode to the target at ~50 fps).
+  - Tests: `tools/tab-ffv.sh` (RUNS=clip:hwdec[:seek]; `tools/ffv.html` page prints Firefox's playback-quality stats
+    via dump(); `tools/ffv-cpu.sh` CPU of all Firefox processes / RDD), clips in /tmp/vdec (tmpfs, gone after reboot).
+  - Not yet tried by Matt on a real site.
+- **23:45 (11-09) FASTER VIDEO DISPLAY.** Matt: "Faster video display".
   - Cause found: mpv's default scalers (gpu-next default profile) cost ~65 ms/frame full screen on the Mali -> 1080p ~15 fps
     untimed. Window size made no difference with `--profile=fast` (bilinear), so the rest is a fixed per-frame cost.
     Clean benchmarks (300 frames 1080p60, `--untimed --framedrop=no`, `tools/gpu-apps-62.txt`): default 20.5 s,

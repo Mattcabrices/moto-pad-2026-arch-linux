@@ -1,0 +1,13 @@
+<!doctype html><body style="margin:0;background:#000"><video id=v autoplay muted loop style="width:100vw;height:100vh"></video>
+<script>
+const P = new URLSearchParams(location.search), src = P.get('src') || 't1080.mp4', seek = +P.get('seek') || 0;
+if (seek) setInterval(() => { v.currentTime = Math.random() * 9; }, seek * 1000);
+v.src = 'file:///tmp/vdec/' + src;
+let last = 0, lastDrop = 0;
+setInterval(() => {
+  const q = v.getVideoPlaybackQuality();
+  const s = `ffv ${src} t=${v.currentTime.toFixed(1)} frames=${q.totalVideoFrames} (+${q.totalVideoFrames-last}) dropped=${q.droppedVideoFrames} (+${q.droppedVideoFrames-lastDrop}) paused=${v.paused} err=${v.error ? v.error.code : 0}`;
+  last = q.totalVideoFrames; lastDrop = q.droppedVideoFrames;
+  document.title = s; dump(s + '\n');
+}, 2000);
+</script></body>

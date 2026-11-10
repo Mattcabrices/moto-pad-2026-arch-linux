@@ -1,19 +1,23 @@
 // Moto Pad (archpad): LD_PRELOAD shim that makes the MediaTek V4L2 video decoder (mtk-vcodec-dec, VCP firmware)
 // usable by standard stateful-decoder clients (FFmpeg *_v4l2m2m, so mpv --hwdec=v4l2m2m-copy).
 //
-// The vendor driver differs from what clients expect in three ways:
+// The vendor driver differs from what clients expect in these ways:
 //  1. Bitstream (OUTPUT queue) buffers must be dma-bufs: with MMAP buffers the driver has no kernel mapping and the
 //     worker drops every job ("src_addr is NULL").
 //  2. Decoded frames come out only as 'M21S' (8-bit, luma in 16x32 tiles, interleaved chroma in 16x16 tiles, planes
 //     back to back).
 //  3. HEVC is called 'H265' instead of V4L2_PIX_FMT_HEVC.
+//  4. Frames come back out of display order, and timestamps keep only their low 32 bits (microseconds).
 // So the shim turns the client's MMAP queues into DMABUF queues backed by (cached) dma-heap buffers. OUTPUT buffers
 // are mapped straight into the client. CAPTURE buffers are reported as NV12; the client's mmap gets a private
 // linear copy that is filled (untiled) from the hardware buffer when the client dequeues it.
-// Everything else (events, drain, poll) goes straight to the driver. Other devices are untouched.
+// Frames are handed out in timestamp order with the full timestamps restored. Everything else (events, drain, poll)
+// goes straight to the driver. Other devices are untouched.
 // Build: gcc -O2 -shared -fPIC -o libmtk-v4l2-shim.so mtk-v4l2-shim.c -ldl -lpthread
 // Use:   LD_PRELOAD=/usr/local/lib/libmtk-v4l2-shim.so mpv --hwdec=v4l2m2m-copy video.mp4
 // Env:   MTK_V4L2_SHIM_DEBUG=1 logs to stderr; MTK_V4L2_SHIM_HEAP picks the dma-heap (default /dev/dma_heap/system).
+//        MTK_V4L2_SHIM_FORMAT=i420 reports frames as planar YUV420 (I420) instead of NV12 (Firefox needs planar).
+//        MTK_V4L2_SHIM_THREADS=n untiles each frame on n threads (default 2).
 #define _GNU_SOURCE
 #include <dirent.h>
 #include <dlfcn.h>
@@ -29,16 +33,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/sysmacros.h>
 #include <unistd.h>
+#ifdef __aarch64__
+#include <arm_neon.h>
+#endif
 
 #define FMT_M21S v4l2_fourcc('M', '2', '1', 'S')
 #define FMT_H265 v4l2_fourcc('H', '2', '6', '5')
 #define MAXBUF 32
-#define MAXCTX 4
+#define MAXCTX 16   /* decoder instances per process (Firefox reopens one on every seek) */
 /* Fake mmap offsets handed to the client (vb2's own are 0.. for OUTPUT and 1<<30.. for CAPTURE). */
 #define OFF_BASE(q) ((q) ? 0x20000000UL : 0x10000000UL)
 #define OFF_STEP 0x00800000UL
@@ -63,9 +71,10 @@ struct ctx {
 	uint32_t cap_w, cap_h; int cap_tiled;
 	int npend, last_seen;
 	int cap_in_drv, cap_min;     /* CAPTURE buffers queued in the driver; driver's minimum (DPB) */
+	long long out_ts; int have_out_ts;   /* timestamp of the last bitstream buffer queued (see unwrap_ts) */
 	struct pend pend[MAXBUF];
 };
-static struct ctx ctxs[MAXCTX] = { { .fd = -1 }, { .fd = -1 }, { .fd = -1 }, { .fd = -1 } };
+static struct ctx ctxs[MAXCTX] = { [0 ... MAXCTX - 1] = { .fd = -1 } };
 
 static void logf_(const char *fmt, ...)
 {
@@ -127,6 +136,7 @@ static struct ctx *get_ctx(int fd, int create)
 			logf_("tracking fd %d", fd);
 			return &ctxs[i];
 		}
+	fprintf(stderr, "mtk-v4l2-shim: more than %d decoder instances open; fd %d not handled\n", MAXCTX, fd);
 	return NULL;
 }
 
@@ -150,10 +160,17 @@ static void free_queue(struct squeue *q)
 }
 
 /* ---- formats ---- */
-static uint32_t pf_to_client(uint32_t pf) { return pf == FMT_M21S ? V4L2_PIX_FMT_NV12 : pf == FMT_H265 ? V4L2_PIX_FMT_HEVC : pf; }
+/* Untiled frames go to the client as NV12, or as I420 (planar) with MTK_V4L2_SHIM_FORMAT=i420. */
+static uint32_t client_yuv(void)
+{
+	static uint32_t pf;
+	if (!pf) { const char *s = getenv("MTK_V4L2_SHIM_FORMAT"); pf = s && !strcasecmp(s, "i420") ? V4L2_PIX_FMT_YUV420 : V4L2_PIX_FMT_NV12; }
+	return pf;
+}
+static uint32_t pf_to_client(uint32_t pf) { return pf == FMT_M21S ? client_yuv() : pf == FMT_H265 ? V4L2_PIX_FMT_HEVC : pf; }
 static uint32_t pf_to_driver(int q, uint32_t pf)
 {
-	if (q == 1 && pf == V4L2_PIX_FMT_NV12) return FMT_M21S;
+	if (q == 1 && pf == client_yuv()) return FMT_M21S;
 	if (q == 0 && pf == V4L2_PIX_FMT_HEVC) return FMT_H265;
 	return pf;
 }
@@ -176,11 +193,12 @@ static void fmt_to_driver(struct v4l2_format *f)
 }
 
 /* ---- untiling ---- */
-static void detile_plane(const uint8_t *src, uint8_t *dst, uint32_t w, uint32_t h, uint32_t th)
+/* Tile rows [ty0, ty1) of a plane in 16-byte-wide tiles of th rows. */
+static void detile_rows(const uint8_t *src, uint8_t *dst, uint32_t w, uint32_t th, uint32_t ty0, uint32_t ty1)
 {
 	uint32_t tiles_x = w / 16;
 	size_t tile = 16 * th;
-	for (uint32_t ty = 0; ty < h / th; ty++) {
+	for (uint32_t ty = ty0; ty < ty1; ty++) {
 		const uint8_t *trow = src + (size_t)ty * tiles_x * tile;
 		uint8_t *drow = dst + (size_t)ty * th * w;
 		for (uint32_t tx = 0; tx < tiles_x; tx++) {
@@ -188,6 +206,70 @@ static void detile_plane(const uint8_t *src, uint8_t *dst, uint32_t w, uint32_t 
 			uint8_t *d = drow + tx * 16;
 			for (uint32_t r = 0; r < th; r++) memcpy(d + (size_t)r * w, t + r * 16, 16);
 		}
+	}
+}
+
+/* Tile rows [ty0, ty1) of interleaved UV in 16x16 tiles, split into separate U and V planes (w/2 wide each). */
+static void detile_uv_split_rows(const uint8_t *src, uint8_t *du, uint8_t *dv, uint32_t w, uint32_t ty0, uint32_t ty1)
+{
+	uint32_t tiles_x = w / 16, cw = w / 2;
+	for (uint32_t ty = ty0; ty < ty1; ty++) {
+		const uint8_t *trow = src + (size_t)ty * tiles_x * 256;
+		for (uint32_t tx = 0; tx < tiles_x; tx++) {
+			const uint8_t *t = trow + tx * 256;
+			for (uint32_t r = 0; r < 16; r++) {
+				size_t o = (size_t)(ty * 16 + r) * cw + tx * 8;
+				const uint8_t *s = t + r * 16;
+#ifdef __aarch64__
+				uint8x8x2_t v = vld2_u8(s);
+				vst1_u8(du + o, v.val[0]);
+				vst1_u8(dv + o, v.val[1]);
+#else
+				for (int i = 0; i < 8; i++) { du[o + i] = s[2 * i]; dv[o + i] = s[2 * i + 1]; }
+#endif
+			}
+		}
+	}
+}
+
+/* One frame's untiling, split by tile rows across threads (luma tiles are 32 rows, chroma 16 rows of half
+ * height, so both planes have h/32 tile rows). */
+struct untile_job { const uint8_t *src; uint8_t *dst; uint32_t w, h; int i420; uint32_t r0, r1; };
+
+static void *untile_part(void *arg)
+{
+	const struct untile_job *j = arg;
+	size_t ys = (size_t)j->w * j->h;
+	detile_rows(j->src, j->dst, j->w, 32, j->r0, j->r1);
+	if (j->i420)
+		detile_uv_split_rows(j->src + ys, j->dst + ys, j->dst + ys + ys / 4, j->w, j->r0, j->r1);
+	else
+		detile_rows(j->src + ys, j->dst + ys, j->w, 16, j->r0, j->r1);
+	return NULL;
+}
+
+static int untile_threads(void)
+{
+	static int n;
+	if (!n) { const char *s = getenv("MTK_V4L2_SHIM_THREADS"); n = s ? atoi(s) : 2; if (n < 1) n = 1; if (n > 8) n = 8; }
+	return n;
+}
+
+static void untile_frame(const uint8_t *src, uint8_t *dst, uint32_t w, uint32_t h, int i420)
+{
+	uint32_t rows = h / 32;
+	int n = untile_threads();
+	if ((uint32_t)n > rows) n = rows ? rows : 1;
+	struct untile_job jobs[8];
+	pthread_t th[8];
+	int started[8] = {0};
+	for (int i = 0; i < n; i++)
+		jobs[i] = (struct untile_job){ src, dst, w, h, i420, rows * i / n, rows * (i + 1) / n };
+	for (int i = 1; i < n; i++) started[i] = !pthread_create(&th[i], NULL, untile_part, &jobs[i]);
+	untile_part(&jobs[0]);
+	for (int i = 1; i < n; i++) {
+		if (started[i]) pthread_join(th[i], NULL);
+		else untile_part(&jobs[i]);
 	}
 }
 
@@ -199,8 +281,7 @@ static void deliver_frame(struct ctx *c, struct sbuf *b, size_t used)
 	uint32_t w = c->cap_w, h = c->cap_h;
 	size_t ys = (size_t)w * h;
 	if (c->cap_tiled && !(w % 16) && !(h % 32) && ys + ys / 2 <= b->size) {
-		detile_plane(b->map, b->client, w, h, 32);
-		detile_plane((const uint8_t *)b->map + ys, (uint8_t *)b->client + ys, w, h / 2, 16);
+		untile_frame(b->map, b->client, w, h, client_yuv() == V4L2_PIX_FMT_YUV420);
 	} else {
 		memcpy(b->client, b->map, used && used <= b->size ? used : b->size);
 	}
@@ -209,11 +290,26 @@ static void deliver_frame(struct ctx *c, struct sbuf *b, size_t used)
 }
 
 /* ---- buffers ---- */
+/* The decoder node is looked up and the dma-heap opened once, when the library loads: in Firefox that is before
+ * the media (RDD) process locks itself into its sandbox, which refuses /sys/class/video4linux and /dev/dma_heap. */
+static int heap_fd = -1;
+static void __attribute__((constructor)) preload_setup(void)
+{
+	init();
+	pthread_mutex_lock(&lock);
+	find_decoder();
+	pthread_mutex_unlock(&lock);
+	if (!dec_rdev) return;   /* no MediaTek decoder here: nothing to do */
+	const char *h = getenv("MTK_V4L2_SHIM_HEAP");
+	heap_fd = open(h ? h : "/dev/dma_heap/system", O_RDONLY | O_CLOEXEC);
+}
 static int heap_open(void)
 {
+	if (heap_fd >= 0) return heap_fd;
 	const char *h = getenv("MTK_V4L2_SHIM_HEAP");
 	return open(h ? h : "/dev/dma_heap/system", O_RDONLY | O_CLOEXEC);
 }
+static void heap_done(int h) { if (h != heap_fd) real_close(h); }
 
 static size_t plane_size(int fd, uint32_t type)
 {
@@ -247,13 +343,13 @@ static int do_reqbufs(struct ctx *c, int fd, struct v4l2_requestbuffers *rb)
 	if (h < 0) { logf_("cannot open dma-heap: %s", strerror(errno)); errno = ENOMEM; return -1; }
 	for (unsigned i = 0; i < r.count; i++) {
 		struct dma_heap_allocation_data a = { .len = sz, .fd_flags = O_RDWR | O_CLOEXEC };
-		if (real_ioctl(h, DMA_HEAP_IOCTL_ALLOC, &a)) { logf_("heap alloc: %s", strerror(errno)); real_close(h); errno = ENOMEM; return -1; }
+		if (real_ioctl(h, DMA_HEAP_IOCTL_ALLOC, &a)) { logf_("heap alloc: %s", strerror(errno)); heap_done(h); errno = ENOMEM; return -1; }
 		q->b[i].dfd = a.fd; q->b[i].size = sz;
 		q->b[i].map = real_mmap(NULL, sz, PROT_READ | PROT_WRITE, MAP_SHARED, a.fd, 0);
 		q->n = i + 1;
-		if (q->b[i].map == MAP_FAILED) { q->b[i].map = NULL; real_close(h); errno = ENOMEM; return -1; }
+		if (q->b[i].map == MAP_FAILED) { q->b[i].map = NULL; heap_done(h); errno = ENOMEM; return -1; }
 	}
-	real_close(h);
+	heap_done(h);
 	q->faked = 1;
 	if (qi == 1) {
 		struct v4l2_control ctl = { .id = V4L2_CID_MIN_BUFFERS_FOR_CAPTURE };
@@ -306,6 +402,25 @@ static int releasable(const struct ctx *c)
 
 static long long ts_us(const struct v4l2_buffer *b) { return (long long)b->timestamp.tv_sec * 1000000 + b->timestamp.tv_usec; }
 
+/* The driver keeps only the low 32 bits of the microsecond timestamp (-0.1 s comes back as 4294.87 s, and anything
+ * past 71.6 minutes wraps too). Put the high bits back: the value with the same low 32 bits that is closest to the
+ * last timestamp queued on the bitstream side. */
+static void unwrap_ts(const struct ctx *c, struct v4l2_buffer *b)
+{
+	if (!c->have_out_ts) return;
+	const long long W = 1LL << 32;
+	long long t = ts_us(b), lo = (long long)(uint32_t)t;
+	long long base = c->out_ts - (long long)(uint32_t)c->out_ts;   /* out_ts with its low 32 bits cleared */
+	long long best = base + lo;
+	if (llabs(best - W - c->out_ts) < llabs(best - c->out_ts)) best -= W;
+	else if (llabs(best + W - c->out_ts) < llabs(best - c->out_ts)) best += W;
+	if (best == t) return;
+	long long s = best / 1000000, u = best % 1000000;
+	if (u < 0) { u += 1000000; s--; }
+	b->timestamp.tv_sec = s;
+	b->timestamp.tv_usec = u;
+}
+
 static int cap_dqbuf(struct ctx *c, int fd, struct v4l2_buffer *ub)
 {
 	struct squeue *q = &c->q[1];
@@ -349,6 +464,7 @@ static int cap_dqbuf(struct ctx *c, int fd, struct v4l2_buffer *ub)
 	ub->m.planes = up;
 	ub->length = ulen;
 	if (up) memcpy(up, sel.p, (ulen < sel.b.length ? ulen : sel.b.length) * sizeof *up);
+	unwrap_ts(c, ub);
 	logf_("DQ cap idx %u ts %lld flags %#x (%d waiting)", ub->index, ts_us(ub), ub->flags, c->npend);
 	to_client(c, ub);
 	return 0;
@@ -370,7 +486,7 @@ static int handle(struct ctx *c, int fd, unsigned long req, void *arg)
 	case VIDIOC_ENUM_FRAMESIZES: {
 		struct v4l2_frmsizeenum *s = arg;
 		uint32_t pf = s->pixel_format;
-		s->pixel_format = pf == V4L2_PIX_FMT_NV12 ? FMT_M21S : pf == V4L2_PIX_FMT_HEVC ? FMT_H265 : pf;
+		s->pixel_format = pf == client_yuv() ? FMT_M21S : pf == V4L2_PIX_FMT_HEVC ? FMT_H265 : pf;
 		int r = real_ioctl(fd, req, arg);
 		s->pixel_format = pf;
 		return r;
@@ -414,6 +530,8 @@ static int handle(struct ctx *c, int fd, unsigned long req, void *arg)
 			return -1;
 		}
 		if (req == VIDIOC_QBUF && qi == 0) {
+			c->out_ts = ts_us(b);
+			c->have_out_ts = 1;
 			struct dma_buf_sync sy = { DMA_BUF_SYNC_END | DMA_BUF_SYNC_WRITE };
 			real_ioctl(q->b[b->index].dfd, DMA_BUF_IOCTL_SYNC, &sy);
 		}
@@ -548,6 +666,7 @@ int close(int fd)
 {
 	init();
 	pthread_mutex_lock(&lock);
+	if (fd >= 0 && fd == heap_fd) heap_fd = -1;   /* someone closing all descriptors: reopen when needed */
 	struct ctx *c = get_ctx(fd, 0);
 	if (c) {
 		logf_("closing fd %d", fd);

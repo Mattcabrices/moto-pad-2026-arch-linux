@@ -3,6 +3,13 @@
 # Uses /usr/lib/firefox/firefox-hybris: Firefox's executable with its TLS moved clear of Android's GL TLS slots
 # (tools/ff-tls-relocate.py; rebuilt by a pacman hook after each Firefox update). Anywhere else (Xorg session,
 # Android services down, patched binary missing) it starts the normal Firefox.
+# Both ways, H.264/HEVC video up to 40 fps is decoded on the MediaTek hardware decoder when the video libraries are
+# installed (tools/src/ff-v4l2-redirect.c + libmtk-v4l2-shim; see tools/tab-vdec-install.sh). Off: ARCHPAD_FF_HWDEC=0.
+SHIM=/usr/local/lib/libmtk-v4l2-shim.so FFR=/usr/local/lib/libff-v4l2-redirect.so
+if [ "${ARCHPAD_FF_HWDEC:-1}" != 0 ] && [ -e "$SHIM" ] && [ -e "$FFR" ] && [ -w /dev/dma_heap/system ]; then
+  # i420: Firefox only takes planar frames from FFmpeg
+  export LD_PRELOAD=$SHIM:$FFR${LD_PRELOAD:+:$LD_PRELOAD} MTK_V4L2_SHIM_FORMAT=i420
+fi
 FF=/usr/lib/firefox/firefox-hybris
 if [ -x "$FF" ] && [ -n "$WAYLAND_DISPLAY" ] && pgrep -f 'graphics.allocator@4.0-service' >/dev/null; then
   export ARCHPAD_GPU=1 MOZ_ENABLE_WAYLAND=1   # ARCHPAD_GPU turns on the GPU prefs (archpad.cfg)

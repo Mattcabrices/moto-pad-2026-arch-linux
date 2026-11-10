@@ -1,0 +1,3 @@
+4 pkill -u matt -x firefox-hybris; sleep 1; rm -rf /tmp/ff-vdec; mkdir -p /tmp/ff-vdec; cp /tmp/ff-vdec-user.js /tmp/ff-vdec/user.js; echo ok
+30 firefox-gpu --new-instance --profile /tmp/ff-vdec "file:///tmp/ffv.html?src=t1080b.mp4" > /tmp/ffv.out 2>&1
+3 pkill -u matt -x firefox-hybris; true
