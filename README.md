@@ -99,7 +99,35 @@ For real hosting, keep the tablet on the charger. It is Wi-Fi only.
   password from `tools/.pad-password` (git-ignored).
 - Paths in the scripts assume the project lives at `C:\mpad26\MotoPadArch` and WSL distro `archlinux`.
 
+## Thanks
+
+This port stands on a lot of other people's work. Thank you to:
+
+- **[Arch Linux ARM](https://archlinuxarm.org/)** and **[Arch Linux](https://archlinux.org/)** for the base system and packages.
+- **The Linux kernel and Android Common Kernel** developers ([kernel/common](https://android.googlesource.com/kernel/common)),
+  and **Motorola** for publishing the tablet's kernel source ([MotoTablets](https://github.com/MotorolaMobilityLLC/MotoTablets)).
+- **[libhybris](https://github.com/libhybris/libhybris)** (Carsten Munk and contributors) and
+  **[Halium](https://github.com/Halium)** (android-headers): the bridge that lets glibc Linux use Android's GPU driver.
+- **[wlroots](https://gitlab.freedesktop.org/wlroots/wlroots)** and **[labwc](https://github.com/labwc/labwc)** for the
+  Wayland compositor this desktop runs on.
+- **[XFCE](https://xfce.org/)** for the desktop, and **[squeekboard](https://gitlab.gnome.org/World/Phosh/squeekboard)**
+  (Purism / Phosh) for the on-screen keyboard.
+- **[mtkclient](https://github.com/bkerler/mtkclient)** (Bjoern Kerler) for MediaTek flashing and recovery.
+- **[BobTheBlinker](https://github.com/BobTheBlinker/recovery_device_motorola_sycamore_row_5G)** for the
+  `sycamore_row_5G` recovery device tree, and the people reporting on MotoTablets issue 8.
+- **[FFmpeg](https://ffmpeg.org/)** and **[mpv](https://mpv.io/)** for video; **Mozilla Firefox** and **Chromium /
+  ANGLE** for the browsers.
+- **[Caddy](https://caddyserver.com/)**, **[Node.js](https://nodejs.org/)**, **Express**, **React**, **Vite**,
+  **SQLite** and **[cloudflared](https://github.com/cloudflare/cloudflared)** for the web server stack.
+- **MediaTek** and **Lenovo/Motorola** for the hardware and the vendor drivers this runs on.
+- **[Claude Code](https://claude.com/claude-code)** (Anthropic), which did much of the debugging and writing with me.
+
 ## License
 
-MIT for the code in this repository (see `LICENSE`). wlroots, libhybris, the Linux kernel and the Android/MediaTek
-firmware keep their own licenses.
+MIT, copyright (c) 2026 **Matt Cabrices**, for the code in this repository (see `LICENSE`).
+
+The upstream projects above keep their own licenses: for example the Linux kernel (GPL-2.0), libhybris (Apache-2.0),
+wlroots (MIT), labwc (GPL-2.0), mtkclient (GPL-3.0), FFmpeg (LGPL/GPL), Firefox (MPL-2.0) and Chromium (BSD-3-Clause).
+The files in `wlroots-pad/` and the libhybris changes in `scripts/` are written to be built into wlroots and
+libhybris; they may also be used under those projects' licenses. No vendor binaries or firmware are included: the
+scripts extract them from your own device.
