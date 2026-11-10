@@ -1,0 +1,1 @@
+20 MTK_V4L2_SHIM_DEBUG=1 timeout -s KILL 12 /usr/local/bin/mpv --untimed --no-audio --framedrop=no --frames=300 --fs --vo=gpu-next --profile=fast --vd-queue-enable=yes -v /tmp/vdec/t1080p60.mp4 > /tmp/mpv-vq.log 2>&1

@@ -1,0 +1,4 @@
+15 /usr/local/bin/mpv --term-status-msg='${hwdec-current} vo-drop=${frame-drop-count} vfps=${estimated-vf-fps} avsync=${avsync}' --length=10 --fs /tmp/vdec/t1080p60.mp4 > /tmp/mpvst-1.txt 2>&1
+15 /usr/local/bin/mpv --term-status-msg='${hwdec-current} vo-drop=${frame-drop-count} vfps=${estimated-vf-fps} avsync=${avsync}' --length=10 --fs /tmp/vdec/t1080b.mp4 > /tmp/mpvst-2.txt 2>&1
+15 /usr/local/bin/mpv --term-status-msg='${hwdec-current} vo-drop=${frame-drop-count} vfps=${estimated-vf-fps} avsync=${avsync}' --length=10 --fs /tmp/vdec/t1080.hevc.mp4 > /tmp/mpvst-3.txt 2>&1
+15 /usr/local/bin/mpv --term-status-msg='${hwdec-current} vo-drop=${frame-drop-count} vfps=${estimated-vf-fps} avsync=${avsync}' --length=10 --fs /tmp/vdec/t1080.vp9.webm > /tmp/mpvst-4.txt 2>&1

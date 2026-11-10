@@ -9,6 +9,7 @@ if [ -e "$SHIM" ] && [ -w /dev/dma_heap/system ]; then
   export LD_PRELOAD=$SHIM${LD_PRELOAD:+:$LD_PRELOAD}
   HW=(--hwdec=v4l2m2m-copy)
 fi
-# display-resample: the GPU desktop shows 1080p at roughly 37 fps; with mpv's default sync it drops about half the
-# frames even of 30 fps video, with this it drops none (30 fps) or keeps audio in sync (60 fps).
-exec /usr/local/bin/hybris-run /usr/bin/mpv "${HW[@]}" --video-sync=display-resample "$@"
+# profile=fast: bilinear scaling. mpv's default scalers cost ~65 ms per frame at full screen on this GPU (1080p played
+# at ~15 fps); with fast, 1080p60 plays at the full 60 fps with no dropped frames.
+# display-resample: smoother pacing; with mpv's default sync, frames were dropped needlessly.
+exec /usr/local/bin/hybris-run /usr/bin/mpv "${HW[@]}" --profile=fast --video-sync=display-resample "$@"

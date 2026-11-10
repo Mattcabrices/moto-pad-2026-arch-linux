@@ -1,0 +1,7 @@
+40 echo 'vo=null hw'; /usr/bin/time -f 'wall %e s cpu %U+%S' /usr/local/bin/mpv --untimed --no-audio --framedrop=no --frames=300 --fs --vo=null /tmp/vdec/t1080p60.mp4 > /dev/null 2> /tmp/mpvt-1.txt
+40 echo 'vo=null sw'; /usr/bin/time -f 'wall %e s cpu %U+%S' /usr/local/bin/mpv --untimed --no-audio --framedrop=no --frames=300 --fs --vo=null --hwdec=no /tmp/vdec/t1080p60.mp4 > /dev/null 2> /tmp/mpvt-2.txt
+40 echo 'gpu-next default hw'; /usr/bin/time -f 'wall %e s cpu %U+%S' /usr/local/bin/mpv --untimed --no-audio --framedrop=no --frames=300 --fs --vo=gpu-next /tmp/vdec/t1080p60.mp4 > /dev/null 2> /tmp/mpvt-3.txt
+40 echo 'gpu-next fast hw'; /usr/bin/time -f 'wall %e s cpu %U+%S' /usr/local/bin/mpv --untimed --no-audio --framedrop=no --frames=300 --fs --vo=gpu-next --profile=fast /tmp/vdec/t1080p60.mp4 > /dev/null 2> /tmp/mpvt-4.txt
+40 echo 'gpu-next fast sw'; /usr/bin/time -f 'wall %e s cpu %U+%S' /usr/local/bin/mpv --untimed --no-audio --framedrop=no --frames=300 --fs --vo=gpu-next --profile=fast --hwdec=no /tmp/vdec/t1080p60.mp4 > /dev/null 2> /tmp/mpvt-5.txt
+40 echo 'gpu-next fast vd-queue hw'; /usr/bin/time -f 'wall %e s cpu %U+%S' /usr/local/bin/mpv --untimed --no-audio --framedrop=no --frames=300 --fs --vo=gpu-next --profile=fast --vd-queue-enable=yes /tmp/vdec/t1080p60.mp4 > /dev/null 2> /tmp/mpvt-6.txt
+40 echo 'gpu fast hw'; /usr/bin/time -f 'wall %e s cpu %U+%S' /usr/local/bin/mpv --untimed --no-audio --framedrop=no --frames=300 --fs --vo=gpu --profile=fast /tmp/vdec/t1080p60.mp4 > /dev/null 2> /tmp/mpvt-7.txt

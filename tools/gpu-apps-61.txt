@@ -1,0 +1,2 @@
+12 MTK_V4L2_SHIM_DEBUG=1 /usr/local/bin/mpv --fs --vo=gpu-next --profile=fast /tmp/vdec/t1080p60.mp4 > /tmp/mpv-q1.log 2>&1 & p=$!; sleep 5; kill -INT $p; sleep 4; if kill -0 $p 2>/dev/null; then echo "HUNG after SIGINT"; else echo "exited ok"; fi
+12 MTK_V4L2_SHIM_DEBUG=1 /usr/local/bin/mpv --fs --vo=gpu-next --profile=fast --length=3 /tmp/vdec/t1080p60.mp4 > /tmp/mpv-q2.log 2>&1 & p=$!; sleep 8; if kill -0 $p 2>/dev/null; then echo "HUNG at end of file"; else echo "exited ok"; fi

@@ -260,7 +260,23 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     /build/out/wlroots-pad.tar). Env: `WLR_RENDERER=hybris WLR_BACKENDS=pad,libinput LIBSEAT_BACKEND=seatd`.
   - Tablet now has labwc seatd xorg-xwayland foot grim wlr-randr (pacman over Wi-Fi). Test:
     `tools/tab-labwc-test.sh` (stops XFCE, runs labwc + foot, grim screenshot /tmp/labwc-shot.png, restarts XFCE).
-- **22:45 (11-09) HARDWARE VIDEO DECODING (RESUME HERE).** Matt: "do videos have gpu accel as well?" -> "Yes, try it".
+- **23:45 (11-09) FASTER VIDEO DISPLAY (RESUME HERE).** Matt: "Faster video display".
+  - Cause found: mpv's default scalers (gpu-next default profile) cost ~65 ms/frame full screen on the Mali -> 1080p ~15 fps
+    untimed. Window size made no difference with `--profile=fast` (bilinear), so the rest is a fixed per-frame cost.
+    Clean benchmarks (300 frames 1080p60, `--untimed --framedrop=no`, `tools/gpu-apps-62.txt`): default 20.5 s,
+    profile=fast hw 6.9 s (~47 fps), fast sw 6.7 s (2x the CPU). Swap interval, PBO upload, gpu vs gpu-next: no change.
+    perf (`tools/tab-perf-mpv.sh`): shim untile ~17 %, vo memcpy (texture upload) ~8 %, Mali ~9 %, cache maintenance.
+  - Fix: wrapper adds `--profile=fast` (plus display-resample). Real-time result (`tools/gpu-apps-66.txt`): 1080p60
+    H.264 vfps 60, 0 dropped, A/V in sync; 1080p30 H.264/HEVC/VP9 0 dropped. Every-frame check still identical.
+  - Shim fixes: release held frames when the driver is down to its minimum CAPTURE buffers (V4L2_CID_MIN_BUFFERS_FOR_
+    CAPTURE + 1, tracked by QBUF/DQBUF count) so a client that holds many frames cannot deadlock it; get_ctx ignores fd -1.
+  - Do NOT use mpv `--vd-queue-enable`: mpv then holds every decoded frame, all 20 V4L2 capture buffers fill and the
+    decoder stops (FFmpeg v4l2m2m limit, shim holds none at that point).
+  - Test-harness trap: commands that pipe mpv's status line (`| tr | grep | tail`) leave mpv spinning at 100 % CPU
+    on the dead pipe when the harness SIGINTs the pipeline; two such leftovers skewed earlier numbers. Write mpv
+    output to a file instead (gpu-apps-62+ do), and `pkill -9 -x mpv` before benchmarking.
+  - Still possible later: zero-copy (dma-buf of the untiled frame -> compositor) would save the upload copy.
+- **22:45 (11-09) HARDWARE VIDEO DECODING.** Matt: "do videos have gpu accel as well?" -> "Yes, try it".
   - Hardware: `/dev/video1` = `mtk-vcodec-dec` (stock vendor module mtk_vcodec_dec_v1 + vcp; the VCP co-processor
     firmware is already running, loaded by the bootloader). Output formats H264, H265, VP90, MPG4, H263, HEIF up to
     2560x1440; capture only `M21S` (8-bit, luma 16x32 tiles, interleaved chroma 16x16 tiles, planes back to back).
@@ -286,7 +302,7 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
     1080p60. The render/present path manages only ~37 fps at 1080p fullscreen (same with software decode, both gpu and
     gpu-next VOs), so with mpv's default sync 30 fps video dropped half its frames; display-resample: 0 drops at 30 fps,
     A/V in sync at 60 fps (shows ~35 fps). Screenshot `shots/mpv-hwdec.png`.
-  - Not done / next: (a) faster presentation for video (NV12 upload + scale via hybris GLES is the suspect; zero-copy
+  - Not done / next: (a) [done 23:45: mpv profile=fast] faster presentation for video (zero-copy
     would need dma-buf import of the decoder buffers, which are tiled); (b) browsers (Firefox can use FFmpeg V4L2 decoding
     only on some builds; Chromium needs its own V4L2 path); (c) 10-bit (MT21S10* formats, not mapped); (d) VP9 speed.
     Not tested by Matt with a real video yet.

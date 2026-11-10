@@ -62,6 +62,7 @@ struct ctx {
 	struct squeue q[2];
 	uint32_t cap_w, cap_h; int cap_tiled;
 	int npend, last_seen;
+	int cap_in_drv, cap_min;     /* CAPTURE buffers queued in the driver; driver's minimum (DPB) */
 	struct pend pend[MAXBUF];
 };
 static struct ctx ctxs[MAXCTX] = { { .fd = -1 }, { .fd = -1 }, { .fd = -1 }, { .fd = -1 } };
@@ -113,6 +114,7 @@ static void find_decoder(void)
 
 static struct ctx *get_ctx(int fd, int create)
 {
+	if (fd < 0) return NULL;
 	for (int i = 0; i < MAXCTX; i++) if (ctxs[i].fd == fd) return &ctxs[i];
 	if (!create) return NULL;
 	find_decoder();
@@ -253,6 +255,10 @@ static int do_reqbufs(struct ctx *c, int fd, struct v4l2_requestbuffers *rb)
 	}
 	real_close(h);
 	q->faked = 1;
+	if (qi == 1) {
+		struct v4l2_control ctl = { .id = V4L2_CID_MIN_BUFFERS_FOR_CAPTURE };
+		c->cap_min = real_ioctl(fd, VIDIOC_G_CTRL, &ctl) == 0 ? ctl.value : 0;
+	}
 	logf_("%s: %u dma-heap buffers of %zu bytes", qi ? "CAPTURE" : "OUTPUT", r.count, sz);
 	return 0;
 }
@@ -292,7 +298,10 @@ static int releasable(const struct ctx *c)
 {
 	if (!c->npend) return 0;
 	if (c->last_seen || c->npend > reorder_depth()) return 1;
-	return c->q[1].n && c->npend >= c->q[1].n - 2;
+	if (c->q[1].n && c->npend >= c->q[1].n - 2) return 1;
+	/* The client holds the rest (e.g. mpv's decode-ahead queue): with no spare buffer the driver cannot finish another
+	 * frame, so waiting for one would deadlock. */
+	return c->cap_min && c->cap_in_drv <= c->cap_min + 1;
 }
 
 static long long ts_us(const struct v4l2_buffer *b) { return (long long)b->timestamp.tv_sec * 1000000 + b->timestamp.tv_usec; }
@@ -307,6 +316,7 @@ static int cap_dqbuf(struct ctx *c, int fd, struct v4l2_buffer *ub)
 		p->b.type = ub->type; p->b.memory = V4L2_MEMORY_DMABUF;
 		p->b.m.planes = p->p; p->b.length = ub->length > VIDEO_MAX_PLANES ? VIDEO_MAX_PLANES : ub->length;
 		if (real_ioctl(fd, VIDIOC_DQBUF, &p->b)) { err = errno; break; }
+		if (c->cap_in_drv > 0) c->cap_in_drv--;
 		if (p->b.flags & V4L2_BUF_FLAG_LAST) c->last_seen = 1;
 		c->npend++;
 	}
@@ -380,12 +390,12 @@ static int handle(struct ctx *c, int fd, unsigned long req, void *arg)
 		return r;
 	}
 	case VIDIOC_STREAMOFF: {
-		if (qidx(*(uint32_t *)arg) == 1) { c->npend = 0; c->last_seen = 0; }   /* the driver takes all buffers back */
+		if (qidx(*(uint32_t *)arg) == 1) { c->npend = 0; c->last_seen = 0; c->cap_in_drv = 0; }   /* the driver takes all buffers back */
 		return real_ioctl(fd, req, arg);
 	}
 	case VIDIOC_REQBUFS: {
 		struct v4l2_requestbuffers *rb = arg;
-		if (qidx(rb->type) == 1) { c->npend = 0; c->last_seen = 0; }
+		if (qidx(rb->type) == 1) { c->npend = 0; c->last_seen = 0; c->cap_in_drv = 0; }
 		if (qidx(rb->type) < 0) return real_ioctl(fd, req, arg);
 		return do_reqbufs(c, fd, rb);
 	}
@@ -409,6 +419,7 @@ static int handle(struct ctx *c, int fd, unsigned long req, void *arg)
 		}
 		int r = real_ioctl(fd, req, arg);
 		int e = errno;
+		if (!r && req == VIDIOC_QBUF && qi == 1) c->cap_in_drv++;
 		if (!r && req == VIDIOC_DQBUF && qi == 0 && b->index < (unsigned)q->n) {
 			struct dma_buf_sync sy = { DMA_BUF_SYNC_START | DMA_BUF_SYNC_WRITE };
 			real_ioctl(q->b[b->index].dfd, DMA_BUF_IOCTL_SYNC, &sy);
