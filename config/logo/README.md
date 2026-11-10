@@ -12,7 +12,9 @@ partition. This folder has an Arch Linux replacement and the tools to make your 
   flattens itself; the wordmark uses DejaVu Sans Bold, Segoe UI Bold or Arial Bold, or `--font`).
 - `../../tools/make-logo.py`: turns any picture into a flashable logo image.
 
-Nothing here has been flashed or tested on the tablet yet (see "Risks" below).
+Flashed on 2026-11-10: `arch-logo-glow.png`, built with `--pad-to 24641536` and written from running Arch
+with `dd ... conv=fsync` (readback sha256 identical). The stock `logo_a` backup is kept off the repo
+(`/home/matt/logo_a.stock.bin` on the tablet, `/build/out/logo/logo_a.stock.bin` in WSL; sha256 `866ff62b...ae449`).
 
 ## The format (how it was checked)
 
@@ -60,11 +62,11 @@ python tools/make-logo.py build my-picture.png --stock logo_a.stock.bin -o out/l
 - Other commands: `info IMAGE` (the frame table), `extract IMAGE DIR [--all]` (frames to PNG),
   `check IMAGE --stock STOCK`.
 
-The Arch image in this repo was built with:
+The flashed image was built with:
 
 ```
-python config/logo/draw-arch-logo.py
-python tools/make-logo.py build config/logo/arch-logo.png --stock logo_a.stock.bin -o out/logo/arch-logo.bin
+python config/logo/draw-arch-logo.py --style glow
+python tools/make-logo.py build config/logo/arch-logo-glow.png --stock logo_a.stock.bin --pad-to 24641536 -o out/logo/arch-logo-glow.bin
 ```
 
 `out/` is git-ignored. Do not commit stock logo images either: they hold Motorola's artwork.

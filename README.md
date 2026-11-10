@@ -22,7 +22,7 @@ Bootloader unlock (a prerequisite): [moto-pad-2026-xt2575-4-unlock](https://gith
 | Audio | Speakers, the main microphone, and headphone jack switching (headphones and headset mic) |
 | USB | Network gadget (SSH over USB) |
 | Web server | Caddy + Node (Express) + SQLite + React starter site on port 80; Cloudflare Tunnel (`cloudflared`) to publish it without port forwarding; Codex CLI. See [Web server](#web-server) |
-| Extras | On-screen keyboard (squeekboard) in the GPU desktop, Xwayland for X11 apps, Claude Code. Optional Arch boot logo (`config/logo/`, not flashed yet) |
+| Extras | On-screen keyboard (squeekboard) in the GPU desktop, Xwayland for X11 apps, Claude Code. Arch boot logo (`config/logo/`) |
 | Not working | Camera, modem. Hardware video decoding for HEVC in Chromium, and for VP9/AV1 in Firefox |
 
 ## How it works (short version)

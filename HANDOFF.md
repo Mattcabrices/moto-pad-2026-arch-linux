@@ -295,7 +295,8 @@ Gralloc logs `platform (common/mt8755) not found` (uses defaults); maybe set ro.
   - Boot logo: Matt picked an Arch wallpaper (blue mark + "archlinux" wordmark on dark blue with light streaks), saved
     locally as `config/logo/local/arch-wallpaper.webp` (git-excluded: third-party art with the Arch trademark).
     Replaced by our own `config/logo/arch-logo-glow.png` (`draw-arch-logo.py --style glow`, same look, committable);
-    flash that with `tools/make-logo.py` (Matt present, backup first).
+    **Flashed 18:20 (11-10)** (`--pad-to 24641536`, dd from Arch, readback sha256 match); LK accepts the unsigned
+    image and boots on. Stock backup: /home/matt/logo_a.stock.bin (tablet) and /build/out/logo/ (WSL), sha256 866ff62b...
 - **11:15 (11-10) CHROMIUM GPU COMPOSITING + HARDWARE VIDEO DECODING.** Matt: "Why does it have to stay
   off? Go ahead and build it." (also: README thanks/license section for a Reddit post, done in `32a1873`).
   - Result: `chromium-gpu` now runs Chromium with **GPU compositing** (chrome://gpu `gpu_compositing: enabled`) and
