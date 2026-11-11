@@ -4,6 +4,18 @@ Project by Matt Cabrices. Overview: README.md.
 
 Last updated: 2026-11-10 18:45 (speakers: one side drops out, not fixed; see "18:45 (11-10)").
 
+## Start here (next agent)
+
+- Tablet state: Arch boots and works (desktop, Chromium HW video, boot logo, screen-off on the power button).
+- **Open task, speakers:** the pair opposite the USB port (aw87xxx amps) drops out after playback stops. See
+  "18:45 (11-10) SPEAKERS". Test with a soft chime (Matt's household prefers it to loud test tones).
+- If the screen sits on the Arch logo: it's the rescue console (telnet 10.55.0.1:23, `tools/padcmd.py`);
+  `reboot -f` boots Arch. Don't press the power button during boot (short press = screen toggle, 4 s = power off).
+- usbipd busid is now 3-1. `/tmp` on the tablet is wiped on reboot: re-push helper files before use.
+- Matt's weekly usage is nearly spent: be economical, one change per test.
+- Some of Matt's work is kept out of this public repo on purpose (local notes on his PC). Don't commit anything he
+  hasn't asked to publish.
+
 ## Goal
 
 A working, lightweight XFCE Arch Linux system on the Moto Pad 2026 (XT2575-4,
