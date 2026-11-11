@@ -59,7 +59,7 @@ Recorded 2026-11-06. Nothing here has been built or booted yet.
 
 ## Decisions and current status
 
-See [HANDOFF.md](../HANDOFF.md).
+See the Status table in [README.md](../README.md).
 
 ## Sources
 

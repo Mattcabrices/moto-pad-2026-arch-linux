@@ -95,7 +95,6 @@ For real hosting, keep the tablet on the charger. It is Wi-Fi only.
 | `config/` | labwc session files and the Android-service systemd units |
 | `kernel/` | Stock kernel config and the Arch config fragment |
 | `docs/FINDINGS.md` | Device research |
-| `HANDOFF.md` | Detailed working log: every fix, gotcha and open item |
 
 ## Warnings
 

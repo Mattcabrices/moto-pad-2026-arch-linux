@@ -10,3 +10,7 @@ tools/.pad-password
 # Python caches
 __pycache__/
 *.pyc
+
+# Working log for agents/sessions: kept on this PC only, never published.
+HANDOFF.md
+local-notes/
